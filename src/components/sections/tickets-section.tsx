@@ -32,7 +32,7 @@ export function TicketsSection() {
           {t.quantityAvailable !== undefined && t.quantityAvailable > 0 && (
             <p className="mt-2 text-xs text-muted-foreground">{t.quantityAvailable > 10 ? "Places disponibles" : `Plus que ${t.quantityAvailable} place${t.quantityAvailable > 1 ? "s" : ""}`}</p>
           )}
-          <Button className="mt-4 w-full" disabled={t.soldOut}
+          <Button className="mt-4 w-full" disabled={t.soldOut} nativeButton={false}
             render={<Link href={t.externalLink ?? "#"} target={t.externalLink ? "_blank" : undefined} rel={t.externalLink ? "noopener noreferrer" : undefined} />}>
             {t.soldOut ? "Indisponible" : "Réserver"}
           </Button>

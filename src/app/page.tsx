@@ -22,6 +22,7 @@ export default function HomePage() {
           <div className="mt-8 flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
             <Button
               size="lg"
+              nativeButton={false}
               className="bg-gala-gold text-gala-primary-dark hover:bg-gala-gold/90"
               render={<Link href="/#tickets" />}
             >
@@ -30,6 +31,7 @@ export default function HomePage() {
             <Button
               size="lg"
               variant="outline"
+              nativeButton={false}
               className="border-white/30 text-white hover:bg-white/10"
               render={<Link href="/#about" />}
             >
