@@ -4,45 +4,29 @@
 
 ---
 
-## 0. 🖥️ Lancer le projet (site web + CMS)
+## 0. 🖥️ Lancer le projet (site web + Studio intégré)
 
-### Terminal 1 — Site web Next.js
+### Terminal unique — Site web Next.js + Studio embarqué
 ```powershell
 cd C:\Users\rudyv\Documents\GALA 2026\Website\gala-insa-2026
 & fnm env --use-on-cd | Out-String | Invoke-Expression; fnm use 24
 npm run dev
 ```
-➡️ **http://localhost:3000**
 
-### Terminal 2 — Sanity Studio (CMS)
-Ouvrez un **second terminal PowerShell** et lancez :
-```powershell
-cd C:\Users\rudyv\Documents\GALA 2026\Website\gala-insa-2026
-& fnm env --use-on-cd | Out-String | Invoke-Expression; fnm use 24
-npm run cms
-```
-➡️ **http://localhost:3333**
+➡️ **Site web :** http://localhost:3000
+➡️ **Studio CMS :** http://localhost:3000/studio
 
-### ⚡ Flux de travail "live"
-```
-1. Ouvrez http://localhost:3333 → connectez-vous au Sanity Studio
-2. Modifiez un contenu (ex: ajoutez un partenaire)
-3. Cliquez sur "Publish" (bouton vert)
-4. Allez sur http://localhost:3000 → rechargez la page
-5. ↻ La modification apparaît immédiatement !
-```
-
-> ⚠️ **Pourquoi deux terminaux ?**
-> Sanity Studio nécessite React ≥ 19.2.5, tandis que Next.js 16 utilise React 19.2.4. Les deux serveurs sont donc lancés séparément. C'est transparent pour l'utilisateur.
+> Le Studio Sanity est embarqué directement dans Next.js sur la route `/studio`.
+> Un seul terminal suffit — plus besoin de lancer deux serveurs séparés.
 
 ---
 
 ## 1. 🚀 Accéder au CMS Sanity
 
-### 1.1 URL d'accès (si déjà lancé)
+### 1.1 URL d'accès
 
-- **En développement local :** `http://localhost:3333`
-- **En production :** à configurer sur Vercel
+- **En développement local :** `http://localhost:3000/studio`
+- **En production :** `https://<URL-VERCEL>/studio`
 
 ### 1.2 Connexion
 
@@ -56,7 +40,7 @@ npm run cms
 | Rôle | Permissions |
 |------|------------|
 | **Administrator** | Accès complet : créer, lire, modifier, supprimer, gérer les membres |
-| **Editor** | Peut créer, modifier, publier et dépublié du contenu |
+| **Editor** | Peut créer, modifier, publier et dépublier du contenu |
 | **Viewer** | Lecture seule — ne peut pas modifier le contenu |
 
 ---
@@ -157,8 +141,8 @@ Les questions sont affichées sous forme d'accordéon sur la page d'accueil.
 2. **Prévisualiser** — Vérifiez les modifications dans l'interface Sanity (mode Draft)
 3. **Publier** — Cliquez sur le bouton **Publish** (vert)
 4. **Propagation** — Les données sont propagées via le CDN Sanity (quelques secondes)
-5. **Affichage** — La page web se met à jour automatiquement (si ISR activé) ou au prochain build
-6. **🔁 En développement** — Rechargez `http://localhost:3000` pour voir les changements en temps réel
+5. **Affichage** — La page web se met à jour automatiquement (ISR activé toutes les 60s)
+6. **🔁 En développement** — Rechargez `http://localhost:3000` pour voir les changements
 
 > ⚠️ **Important :** En production (Vercel), les pages statiques ne se mettent à jour qu'après un nouveau déploiement. Pour des mises à jour en temps réel, il faudra configurer un webhook Sanity → Vercel.
 
@@ -209,7 +193,7 @@ Un push sur la branche `main` de [GitHub](https://github.com/GalaINSAStras/gala-
 
 ### "Je ne vois pas le studio Sanity"
 - Vérifiez que le projet Sanity est bien lié (Project ID : `tsuy1vy3`)
-- Lancez `npx sanity dev` dans le dossier `src/sanity/`
+- Rendez-vous sur `http://localhost:3000/studio` (Studio embarqué dans l'app Next.js)
 
 ### "Erreur de connexion"
 - Vérifiez votre compte Google/GitHub
@@ -220,11 +204,13 @@ Un push sur la branche `main` de [GitHub](https://github.com/GalaINSAStras/gala-
 ## 7. 📚 Rappels techniques
 
 - **Framework :** Next.js 16 (App Router)
-- **CMS :** Sanity v6
+- **CMS :** Sanity v6 (embarqué via `next-sanity`)
+- **Client :** `@sanity/image-url` pour les images, `next-sanity` pour les requêtes
 - **Langage de requêtes :** **GROQ** (prononcer "grok")
 - **Hébergement :** Vercel (Hobby)
 - **Base de données :** PostgreSQL via Supabase
 - **Analytics :** Umami (auto-hébergé)
+- **UI :** shadcn/ui (Radix UI) + Tailwind CSS v4
 
 ---
 

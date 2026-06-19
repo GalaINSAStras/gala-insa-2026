@@ -48,6 +48,7 @@ export const NAVIGATION = [
   { label: "À propos", href: "/#about" },
   { label: "Partenaires", href: "/#partners" },
   { label: "Billetterie", href: "/#tickets" },
+  { label: "Équipe", href: "/#team" },
   { label: "FAQ", href: "/#faq" },
   { label: "Contact", href: "/#contact" },
 ] as const;

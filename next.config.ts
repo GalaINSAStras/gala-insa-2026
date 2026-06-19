@@ -1,8 +1,12 @@
+// next.config.ts
+import path from "path";
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  turbopack: {
+    root: path.resolve(__dirname),
+  },
   images: {
-    // Domaines autorisés pour next/image (Sanity CDN)
     remotePatterns: [
       {
         protocol: "https",
@@ -13,11 +17,11 @@ const nextConfig: NextConfig = {
     ],
   },
 
-  // En-têtes de sécurité HTTP
   async headers() {
     return [
       {
-        source: "/(.*)",
+        // Apply strict headers to everything EXCEPT /studio
+        source: "/((?!studio).*)",
         headers: [
           {
             key: "X-Content-Type-Options",
@@ -39,6 +43,22 @@ const nextConfig: NextConfig = {
             key: "Permissions-Policy",
             value: "camera=(), microphone=(), geolocation=()",
           },
+        ],
+      },
+      {
+        // Relaxed headers specifically for Sanity Studio
+        source: "/studio/:path*",
+        headers: [
+          {
+            key: "X-Content-Type-Options",
+            value: "nosniff",
+          },
+          {
+            key: "Referrer-Policy",
+            value: "strict-origin-when-cross-origin",
+          },
+          // No X-Frame-Options — Studio needs iframe access
+          // No X-XSS-Protection — can interfere with Studio's inline scripts
         ],
       },
     ];

@@ -1,36 +1,36 @@
 /**
- * Client Sanity — Utilise fetch() natif
+ * Client Sanity — Basé sur next-sanity (createClient) et @sanity/image-url
+ *
+ * Ce fichier sert de couche d'abstraction pour l'ensemble du projet.
+ * Il réexporte le client officiel et fournit urlFor() pour les images.
  */
+import { createClient } from "next-sanity";
+import { createImageUrlBuilder } from "@sanity/image-url";
 
-const projectId = "tsuy1vy3";
-const dataset = "production";
-const apiVersion = "2024-01-01";
-
-const baseUrl = `https://${projectId}.api.sanity.io/v${apiVersion}/data/query/${dataset}`;
+import {
+  apiVersion,
+  dataset,
+  projectId,
+} from "@/sanity/lib/env";
 
 /**
- * Exécute une requête GROQ sur l'API Sanity CDN (côté serveur)
+ * Client Sanity configuré pour les Server Components
+ * (useCdn: true pour les données publiées)
  */
-export async function sanityFetch<T>(query: string): Promise<T> {
-  const url = `${baseUrl}?query=${encodeURIComponent(query)}`;
-  const res = await fetch(url, { next: { revalidate: 60 } });
-  if (!res.ok) throw new Error(`Sanity fetch failed: ${res.statusText}`);
-  const json = await res.json();
-  return json.result as T;
-}
+export const client = createClient({
+  projectId,
+  dataset,
+  apiVersion,
+  useCdn: true,
+});
+
+// -- Image URL builder ------------------------------------------------
+
+const builder = createImageUrlBuilder(client);
 
 /**
- * Exécute une requête GROQ depuis le navigateur
+ * Type d'image Sanity (asset référence avec crop/hotspot optionnels)
  */
-export async function clientFetch<T>(query: string): Promise<T> {
-  const url = `${baseUrl}?query=${encodeURIComponent(query)}`;
-  const res = await fetch(url);
-  if (!res.ok) throw new Error(`Sanity fetch failed: ${res.statusText}`);
-  const json = await res.json();
-  return json.result as T;
-}
-
-/** Type d'image Sanity */
 export type SanityImageSource = {
   _type: "image";
   asset: { _ref: string; _type: "reference" };
@@ -39,36 +39,23 @@ export type SanityImageSource = {
 };
 
 /**
- * Génère une URL d'image Sanity
+ * Génère une URL d'image Sanity avec chaînage fluide
+ * Exemple : urlFor(image).width(400).height(300).url()
  */
-export function urlFor(source: SanityImageSource): {
-  width: (w: number) => {
-    height: (h: number) => {
-      fit: (f: string) => { url: () => string };
-    };
-  };
-  url: () => string;
-} {
-  const ref = source?.asset?._ref;
-  const parts = ref?.split("-") ?? [];
-  const [, id, dimensions, format] = parts;
-
-  const buildUrl = (w?: number, h?: number, fit?: string) => {
-    const base = `https://cdn.sanity.io/images/${projectId}/${dataset}/${id}-${dimensions}.${format}`;
-    const params = new URLSearchParams();
-    if (w) params.set("w", String(w));
-    if (h) params.set("h", String(h));
-    if (fit) params.set("fit", fit);
-    const qs = params.toString();
-    return qs ? `${base}?${qs}` : base;
-  };
-
-  return {
-    width: (w: number) => ({
-      height: (h: number) => ({
-        fit: (f: string) => ({ url: () => buildUrl(w, h, f) }),
-      }),
-    }),
-    url: () => buildUrl(),
-  };
+export function urlFor(source: SanityImageSource) {
+  return builder.image(source);
 }
+
+// -- Helpers de requête (rétrocompatible avec queries.ts et composants) --
+
+/**
+ * Exécute une requête GROQ et retourne le résultat typé
+ */
+export async function sanityFetch<T>(query: string): Promise<T> {
+  return client.fetch<T>(query);
+}
+
+/**
+ * Alias pour fetch côté client (composants "use client")
+ */
+export const clientFetch = sanityFetch;
