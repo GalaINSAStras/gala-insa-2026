@@ -6,7 +6,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "cms": "npx sanity@6 dev src/sanity --port 3333",
+    "cms:build": "npx sanity@6 build src/sanity -y"
   },
   "dependencies": {
     "@base-ui/react": "^1.6.0",

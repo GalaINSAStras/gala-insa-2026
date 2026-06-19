@@ -4,12 +4,45 @@
 
 ---
 
+## 0. 🖥️ Lancer le projet (site web + CMS)
+
+### Terminal 1 — Site web Next.js
+```powershell
+cd C:\Users\rudyv\Documents\GALA 2026\Website\gala-insa-2026
+& fnm env --use-on-cd | Out-String | Invoke-Expression; fnm use 24
+npm run dev
+```
+➡️ **http://localhost:3000**
+
+### Terminal 2 — Sanity Studio (CMS)
+Ouvrez un **second terminal PowerShell** et lancez :
+```powershell
+cd C:\Users\rudyv\Documents\GALA 2026\Website\gala-insa-2026
+& fnm env --use-on-cd | Out-String | Invoke-Expression; fnm use 24
+npm run cms
+```
+➡️ **http://localhost:3333**
+
+### ⚡ Flux de travail "live"
+```
+1. Ouvrez http://localhost:3333 → connectez-vous au Sanity Studio
+2. Modifiez un contenu (ex: ajoutez un partenaire)
+3. Cliquez sur "Publish" (bouton vert)
+4. Allez sur http://localhost:3000 → rechargez la page
+5. ↻ La modification apparaît immédiatement !
+```
+
+> ⚠️ **Pourquoi deux terminaux ?**
+> Sanity Studio nécessite React ≥ 19.2.5, tandis que Next.js 16 utilise React 19.2.4. Les deux serveurs sont donc lancés séparément. C'est transparent pour l'utilisateur.
+
+---
+
 ## 1. 🚀 Accéder au CMS Sanity
 
-### 1.1 URL d'accès
+### 1.1 URL d'accès (si déjà lancé)
 
 - **En développement local :** `http://localhost:3333`
-- **En production :** `https://gala-insa-2026.vercel.app/studio` (à configurer)
+- **En production :** à configurer sur Vercel
 
 ### 1.2 Connexion
 
