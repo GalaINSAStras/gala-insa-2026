@@ -84,6 +84,14 @@ export default function RootLayout({
       lang="fr"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
+      <head>
+        {/* Block bis_skin_checked at the lowest level to prevent React hydration mismatches */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `(function(){var E=Element.prototype,sa=E.setAttribute;E.setAttribute=function(n,v){if(n==='bis_skin_checked'){return}return sa.call(this,n,v)};var san=E.setAttributeNS;san&&(E.setAttributeNS=function(ns,n,v){if(n==='bis_skin_checked'){return}return san.call(this,ns,n,v)});var an=E.setAttributeNode;an&&(E.setAttributeNode=function(a){if(a&&a.name==='bis_skin_checked'){return null}return an.call(this,a)});var an2=E.setAttributeNodeNS;an2&&(E.setAttributeNodeNS=function(a){if(a&&a.name==='bis_skin_checked'){return null}return an2.call(this,a)});var mo=new MutationObserver(function(m){for(var i=0;i<m.length;i++){var t=m[i];if(t.type==='attributes'&&t.attributeName==='bis_skin_checked'){t.target.removeAttribute('bis_skin_checked')}else if(t.type==='childList'){for(var j=0;j<t.addedNodes.length;j++){var n=t.addedNodes[j];if(n.nodeType===1&&n.hasAttribute('bis_skin_checked')){n.removeAttribute('bis_skin_checked')}}}}}) ;mo.observe(document.documentElement,{attributes:true,attributeFilter:['bis_skin_checked'],childList:true,subtree:true});[].forEach.call(document.querySelectorAll('[bis_skin_checked]'),function(e){e.removeAttribute('bis_skin_checked')})})()`,
+          }}
+        />
+      </head>
       <body className="min-h-full flex flex-col" suppressHydrationWarning>
         <Header />
         <main className="flex-1">{children}</main>
