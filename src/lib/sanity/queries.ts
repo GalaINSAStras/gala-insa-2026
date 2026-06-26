@@ -74,6 +74,9 @@ export async function getLineup(): Promise<LineupItem[]> {
 /** Récupère le singleton Infos Pratiques */
 export async function getInfosPratiques(): Promise<InfosPratiques | null> {
   return sanityFetch<InfosPratiques | null>(
-    `*[_type == "infosPratiques"][0]`
+    `*[_type == "infosPratiques"][0]{
+      ...,
+      "planPDF": planPDF.asset->{url, originalFilename, size}
+    }`
   );
 }

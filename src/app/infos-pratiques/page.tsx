@@ -130,9 +130,9 @@ export default async function InfosPratiquesPage() {
                   </svg>
                 </div>
               )}
-              {infos?.planPDF?.asset.url ? (
+              {infos?.planPDF?.url ? (
                 <a
-                  href={infos.planPDF.asset.url}
+                  href={infos.planPDF.url}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 rounded-lg bg-gala-primary px-6 py-3 text-sm font-medium text-white hover:bg-gala-primary-light transition-colors"
