@@ -7,9 +7,9 @@ import Link from "next/link";
 import type { Partner } from "@/lib/sanity/types";
 
 const categoryStyles = {
+  premium: { label: "Premium", className: "border-gala-gold/60 bg-gala-gold/10", badge: "bg-gala-gold text-gala-primary-dark" },
   gold: { label: "Or", className: "border-gala-gold/40 bg-gala-gold/5", badge: "bg-gala-gold text-gala-primary-dark" },
   silver: { label: "Argent", className: "border-gala-silver/40 bg-gala-silver/5", badge: "bg-gala-silver text-white" },
-  bronze: { label: "Bronze", className: "border-gala-bronze/40 bg-gala-bronze/5", badge: "bg-gala-bronze text-white" },
 } as const;
 
 export function PartnersGrid() {
@@ -30,7 +30,7 @@ export function PartnersGrid() {
   return (
     <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
       {partners.map((p) => {
-        const c = categoryStyles[p.category] ?? categoryStyles.bronze;
+        const c = categoryStyles[p.category] ?? categoryStyles.silver;
         return (
           <Link key={p._id} href={p.websiteUrl ?? "#"} target={p.websiteUrl ? "_blank" : undefined} rel={p.websiteUrl ? "noopener noreferrer" : undefined}
             className={`group relative flex flex-col items-center justify-center rounded-xl border-2 p-6 transition-all hover:shadow-lg hover:-translate-y-1 ${c.className}`}>

@@ -16,7 +16,7 @@ export default defineType({
       validation: (rule) => rule.required(),
     }),
     defineField({
-      name: "answer",
+      name: "reponse",
       title: "Réponse",
       type: "text",
       rows: 4,

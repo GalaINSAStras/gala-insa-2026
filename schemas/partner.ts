@@ -28,14 +28,21 @@ export default defineType({
       type: "url",
     }),
     defineField({
+      name: "description",
+      title: "Description courte",
+      type: "text",
+      rows: 3,
+      description: "Texte descriptif du partenaire (affiché au survol sur la page Partenaires).",
+    }),
+    defineField({
       name: "category",
       title: "Catégorie",
       type: "string",
       options: {
         list: [
+          { title: "Premium", value: "premium" },
           { title: "Or", value: "gold" },
           { title: "Argent", value: "silver" },
-          { title: "Bronze", value: "bronze" },
         ],
       },
       validation: (rule) => rule.required(),

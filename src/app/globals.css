@@ -4,51 +4,91 @@
 
 @custom-variant dark (&:is(.dark *));
 
+/* ═══════════════════════════════════════════════════
+   🎨 GALA INSA Strasbourg 2026 — Design System V2
+   ═══════════════════════════════════════════════════ */
+
+/* ─── Typography: imported via next/font in layout.tsx ─── */
+/* --font-display: "Cormorant Garamond", serif;   // Titres H1/H2/Branding */
+/* --font-body: "Inter", sans-serif;               // Corps de texte, UI */
+
 @theme inline {
+  /* ─── Gala Custom Color Classes (Tailwind V4 mapping) ─── */
+  /* Ces tokens permettent d'utiliser bg-gala-primary, text-gala-gold, etc. */
+  --color-gala-primary: var(--primary);
+  --color-gala-primary-light: var(--primary-light);
+  --color-gala-primary-dark: var(--primary-hover);
+  --color-gala-primary-hover: var(--primary-hover);
+  --color-gala-secondary: var(--secondary);
+  --color-gala-secondary-light: var(--secondary-light);
+  --color-gala-secondary-hover: var(--secondary-hover);
+  --color-gala-gold: var(--accent);
+  --color-gala-gold-light: var(--accent-light);
+  --color-gala-gold-hover: var(--accent-hover);
+  --color-gala-accent: var(--accent);
+  --color-gala-accent-light: var(--accent-light);
+  --color-gala-accent-hover: var(--accent-hover);
+  --color-gala-silver: var(--primary-light);
+  --color-gala-bronze: var(--secondary-light);
+  --color-gala-surface-1: var(--surface-1);
+  --color-gala-surface-2: var(--surface-2);
+  --color-gala-surface-3: var(--surface-3);
+  --color-gala-highlight: var(--highlight);
+  --color-gala-text: var(--text-primary);
+  --color-gala-text-secondary: var(--text-secondary);
+
+  /* ─── Radius Tokens ─── */
+  --radius-input: 8px;
+  --radius-card: 16px;
+  --radius-button: 12px;
+  --radius-modal: 20px;
+
+  /* ─── Shadow Tokens (Gala Soft Ambiances) ─── */
+  --shadow-sm: 0 2px 8px rgba(30, 40, 60, 0.05);
+  --shadow-md: 0 6px 20px rgba(30, 40, 60, 0.08);
+  --shadow-lg: 0 14px 36px rgba(30, 40, 60, 0.12);
+
+  /* ─── Semantic Color Tokens (mapped to shadcn/ui) ─── */
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-sans, "Geist", ui-sans-serif, system-ui, sans-serif);
-  --font-mono: var(--font-geist-mono, "Geist Mono", ui-monospace, monospace);
-  --font-heading: var(--font-sans);
-
-  /* 🌐 Couleurs du Gala INSA Strasbourg 2026 */
-  --color-gala-primary: #043768;
-  --color-gala-primary-light: #0654a0;
-  --color-gala-primary-dark: #032a50;
-  --color-gala-gold: #c9a84c;
-  --color-gala-silver: #b0b0b0;
-  --color-gala-bronze: #a67c52;
-
-  /* shadcn/ui tokens */
-  --color-sidebar-ring: var(--sidebar-ring);
-  --color-sidebar-border: var(--sidebar-border);
-  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
-  --color-sidebar-accent: var(--sidebar-accent);
-  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
-  --color-sidebar-primary: var(--sidebar-primary);
-  --color-sidebar-foreground: var(--sidebar-foreground);
-  --color-sidebar: var(--sidebar);
-  --color-chart-5: var(--chart-5);
-  --color-chart-4: var(--chart-4);
-  --color-chart-3: var(--chart-3);
-  --color-chart-2: var(--chart-2);
-  --color-chart-1: var(--chart-1);
-  --color-ring: var(--ring);
-  --color-input: var(--input);
-  --color-border: var(--border);
-  --color-destructive: var(--destructive);
-  --color-accent-foreground: var(--accent-foreground);
-  --color-accent: var(--accent);
-  --color-muted-foreground: var(--muted-foreground);
-  --color-muted: var(--muted);
-  --color-secondary-foreground: var(--secondary-foreground);
-  --color-secondary: var(--secondary);
-  --color-primary-foreground: var(--primary-foreground);
-  --color-primary: var(--primary);
-  --color-popover-foreground: var(--popover-foreground);
-  --color-popover: var(--popover);
-  --color-card-foreground: var(--card-foreground);
   --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+
+  /* ─── Fonts ─── */
+  --font-display: "Cormorant Garamond", serif;
+  --font-body: "Inter", sans-serif;
+  --font-mono: "Geist Mono", ui-monospace, monospace;
+
+  /* ─── Radius shadcn legacy mapping ─── */
+  --radius: 0.625rem;
   --radius-sm: calc(var(--radius) * 0.6);
   --radius-md: calc(var(--radius) * 0.8);
   --radius-lg: var(--radius);
@@ -58,84 +98,188 @@
   --radius-4xl: calc(var(--radius) * 2.6);
 }
 
+/* ═══════════════════════════════════════════════════
+   🌞 LIGHT MODE
+   ═══════════════════════════════════════════════════ */
 :root {
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.145 0 0);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.145 0 0);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.145 0 0);
-  /* 🎯 Primaire : #043768 converti en OKLCH */
-  --primary: oklch(0.25 0.12 260);
-  --primary-foreground: oklch(0.985 0 0);
-  --secondary: oklch(0.97 0 0);
-  --secondary-foreground: oklch(0.205 0 0);
-  --muted: oklch(0.97 0 0);
-  --muted-foreground: oklch(0.556 0 0);
-  --accent: oklch(0.97 0 0);
-  --accent-foreground: oklch(0.205 0 0);
-  --destructive: oklch(0.577 0.245 27.325);
-  --border: oklch(0.922 0 0);
-  --input: oklch(0.922 0 0);
-  --ring: oklch(0.708 0 0);
-  --chart-1: oklch(0.87 0 0);
-  --chart-2: oklch(0.556 0 0);
-  --chart-3: oklch(0.439 0 0);
-  --chart-4: oklch(0.371 0 0);
-  --chart-5: oklch(0.269 0 0);
-  --radius: 0.625rem;
-  --sidebar: oklch(0.985 0 0);
-  --sidebar-foreground: oklch(0.145 0 0);
-  --sidebar-primary: oklch(0.205 0 0);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.97 0 0);
-  --sidebar-accent-foreground: oklch(0.205 0 0);
-  --sidebar-border: oklch(0.922 0 0);
-  --sidebar-ring: oklch(0.708 0 0);
+  /* ─── Surfaces ─── */
+  --background: #FFFBF2;               /* Crème */
+  --foreground: #2E3342;               /* text-primary */
+  --card: #FFFFFF;                     /* surface */
+  --card-foreground: #2E3342;
+  --popover: #FFFFFF;
+  --popover-foreground: #2E3342;
+  --surface: #FFFFFF;
+  --surface-alt: #F6F7F8;
+
+  /* ─── Primary — Bleu ardoise ─── */
+  --primary: #5E708E;
+  --primary-foreground: #FFFFFF;
+  --primary-light: #BACCE9;
+  --primary-hover: #50617C;
+
+  /* ─── Secondary — Vert sauge ─── */
+  --secondary: #9DBE8B;
+  --secondary-foreground: #FFFFFF;
+  --secondary-light: #D6EDCF;
+  --secondary-hover: #88AA76;
+
+  /* ─── Accent — Ocre doré ─── */
+  --accent: #D9A956;
+  --accent-foreground: #FFFFFF;
+  --accent-light: #F3DAA2;
+  --accent-hover: #C8963F;
+
+  /* ─── Text ─── */
+  --text-primary: #2E3342;
+  --text-secondary: #5C6475;
+
+  /* ─── Borders / Inputs ─── */
+  --border: #E5E7EB;
+  --input: #E5E7EB;
+  --ring: #BACCE9;
+
+  /* ─── Destructive ─── */
+  --destructive: #D9534F;
+  --destructive-foreground: #FFFFFF;
+
+  /* ─── Muted ─── */
+  --muted: #F6F7F8;
+  --muted-foreground: #5C6475;
+
+  /* ─── Charts (hérité pour compatibilité) ─── */
+  --chart-1: #5E708E;
+  --chart-2: #9DBE8B;
+  --chart-3: #D9A956;
+  --chart-4: #F3DAA2;
+  --chart-5: #BACCE9;
+
+  /* ─── Sidebar ─── */
+  --sidebar: #FFFFFF;
+  --sidebar-foreground: #2E3342;
+  --sidebar-primary: #5E708E;
+  --sidebar-primary-foreground: #FFFFFF;
+  --sidebar-accent: #F6F7F8;
+  --sidebar-accent-foreground: #2E3342;
+  --sidebar-border: #E5E7EB;
+  --sidebar-ring: #BACCE9;
+
+  /* ─── Decorative Surface Colors ─── */
+  --surface-1: #FFFBF2;                /* Crème */
+  --surface-2: #E9F5FF;                /* Bleu très clair */
+  --surface-3: #FFF2F6;                /* Rose très clair */
+  --highlight: #F3DAA2;                /* Jaune pastel */
+  --decoration-pink: #FCD8E4;          /* Rose pastel */
+  --decoration-blue: #BACCE9;          /* Bleu pastel */
+  --decoration-green: #D6EDCF;         /* Vert clair */
 }
 
+/* ═══════════════════════════════════════════════════
+   🌙 DARK MODE
+   ═══════════════════════════════════════════════════ */
 .dark {
-  --background: oklch(0.145 0 0);
-  --foreground: oklch(0.985 0 0);
-  --card: oklch(0.205 0 0);
-  --card-foreground: oklch(0.985 0 0);
-  --popover: oklch(0.205 0 0);
-  --popover-foreground: oklch(0.985 0 0);
-  --primary: oklch(0.922 0 0);
-  --primary-foreground: oklch(0.205 0 0);
-  --secondary: oklch(0.269 0 0);
-  --secondary-foreground: oklch(0.985 0 0);
-  --muted: oklch(0.269 0 0);
-  --muted-foreground: oklch(0.708 0 0);
-  --accent: oklch(0.269 0 0);
-  --accent-foreground: oklch(0.985 0 0);
-  --destructive: oklch(0.704 0.191 22.216);
-  --border: oklch(1 0 0 / 10%);
-  --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.556 0 0);
-  --chart-1: oklch(0.87 0 0);
-  --chart-2: oklch(0.556 0 0);
-  --chart-3: oklch(0.439 0 0);
-  --chart-4: oklch(0.371 0 0);
-  --chart-5: oklch(0.269 0 0);
-  --sidebar: oklch(0.205 0 0);
-  --sidebar-foreground: oklch(0.985 0 0);
-  --sidebar-primary: oklch(0.488 0.243 264.376);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.269 0 0);
-  --sidebar-accent-foreground: oklch(0.985 0 0);
-  --sidebar-border: oklch(1 0 0 / 10%);
-  --sidebar-ring: oklch(0.556 0 0);
+  /* ─── Surfaces (gris-bleutés profonds, pas de noir pur) ─── */
+  --background: #1C1E24;
+  --foreground: #F7F7F5;
+  --card: #2B303B;
+  --card-foreground: #F7F7F5;
+  --popover: #2B303B;
+  --popover-foreground: #F7F7F5;
+  --surface: #2B303B;
+  --surface-alt: #363C48;
+
+  /* ─── Primary ─── */
+  --primary: #AFC3E7;
+  --primary-foreground: #1C1E24;
+  --primary-light: #D6E5FA;
+  --primary-hover: #50617C;
+
+  /* ─── Secondary ─── */
+  --secondary: #B9D7A9;
+  --secondary-foreground: #1C1E24;
+  --secondary-light: #DDEDD5;
+  --secondary-hover: #88AA76;
+
+  /* ─── Accent ─── */
+  --accent: #E0BA6C;
+  --accent-foreground: #1C1E24;
+  --accent-light: #F4DFA8;
+  --accent-hover: #C8963F;
+
+  /* ─── Text ─── */
+  --text-primary: #F7F7F5;
+  --text-secondary: #D8D9DD;
+
+  /* ─── Borders / Inputs ─── */
+  --border: #464D59;
+  --input: #464D59;
+  --ring: #AFC3E7;
+
+  /* ─── Destructive ─── */
+  --destructive: #D9534F;
+  --destructive-foreground: #FFFFFF;
+
+  /* ─── Muted ─── */
+  --muted: #363C48;
+  --muted-foreground: #D8D9DD;
+
+  /* ─── Charts ─── */
+  --chart-1: #AFC3E7;
+  --chart-2: #B9D7A9;
+  --chart-3: #E0BA6C;
+  --chart-4: #D6E5FA;
+  --chart-5: #BACCE9;
+
+  /* ─── Sidebar ─── */
+  --sidebar: #252932;
+  --sidebar-foreground: #F7F7F5;
+  --sidebar-primary: #AFC3E7;
+  --sidebar-primary-foreground: #1C1E24;
+  --sidebar-accent: #363C48;
+  --sidebar-accent-foreground: #F7F7F5;
+  --sidebar-border: #464D59;
+  --sidebar-ring: #AFC3E7;
+
+  /* ─── Decorative Surface Colors ─── */
+  --surface-1: #1C1E24;
+  --surface-2: #252932;
+  --surface-3: #2B303B;
+  --highlight: #2B303B;
+  --decoration-pink: #3A3040;
+  --decoration-blue: #2A3545;
+  --decoration-green: #2A3A30;
 }
 
+/* ═══════════════════════════════════════════════════
+   🎯 ACCESSIBILITY — Focus State Global
+   ═══════════════════════════════════════════════════ */
 @layer base {
   * {
-    @apply border-border outline-ring/50;
+    @apply border-border;
   }
+
+  /* Focus visible global : outline épais avec la couleur primary-light */
+  *:focus-visible {
+    outline: 3px solid #BACCE9;
+    outline-offset: 2px;
+  }
+
   body {
     @apply bg-background text-foreground;
+    font-family: var(--font-body);
   }
+
   html {
-    @apply font-sans;
+    font-family: var(--font-body);
+  }
+
+  /* Les titres utilisent la police display (Cormorant Garamond) */
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-display);
+  }
+
+  /* Interdiction d'utiliser la display font pour les longs textes */
+  p, li, td, th, label, input, textarea, button, span, small, blockquote {
+    font-family: var(--font-body);
   }
 }

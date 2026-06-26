@@ -20,6 +20,10 @@
 # production
 /build
 
+# sanity
+/dist
+/.sanity/runtime
+
 # misc
 .DS_Store
 *.pem
@@ -39,3 +43,6 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# debug screenshots
+studio-check*.png

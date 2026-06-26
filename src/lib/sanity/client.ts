@@ -7,21 +7,14 @@
 import { createClient } from "next-sanity";
 import { createImageUrlBuilder } from "@sanity/image-url";
 
-import {
-  apiVersion,
-  dataset,
-  projectId,
-} from "@/sanity/lib/env";
+import { sanityClientConfig } from "@/sanity/lib/client";
 
 /**
  * Client Sanity configuré pour les Server Components
- * (useCdn: true pour les données publiées)
+ * (CDN actif en production, désactivé en développement)
  */
 export const client = createClient({
-  projectId,
-  dataset,
-  apiVersion,
-  useCdn: true
+  ...sanityClientConfig,
 });
 
 // -- Image URL builder ------------------------------------------------

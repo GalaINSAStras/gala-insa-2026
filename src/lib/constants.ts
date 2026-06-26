@@ -2,20 +2,20 @@
 // 🎭 Gala INSA Strasbourg 2026 — Constantes
 // ============================================
 
-/** Couleurs de la charte graphique Gala 2026 */
+import { TOKENS } from "./design-tokens";
+
+/** Couleurs de la charte graphique Gala 2026 (Design System V2) */
 export const COLORS = {
-  /** Bleu marine INSA — primaire */
-  galaPrimary: "#043768" as const,
-  /** Variante plus claire */
-  galaPrimaryLight: "#0654a0" as const,
-  /** Variante plus foncée */
-  galaPrimaryDark: "#032a50" as const,
-  /** Or — partenaires Gold */
-  galaGold: "#c9a84c" as const,
-  /** Argent — partenaires Silver */
-  galaSilver: "#b0b0b0" as const,
-  /** Bronze — partenaires Bronze */
-  galaBronze: "#a67c52" as const,
+  /** Bleu ardoise — primaire */
+  galaPrimary: TOKENS.primary,
+  /** Variante claire */
+  galaPrimaryLight: TOKENS.primaryLight,
+  /** Ocre doré — Accent (ex-Gold) */
+  galaGold: TOKENS.accent,
+  /** Bleu pastel — Silver (ex-argent) */
+  galaSilver: TOKENS.primaryLight,
+  /** Vert clair — Bronze */
+  galaBronze: TOKENS.secondaryLight,
 } as const;
 
 /** Informations sur l'événement */
@@ -45,10 +45,10 @@ export const LEGAL = {
 
 /** Navigation principale */
 export const NAVIGATION = [
-  { label: "À propos", href: "/#about" },
-  { label: "Partenaires", href: "/#partners" },
-  { label: "Billetterie", href: "/#tickets" },
-  { label: "Équipe", href: "/#team" },
+  { label: "La Soirée", href: "/la-soiree" },
+  { label: "Infos Pratiques", href: "/infos-pratiques" },
+  { label: "Billetterie", href: "/billetterie" },
+  { label: "Partenaires", href: "/partenaires" },
   { label: "FAQ", href: "/#faq" },
   { label: "Contact", href: "/#contact" },
 ] as const;

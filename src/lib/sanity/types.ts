@@ -13,7 +13,8 @@ export interface Partner {
   name: string;
   logo: SanityImageSource;
   websiteUrl?: string;
-  category: "gold" | "silver" | "bronze";
+  description?: string;
+  category: "premium" | "gold" | "silver";
   displayOrder: number;
 }
 
@@ -56,7 +57,7 @@ export interface FAQ {
   _createdAt: string;
   _updatedAt: string;
   question: string;
-  answer: string;
+  reponse: string;
   displayOrder: number;
 }
 
@@ -71,4 +72,81 @@ export interface TeamMember {
   photo?: SanityImageSource;
   bio?: string;
   displayOrder: number;
+}
+
+// ============================================
+// Nouveaux types (71e édition)
+// ============================================
+
+/** Hero — Section d'accueil */
+export interface Hero {
+  _id: string;
+  _type: "hero";
+  _createdAt: string;
+  _updatedAt: string;
+  title: string;
+  teaserVideo?: { _type: "file"; asset: { _ref: string; _type: "reference" } };
+  posterFallback?: SanityImageSource;
+  loadingLogo?: SanityImageSource;
+  taglines?: string[];
+  ctaLabel: string;
+  ctaLink: string;
+}
+
+/** Soirée — Thème, menu, dress code */
+export interface Soiree {
+  _id: string;
+  _type: "soiree";
+  _createdAt: string;
+  _updatedAt: string;
+  theme: string;
+  themeDescription?: string;
+  themeImage?: SanityImageSource;
+  dressCode?: string;
+  dressCodeIllustration?: SanityImageSource;
+  soireeSeuleDetails?: string;
+  soireeSeulePrice?: number;
+  menuBuffetTitle?: string;
+  menuBuffet?: MenuItem[];
+  buffetPrice?: number;
+}
+
+export interface MenuItem {
+  dish: string;
+  allergenes?: string[];
+}
+
+/** Line-Up artistique */
+export interface LineupItem {
+  _id: string;
+  _type: "lineup";
+  _createdAt: string;
+  _updatedAt: string;
+  artistName: string;
+  stageTime?: string;
+  genre?: string;
+  description?: string;
+  image?: SanityImageSource;
+  displayOrder: number;
+}
+
+/** Infos Pratiques */
+export interface InfosPratiques {
+  _id: string;
+  _type: "infosPratiques";
+  _createdAt: string;
+  _updatedAt: string;
+  openingTime?: string;
+  closingTime?: string;
+  tarifs?: string;
+  planPDF?: {
+    _type: "file";
+    asset: { _ref?: string; _type?: "reference"; url?: string };
+  };
+  planImage?: SanityImageSource;
+  mapLat: number;
+  mapLng: number;
+  accessibilite?: string;
+  stopVSSTitle?: string;
+  stopVSS?: string;
 }

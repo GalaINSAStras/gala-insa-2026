@@ -1,20 +1,24 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Inter, Cormorant_Garamond } from "next/font/google";
 import Script from "next/script";
-import { Header } from "@/components/layout/header";
-import { Footer } from "@/components/layout/footer";
-import { LEGAL } from "@/lib/constants";
 import { sanityFetch } from "@/lib/sanity/client";
+import { SiteShellClient } from "./site-shell-client";
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+/* ─── Body Font : Inter (lisibilité maximale) ─── */
+const inter = Inter({
+  variable: "--font-body",
   subsets: ["latin"],
+  display: "swap",
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+/* ─── Display Font : Cormorant Garamond (alternative libre à Renaissance) ─── */
+const cormorantGaramond = Cormorant_Garamond({
+  variable: "--font-display",
   subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  style: ["normal", "italic"],
+  display: "swap",
 });
 
 async function getEventMetadata() {
@@ -82,22 +86,44 @@ export default function RootLayout({
   return (
     <html
       lang="fr"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      className={`${inter.variable} ${cormorantGaramond.variable} h-full antialiased`}
     >
-      <head>
-        {/* Block bis_skin_checked at the lowest level to prevent React hydration mismatches */}
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `(function(){var E=Element.prototype,sa=E.setAttribute;E.setAttribute=function(n,v){if(n==='bis_skin_checked'){return}return sa.call(this,n,v)};var san=E.setAttributeNS;san&&(E.setAttributeNS=function(ns,n,v){if(n==='bis_skin_checked'){return}return san.call(this,ns,n,v)});var an=E.setAttributeNode;an&&(E.setAttributeNode=function(a){if(a&&a.name==='bis_skin_checked'){return null}return an.call(this,a)});var an2=E.setAttributeNodeNS;an2&&(E.setAttributeNodeNS=function(a){if(a&&a.name==='bis_skin_checked'){return null}return an2.call(this,a)});var mo=new MutationObserver(function(m){for(var i=0;i<m.length;i++){var t=m[i];if(t.type==='attributes'&&t.attributeName==='bis_skin_checked'){t.target.removeAttribute('bis_skin_checked')}else if(t.type==='childList'){for(var j=0;j<t.addedNodes.length;j++){var n=t.addedNodes[j];if(n.nodeType===1&&n.hasAttribute('bis_skin_checked')){n.removeAttribute('bis_skin_checked')}}}}}) ;mo.observe(document.documentElement,{attributes:true,attributeFilter:['bis_skin_checked'],childList:true,subtree:true});[].forEach.call(document.querySelectorAll('[bis_skin_checked]'),function(e){e.removeAttribute('bis_skin_checked')})})()`,
-          }}
-        />
-      </head>
       <body className="min-h-full flex flex-col" suppressHydrationWarning>
-        <Header />
-        <main className="flex-1">{children}</main>
-        <Footer />
+        {/* Script anti-extension (bis_skin_checked) — s'exécute avant l'hydration */}
+        <Script id="sanitize-bis" strategy="beforeInteractive">
+          {`
+            (function(){
+              var E=Element.prototype,sa=E.setAttribute;
+              E.setAttribute=function(n,v){if(n==='bis_skin_checked'){return}return sa.call(this,n,v)};
+              var san=E.setAttributeNS;
+              san&&(E.setAttributeNS=function(ns,n,v){if(n==='bis_skin_checked'){return}return san.call(this,ns,n,v)});
+              var an=E.setAttributeNode;
+              an&&(E.setAttributeNode=function(a){if(a&&a.name==='bis_skin_checked'){return null}return an.call(this,a)});
+              var an2=E.setAttributeNodeNS;
+              an2&&(E.setAttributeNodeNS=function(a){if(a&&a.name==='bis_skin_checked'){return null}return an2.call(this,a)});
+              var mo=new MutationObserver(function(m){
+                for(var i=0;i<m.length;i++){
+                  var t=m[i];
+                  if(t.type==='attributes'&&t.attributeName==='bis_skin_checked'){
+                    t.target.removeAttribute('bis_skin_checked')
+                  }else if(t.type==='childList'){
+                    for(var j=0;j<t.addedNodes.length;j++){
+                      var n=t.addedNodes[j];
+                      if(n.nodeType===1&&n.hasAttribute('bis_skin_checked')){
+                        n.removeAttribute('bis_skin_checked')
+                      }
+                    }
+                  }
+                }
+              });
+              mo.observe(document.documentElement,{attributes:true,attributeFilter:['bis_skin_checked'],childList:true,subtree:true});
+              [].forEach.call(document.querySelectorAll('[bis_skin_checked]'),function(e){e.removeAttribute('bis_skin_checked')});
+            })()
+          `}
+        </Script>
 
-        {/* Umami Analytics — (privacy-first, auto-hébergé) */}
+        <SiteShellClient>{children}</SiteShellClient>
+
         {umamiWebsiteId && umamiUrl && (
           <Script
             src={`${umamiUrl}/script.js`}
