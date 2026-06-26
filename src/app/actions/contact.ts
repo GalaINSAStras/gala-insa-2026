@@ -85,9 +85,23 @@ export async function submitContact(
     return { success: true };
   }
 
+  // Vérification de la configuration Resend
+  const apiKey = process.env.RESEND_API_KEY;
+  if (!apiKey) {
+    console.error(
+      "[INFRASTRUCTURE ERROR]: Resend API Key is not configured. " +
+        "Set RESEND_API_KEY in environment variables."
+    );
+    return {
+      success: false,
+      error: "Le service d'envoi est temporairement indisponible.",
+      fields: data,
+    };
+  }
+
   // Envoi de l'email via Resend
   try {
-    const resend = new Resend(process.env.RESEND_API_KEY);
+    const resend = new Resend(apiKey);
 
     const { error } = await resend.emails.send({
       from: "Contact Gala INSA <onboarding@resend.dev>",
