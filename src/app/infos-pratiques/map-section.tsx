@@ -5,6 +5,7 @@
  * Affiche l'emplacement de L'Illiade avec marqueurs
  */
 export function MapSection({ lat, lng }: { lat: number; lng: number }) {
+  const query = `${lat},${lng}`;
   const mapUrl = `https://www.openstreetmap.org/export/embed.html?bbox=${lng - 0.015}%2C${lat - 0.015}%2C${lng + 0.015}%2C${lat + 0.015}&layer=mapnik&marker=${lat}%2C${lng}`;
   const directionsUrl = `https://www.openstreetmap.org/directions?from=&to=${lat}%2C${lng}#map=16/${lat}/${lng}`;
 

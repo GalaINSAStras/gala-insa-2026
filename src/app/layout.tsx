@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter, Cormorant_Garamond } from "next/font/google";
 import Script from "next/script";
+import { LEGAL } from "@/lib/constants";
 import { sanityFetch } from "@/lib/sanity/client";
 import { SiteShellClient } from "./site-shell-client";
 import "./globals.css";

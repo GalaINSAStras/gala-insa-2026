@@ -13,7 +13,10 @@ export const metadata: Metadata = {
 export const revalidate = 60;
 
 export default async function InfosPratiquesPage() {
-  const [infos, event] = await Promise.all([getInfosPratiques(), getEvent()]);
+  const [infos, event] = await Promise.all([
+    getInfosPratiques().catch(() => null),
+    getEvent().catch(() => null),
+  ]);
 
   return (
     <div className="flex flex-col">

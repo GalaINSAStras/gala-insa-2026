@@ -139,10 +139,7 @@ export interface InfosPratiques {
   openingTime?: string;
   closingTime?: string;
   tarifs?: string;
-  planPDF?: {
-    _type: "file";
-    asset: { _ref?: string; _type?: "reference"; url?: string };
-  };
+  planPDF?: { _type: "file"; asset: { _ref: string; _type: "reference" } };
   planImage?: SanityImageSource;
   mapLat: number;
   mapLng: number;

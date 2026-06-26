@@ -13,7 +13,7 @@ import { urlFor } from "@/lib/sanity/client";
 export const revalidate = 60;
 
 export default async function HomePage() {
-  const event = await getEvent();
+  const event = await getEvent().catch(() => null);
 
   const title = event?.title ?? "Gala INSA Strasbourg";
   const edition = event?.edition ?? 71;

@@ -15,7 +15,10 @@ export const metadata: Metadata = {
 export const revalidate = 60;
 
 export default async function LaSoireePage() {
-  const [soiree, lineup] = await Promise.all([getSoiree(), getLineup()]);
+  const [soiree, lineup] = await Promise.all([
+    getSoiree().catch(() => null),
+    getLineup().catch(() => []),
+  ]);
 
   return (
     <div className="flex flex-col">
