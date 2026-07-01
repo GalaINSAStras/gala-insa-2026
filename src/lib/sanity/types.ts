@@ -147,3 +147,14 @@ export interface InfosPratiques {
   stopVSSTitle?: string;
   stopVSS?: string;
 }
+
+/** Paramètres Instagram (post épinglé géré depuis Sanity) */
+export interface InstagramSettings {
+  _id: string;
+  _type: "instagram";
+  _createdAt: string;
+  _updatedAt: string;
+  title: string;
+  profilePicUrl?: string;
+  latestPostUrl?: string;
+}

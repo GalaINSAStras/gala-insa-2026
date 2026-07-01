@@ -9,6 +9,7 @@ import type {
   Soiree,
   LineupItem,
   InfosPratiques,
+  InstagramSettings,
 } from "./types";
 
 // ============================================
@@ -78,5 +79,12 @@ export async function getInfosPratiques(): Promise<InfosPratiques | null> {
       ...,
       "planPDF": planPDF.asset->{url, originalFilename, size}
     }`
+  );
+}
+
+/** Récupère les paramètres Instagram (post épinglé géré depuis Sanity) */
+export async function getInstagram(): Promise<InstagramSettings | null> {
+  return sanityFetch<InstagramSettings | null>(
+    `*[_type == "instagram"][0]{ profilePicUrl, latestPostUrl }`
   );
 }

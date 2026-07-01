@@ -7,6 +7,7 @@ import hero from "./hero";
 import soiree from "./soiree";
 import lineup from "./lineup";
 import infosPratiques from "./infosPratiques";
+import instagram from "./instagram";
 
 export const schemaTypes = [
   event,
@@ -18,4 +19,5 @@ export const schemaTypes = [
   soiree,
   lineup,
   infosPratiques,
+  instagram,
 ];
