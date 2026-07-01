@@ -2,6 +2,9 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  // Le code source est dans src/ (config tsconfig paths)
+  // Pas besoin de experimental.appDir — App Router est le défaut dans Next 16
+
   images: {
     remotePatterns: [
       {

@@ -2,7 +2,6 @@
 
 import { z } from "zod";
 import { Resend } from "resend";
-import { LEGAL } from "@/lib/constants";
 
 // -- Validation schema ------------------------------------------------
 
@@ -104,8 +103,8 @@ export async function submitContact(
     const resend = new Resend(apiKey);
 
     const { error } = await resend.emails.send({
-      from: "Contact Gala INSA <onboarding@resend.dev>",
-      to: [LEGAL.email],
+      from: "Gala INSA <onboarding@resend.dev>",
+      to: [process.env.CONTACT_EMAIL || "gala.insastras@gmail.com"],
       replyTo: result.data.email,
       subject: `[Gala INSA 2026] Nouveau message de ${result.data.name}`,
       html: `

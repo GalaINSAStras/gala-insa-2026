@@ -1,5 +1,5 @@
 import { createClient } from "next-sanity";
-import { getProjectId, getDataset, getApiVersion } from "./env";
+import { getProjectId, getDataset, getApiVersion, validateSanityEnv } from "./env";
 
 /**
  * Configuration lazily-evaluated du client Sanity.
@@ -40,7 +40,6 @@ export function getClient() {
  * À utiliser dans les composants qui ont besoin du client.
  */
 export function getValidatedClient() {
-  const { validateSanityEnv } = require("./env");
   validateSanityEnv();
   return getClient();
 }
