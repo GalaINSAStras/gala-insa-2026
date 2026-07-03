@@ -4,7 +4,6 @@ import { motion, useScroll, useTransform } from "motion/react";
 import { useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import { ArrowDown } from "lucide-react";
 
 interface HeroSectionProps {
   title: string;
@@ -128,7 +127,7 @@ export function HeroSection({
 
       {/* Contenu central animé */}
       <motion.div
-        className="container mx-auto px-4 text-center md:px-6 pb-20 md:pb-32"
+        className="container mx-auto px-4 text-center md:px-6 pt-10 pb-20 md:pt-32 md:pb-32"
         style={{ y: contentY }}
       >
         <motion.div
@@ -158,7 +157,7 @@ export function HeroSection({
           {/* Titre avec effet de révélation — texte blanc pur sur fond sombre ✅ */}
           <h1 className="font-display text-5xl font-bold tracking-tight text-white leading-[1.2] md:leading-none md:text-7xl lg:text-8xl">
             {title.split(" ").map((word, i, arr) => (
-              <span key={i} className="inline-block overflow-hidden pb-4 pt-0">
+              <span key={i} className="inline-block overflow-hidden pb-0 pt-0 -mb-2 md:pb-4">
                 <motion.span
                   className="inline-block"
                   initial={{ y: "100%" }}
@@ -257,24 +256,6 @@ export function HeroSection({
         </motion.div>
       </motion.div>
 
-      {/* Scroll indicator */}
-      <motion.div
-        className="absolute bottom-8 left-1/2 -translate-x-1/2"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1.5, duration: 0.8 }}
-      >
-        <motion.div
-          animate={{ y: [0, 8, 0] }}
-          transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-          className="flex flex-col items-center gap-2"
-        >
-          <span className="text-xs uppercase tracking-widest text-white/45">
-            Scroll
-          </span>
-          <ArrowDown className="h-4 w-4 text-white/45" />
-        </motion.div>
-      </motion.div>
     </section>
   );
 }
