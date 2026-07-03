@@ -42,7 +42,7 @@ export function TeamSection() {
   if (!team.length)
     return (
       <p className="text-muted-foreground italic">
-        L'équipe sera bientôt dévoilée.
+        L&rsquo;&eacute;quipe sera bient&ocirc;t d&eacute;voil&eacute;e.
       </p>
     );
 

@@ -287,17 +287,7 @@ export function MapSection({
           language="fr"
           region="FR"
         >
-          {apiStatus === "error" ? (
-            <iframe
-              title="Carte Google Maps de L'Illiade"
-              src={`https://www.google.com/maps?q=${encodeURIComponent(address)}&z=16&output=embed`}
-              className="h-full w-full border-0"
-              loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
-            />
-          ) : (
-            <GoogleMapCanvas lat={lat} lng={lng} address={address} />
-          )}
+          <GoogleMapCanvas lat={lat} lng={lng} address={address} />
         </APIProvider>
       </div>
       <div className="flex gap-3">

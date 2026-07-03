@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "motion/react";
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 import Image from "next/image";
 import { SOCIAL } from "@/lib/constants";
 import type { InstagramApiResponse } from "@/app/api/instagram/route";
@@ -49,15 +49,24 @@ export function InstagramFeed() {
         setData(json);
       }
     } catch {
-      // Silently fail — fallback will show
+      // Silently fail -- fallback will show
     } finally {
       setLoading(false);
     }
   }, []);
 
+  const fetchInstagramRef = useRef(fetchInstagram);
+
   useEffect(() => {
-    fetchInstagram();
+    fetchInstagramRef.current = fetchInstagram;
   }, [fetchInstagram]);
+
+  useEffect(() => {
+    const raf = requestAnimationFrame(() => {
+      fetchInstagramRef.current();
+    });
+    return () => cancelAnimationFrame(raf);
+  }, []);
 
   const profilePicUrl = data?.profilePicUrl ?? null;
   const latestPostUrl = data?.latestPostUrl ?? null;
@@ -67,10 +76,10 @@ export function InstagramFeed() {
     <section
       id="instagram"
       className="py-20 md:py-28"
-      aria-label="Dernière publication Instagram"
+      aria-label="Derni&egrave;re publication Instagram"
     >
       <div className="container mx-auto px-4 md:px-6">
-        {/* En-tête de section */}
+        {/* En-tete de section */}
         <motion.div
           className="mb-10 flex flex-col items-start gap-3 md:flex-row md:items-end md:justify-between"
           initial={{ opacity: 0, y: 30 }}
@@ -80,7 +89,7 @@ export function InstagramFeed() {
         >
           <div>
             <div className="mb-2 flex items-center gap-3">
-              {/* Photo de profil Instagram (ou fallback icône) */}
+              {/* Photo de profil Instagram (ou fallback icone) */}
               {!loading && profilePicUrl ? (
                 <div className="relative h-10 w-10 overflow-hidden rounded-full ring-2 ring-[rgba(217,169,86,0.3)]">
                   <Image
@@ -107,10 +116,10 @@ export function InstagramFeed() {
               </span>
             </div>
             <h2 className="font-display text-3xl font-bold text-gala-primary md:text-4xl">
-              Suivez l'aventure
+              Suivez l&rsquo;aventure
             </h2>
             <p className="mt-2 text-muted-foreground">
-              Retrouvez toute l'actualité du Gala sur notre compte
+              Retrouvez toute l&rsquo;actualit&eacute; du Gala sur notre compte
               Instagram.
             </p>
           </div>
@@ -184,11 +193,11 @@ export function InstagramFeed() {
 
 /**
  * Embed Instagram via blockquote officiel.
- * Nécessite le script instagram/embed.js qui convertit le blockquote en iframe.
+ * Necessite le script instagram/embed.js qui convertit le blockquote en iframe.
  */
 function InstagramPostEmbed({ postUrl }: { postUrl: string }) {
   useEffect(() => {
-    // Re-trigger Instagram embeds.js s'il est déjà chargé
+    // Re-trigger Instagram embeds.js s'il est deja charge
     if (typeof window !== "undefined") {
       const win = window as unknown as { instgrm?: { Embeds?: { process?: () => void } } };
       if (win.instgrm) {
