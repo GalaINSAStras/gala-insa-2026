@@ -16,7 +16,7 @@ export default async function HomePage() {
   const event = await getEvent().catch(() => null);
 
   const title = event?.title ?? "Gala INSA Strasbourg";
-  const edition = event?.edition ?? 71;
+  const edition = event?.edition ?? 72;
   const date = event?.date
     ? new Date(event.date).toLocaleDateString("fr-FR", {
         day: "numeric",
@@ -52,31 +52,33 @@ export default async function HomePage() {
       {/* Compteurs animés + Countdown */}
       <StatsCountdown />
 
-      {/* Section Instagram — Dernière publication */}
-      <InstagramFeed />
+      {/* Section Instagram — Dernière publication — temporairement masquée */}
+      <div className="hidden">
+        <InstagramFeed />
+      </div>
 
       {/* Section À propos */}
-      <section id="about" className="py-20 md:py-28">
+      <section id="about" className="pt-32 md:pt-44 pb-20 md:pb-28">
         <div className="container mx-auto px-4 md:px-6">
           {/*
            * Titre : font-display (Cormorant Garamond), text-gala-primary (#5E708E)
            * Contraste #5E708E sur #FFFBF2 = 4.5:1 ✅ WCAG AA
            */}
-          <h2 className="font-display text-3xl font-bold text-gala-primary md:text-4xl">
+          <h2 className="font-display text-3xl font-bold text-gala-primary md:text-4xl text-center md:text-left">
             À propos
           </h2>
           {/*
            * Corps : text-muted-foreground (#5C6475) sur fond crème (#FFFBF2)
            * Contraste = 5.1:1 ✅ WCAG AA
            */}
-          <p className="mt-4 max-w-2xl text-muted-foreground">{description}</p>
+          <p className="mt-4 max-w-2xl text-muted-foreground text-center md:text-left">{description}</p>
         </div>
       </section>
 
       {/* Section Partenaires */}
       <section id="partners" className="bg-muted/50 py-20 md:py-28">
         <div className="container mx-auto px-4 md:px-6">
-          <h2 className="font-display text-3xl font-bold text-gala-primary md:text-4xl">
+          <h2 className="font-display text-3xl font-bold text-gala-primary md:text-4xl text-center md:text-left">
             Nos partenaires
           </h2>
           <div className="mt-8">
@@ -88,7 +90,7 @@ export default async function HomePage() {
       {/* Section Billetterie */}
       <section id="tickets" className="py-20 md:py-28">
         <div className="container mx-auto px-4 md:px-6">
-          <h2 className="font-display text-3xl font-bold text-gala-primary md:text-4xl">
+          <h2 className="font-display text-3xl font-bold text-gala-primary md:text-4xl text-center md:text-left">
             Billetterie
           </h2>
           <div className="mt-8">
@@ -100,10 +102,10 @@ export default async function HomePage() {
       {/* Section Équipe */}
       <section id="team" className="bg-muted/50 py-20 md:py-28">
         <div className="container mx-auto px-4 md:px-6">
-          <h2 className="font-display text-3xl font-bold text-gala-primary md:text-4xl">
+          <h2 className="font-display text-3xl font-bold text-gala-primary md:text-4xl text-center md:text-left">
             L'équipe organisatrice
           </h2>
-          <p className="mt-2 text-muted-foreground">
+          <p className="mt-2 text-muted-foreground text-center md:text-left">
             Découvrez les étudiants qui œuvrent dans l'ombre pour faire de
             cette soirée un moment inoubliable.
           </p>
@@ -116,10 +118,10 @@ export default async function HomePage() {
       {/* Section FAQ */}
       <section id="faq" className="py-20 md:py-28">
         <div className="container mx-auto px-4 md:px-6">
-          <h2 className="font-display text-3xl font-bold text-gala-primary md:text-4xl">
+          <h2 className="font-display text-3xl font-bold text-gala-primary md:text-4xl text-center md:text-left">
             Questions fréquentes
           </h2>
-          <p className="mt-2 text-muted-foreground">
+          <p className="mt-2 text-muted-foreground text-center md:text-left">
             Vous avez une question ? Consultez nos réponses ci-dessous.
           </p>
           <div className="mt-8">
@@ -131,10 +133,10 @@ export default async function HomePage() {
       {/* Section Contact */}
       <section id="contact" className="bg-muted/50 py-20 md:py-28">
         <div className="container mx-auto px-4 md:px-6">
-          <h2 className="font-display text-3xl font-bold text-gala-primary md:text-4xl">
+          <h2 className="font-display text-3xl font-bold text-gala-primary md:text-4xl text-center md:text-left">
             Contact
           </h2>
-          <p className="mt-2 text-muted-foreground">
+          <p className="mt-2 text-muted-foreground text-center md:text-left">
             Une question, une suggestion ? Écrivez-nous !
           </p>
           <div className="mt-8">

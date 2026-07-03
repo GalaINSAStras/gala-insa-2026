@@ -31,7 +31,7 @@ export const EVENT = {
   /** Ville */
   city: "Illkirch-Graffenstaden",
   /** Adresse complète */
-  address: "L'Illiade, 1 Rue de l'Illiade, 67400 Illkirch-Graffenstaden",
+  address: "L'Illiade, 11 All. François Mitterrand, 67400 Illkirch-Graffenstaden",
 } as const;
 
 /** Mentions légales obligatoires */

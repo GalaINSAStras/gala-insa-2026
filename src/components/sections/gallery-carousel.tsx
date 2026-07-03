@@ -1,72 +1,102 @@
 "use client";
 
-import { motion, useScroll, useTransform } from "motion/react";
-import { useRef } from "react";
+import { motion, useMotionValue, animate } from "motion/react";
 import Image from "next/image";
+import { useRef, useCallback, useEffect } from "react";
 
 interface GalleryImage {
-  src: string;
+  src?: string;
   alt: string;
-  caption?: string;
+  label: string;
+  gradient?: string;
 }
 
-const PLACEHOLDER_IMAGES: GalleryImage[] = [
+const GALLERY_IMAGES: GalleryImage[] = [
   {
-    src: "https://images.unsplash.com/photo-1511795409834-ef04bbd61622?w=800&q=80",
-    alt: "Soirée de gala - danseurs",
-    caption: "Moments de grâce sur la piste de danse",
+    src: "/gala_2024.webp",
+    alt: "Affiche Gala 2024 — 69e édition",
+    label: "Gala 2024 — 69e édition",
   },
   {
-    src: "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800&q=80",
-    alt: "Conférence ou discours",
-    caption: "Discours d'ouverture de l'édition précédente",
+    src: "/gala_2025.webp",
+    alt: "Affiche Gala 2025 — 70e édition",
+    label: "Gala 2025 — 70e édition",
   },
   {
-    src: "https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=800&q=80",
-    alt: "Décoration de salle",
-    caption: "Une salle magnifiquement décorée",
+    gradient: "from-gala-primary to-gala-gold",
+    alt: "Affiche Gala 2026 — 72e édition",
+    label: "Gala 2026 — 72e édition",
   },
   {
-    src: "https://images.unsplash.com/photo-1505236858219-8359eb29e329?w=800&q=80",
-    alt: "Concert live",
-    caption: "Performances musicales en live",
-  },
-  {
-    src: "https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?w=800&q=80",
-    alt: "Photographie de groupe",
-    caption: "Les organisateurs et bénévoles",
-  },
-  {
-    src: "https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=800&q=80",
-    alt: "Ambiance soirée",
-    caption: "Ambiance et convivialité",
+    src: "/gala_2024.webp",
+    alt: "Affiche Gala 2024 — 69e édition",
+    label: "Gala 2024 — 69e édition",
   },
 ];
 
+const AUTOPLAY_DURATION = 10;
+
 export function GalleryCarousel() {
-  const sectionRef = useRef<HTMLElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
+  const x = useMotionValue(0);
+  const autoplayRef = useRef<ReturnType<typeof animate> | null>(null);
 
-  const { scrollYProgress } = useScroll({
-    target: sectionRef,
-    offset: ["start end", "end start"],
-  });
+  const getTrackHalfWidth = useCallback(() => {
+    if (!trackRef.current) return 0;
+    return trackRef.current.scrollWidth / 4;
+  }, []);
 
-  // Effet parallaxe horizontal : plus on scrolle, plus le carrousel se déplace
-  const x = useTransform(scrollYProgress, [0, 1], ["0%", "-50%"]);
+  const stopAutoplay = useCallback(() => {
+    autoplayRef.current?.stop();
+    autoplayRef.current = null;
+  }, []);
 
-  // Opacité progressive au scroll
-  const opacity = useTransform(
-    scrollYProgress,
-    [0, 0.15, 0.85, 1],
-    [0.4, 1, 1, 0.4]
+  const startAutoplay = useCallback(() => {
+    const half = getTrackHalfWidth();
+    if (half <= 0) return;
+
+    const currentX = x.get();
+    const target = currentX - half;
+
+    stopAutoplay();
+
+    autoplayRef.current = animate(x, target, {
+      duration: AUTOPLAY_DURATION,
+      ease: "linear",
+      onComplete: () => {
+        // On a atteint -50% → on avance de half pour revenir au début sans saut
+        // (les images sont doublées donc le rendu est identique)
+        x.set(x.get() + half);
+        startAutoplay();
+      },
+    });
+  }, [x, getTrackHalfWidth, stopAutoplay]);
+
+  // Lance l'autoplay au montage
+  useEffect(() => {
+    startAutoplay();
+    return () => stopAutoplay();
+  }, [startAutoplay, stopAutoplay]);
+
+  const handleDragEnd = useCallback(
+    (_: unknown, info: { velocity: { x: number } }) => {
+      const velocity = info.velocity.x;
+
+      // Inertie manuelle après le drag
+      animate(x, x.get() + velocity * 0.15, {
+        type: "spring",
+        stiffness: 300,
+        damping: 30,
+        onComplete: () => {
+          startAutoplay();
+        },
+      });
+    },
+    [x, startAutoplay]
   );
 
   return (
-    <section
-      ref={sectionRef}
-      className="relative overflow-hidden py-24 md:py-32"
-    >
+    <section className="relative overflow-hidden py-24 md:py-32">
       {/* Titre */}
       <div className="container mx-auto mb-16 px-4 md:px-6">
         <motion.h2
@@ -89,61 +119,52 @@ export function GalleryCarousel() {
         </motion.p>
       </div>
 
-      {/* Carrousel horizontal à défilement parallaxe */}
+      {/* Carrousel hybride : autoplay + drag */}
       <div className="relative">
-        {/* Dégradés de bord (gauche/droite) pour l'immersion */}
-        <div className="pointer-events-none absolute left-0 top-0 z-10 h-full w-32 bg-gradient-to-r from-background to-transparent" />
-        <div className="pointer-events-none absolute right-0 top-0 z-10 h-full w-32 bg-gradient-to-l from-background to-transparent" />
+        {/* Masque de fondu latéral */}
+        <div className="pointer-events-none absolute left-0 top-0 z-10 h-full w-8 bg-gradient-to-r from-[var(--background)] to-transparent md:w-32" />
+        <div className="pointer-events-none absolute right-0 top-0 z-10 h-full w-8 bg-gradient-to-l from-[var(--background)] to-transparent md:w-32" />
 
         <motion.div
           ref={trackRef}
-          className="flex gap-6 px-16"
-          style={{ x, opacity }}
+          className="flex gap-3 md:gap-6 cursor-grab active:cursor-grabbing"
+          style={{ x, touchAction: "pan-y" }}
+          drag="x"
+          dragMomentum={false}
+          onDragStart={stopAutoplay}
+          onDragEnd={handleDragEnd}
         >
-          {/* Double les slides pour un défilement infini */}
-          {[...PLACEHOLDER_IMAGES, ...PLACEHOLDER_IMAGES].map(
-            (image, index) => (
-              <motion.div
-                key={`${image.src}-${index}`}
-                className="group relative flex-shrink-0 overflow-hidden rounded-2xl"
-                style={{
-                  width: 380,
-                  height: 500,
-                  perspective: 1000,
-                }}
-                whileHover={{ scale: 1.02, z: 50 }}
-                transition={{ duration: 0.3 }}
-              >
+          {/* Tableau doublé pour une boucle sans coupure */}
+          {[...GALLERY_IMAGES, ...GALLERY_IMAGES].map((image, index) => (
+            <div
+              key={`${image.label}-${index}`}
+              className="relative w-40 flex-shrink-0 overflow-hidden aspect-[3/4] md:w-[420px]"
+              style={{
+                boxShadow: "var(--shadow-md)",
+              }}
+            >
+              {image.src ? (
                 <Image
                   src={image.src}
                   alt={image.alt}
                   fill
-                  className="object-cover transition-all duration-500 group-hover:scale-110"
-                  sizes="380px"
+                  className="object-cover pointer-events-none"
+                  sizes="(max-width: 768px) 160px, 420px"
                 />
-
-                {/* Overlay gradient au hover */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/0 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
-
-                {/*
-                 * Légende au hover — texte blanc sur fond sombre
-                 * Contraste #FFFFFF sur rgba(0,0,0,0.7) ≈ 12:1 ✅ WCAG AAA
-                 */}
-                <div className="absolute bottom-0 left-0 right-0 translate-y-4 p-6 opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100">
-                  <p className="text-sm font-medium text-white">
-                    {image.caption}
-                  </p>
-                </div>
-
-                {/*
-                 * Effet de bordure lumineuse au hover — accent V2 (#D9A956)
-                 */}
+              ) : (
                 <div
-                  className="absolute inset-0 rounded-2xl ring-1 ring-inset ring-transparent transition-all duration-300 group-hover:ring-[rgba(217,169,86,0.35)]"
+                  className={`h-full w-full bg-gradient-to-br ${image.gradient}`}
                 />
-              </motion.div>
-            )
-          )}
+              )}
+
+              {/* Overlay de légende fixe en bas de la carte */}
+              <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/60 to-transparent p-6 pt-16">
+                <p className="text-base font-medium text-white drop-shadow-sm">
+                  {image.label}
+                </p>
+              </div>
+            </div>
+          ))}
         </motion.div>
       </div>
     </section>

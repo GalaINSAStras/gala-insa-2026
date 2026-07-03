@@ -42,7 +42,7 @@ async function getEventMetadata() {
 export async function generateMetadata(): Promise<Metadata> {
   const event = await getEventMetadata();
 
-  const edition = event?.edition ?? 71;
+  const edition = event?.edition ?? 72;
   const date = event?.date
     ? new Date(event.date).toLocaleDateString("fr-FR", {
         day: "numeric",

@@ -56,7 +56,7 @@ Le document **Événement** contrôle les informations principales affichées su
 | Champ | Type | Description |
 |-------|------|-------------|
 | Titre | Texte | "Gala INSA Strasbourg 2026" |
-| Numéro d'édition | Nombre | 71 |
+| Numéro d'édition | Nombre | 72 |
 | Date de l'événement | Date/heure | 2026-11-21 |
 | Lieu | Texte | "L'Illiade, Illkirch-Graffenstaden" |
 | Adresse complète | Texte | Adresse postale complète |

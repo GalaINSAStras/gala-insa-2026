@@ -1,6 +1,6 @@
 # 🧠 Gala V2 — Mémoire de Projet & Feedback Continu
 
-> **Dernière mise à jour :** 26 Juin 2026
+> **Dernière mise à jour :** 03 Juillet 2026
 > **Objectif :** Ne jamais répéter une erreur passée. Capitaliser sur les préférences validées.
 
 ---
@@ -15,6 +15,13 @@
 | 26/06/2026 | **Police Renaissance → Cormorant Garamond** (alternative libre) | `@next/font` via Google Fonts, importée dans `layout.tsx` |
 | 26/06/2026 | **Inter** choisie comme Body Font (lisibilité maximale) | Remplacé Geist comme police par défaut |
 | 26/06/2026 | **Refonte accessibilité complète** — Classes Tailwind customs définies | Correction du bug critique d'invisibilité des styles |
+| 03/07/2026 | **Polish UI** — Marge Hero `mt-10`→`mt-16`, stagger reveal mot par mot FAQ, métriques INSA (10%, 7 écoles, 80 000) en rolling numbers | `hero-section.tsx`, `faq-section.tsx`, `stats-countdown.tsx` |
+| 03/07/2026 | **Menu burger fullscreen bulle** — clip-path circle, hamburger morphing 3 lignes→croix, suppression infos légales | `header.tsx` |
+| 03/07/2026 | **Correction d'urgence du menu mobile** — intégration des CSS safe-area-insets, opacité du fond verrouillée à 100%, et bouton de fermeture z-index corrigé | `header.tsx` |
+| 03/07/2026 | **Polish mobile complet** — textes menu agrandis (text-4xl), correctif padding chiffres INSA (grid-cols-1 + px-6), suppression overlap countdown (mb-16 + pb-12) | `header.tsx`, `stats-countdown.tsx` |
+| 03/07/2026 | **Migration OSM → Google Maps custom** — carte Google Maps stylisée aux couleurs du Design System V2 via `@vis.gl/react-google-maps`, style JSON personnalisé, marqueur SVG pin doré + cercle ardoise, fallback gracieux sans clé API | `map-section.tsx`, `.env.example`, `package.json` |
+| 03/07/2026 | **Stabilisation du compteur landing** — suppression du parallax vertical sur `StatsCountdown` pour éviter le chevauchement mobile avec la section suivante | `stats-countdown.tsx` |
+| 03/07/2026 | **Finalisation Google Maps** — routes en bleu ardoise, parcs en vert sauge, correction du marqueur SVG et usage de `NEXT_PUBLIC_GOOGLE_MAPS_API_KEY` côté client | `map-section.tsx` |
 
 ---
 
@@ -99,7 +106,10 @@
 
 - **Template clip-wipe :** Effet rideau avec `inset()` + ligne de lumière verticale dorée
 - **Hero vidéo :** Vidéo Coverr (gratuite, libre de droits) en background loop avec parallaxe
-- **Carrousel :** Parallaxe horizontal via `useTransform` + images Unsplash
+- **Carrousel :** Hybride autoplay linéaire infini + drag horizontal physique via `motion` `useMotionValue`/`animate`, responsive mobile, `cursor-grab`, `touch-action: pan-y`
+- **FAQ stagger :** Texte découpé en mots, `motion.span` avec `delay: i * 0.015` et `y: 4→0` à l'ouverture
+- **Compteurs INSA :** Rolling numbers avec `toLocaleString("fr-FR")` pour 10%, 7 écoles, 80 000 anciens
+- **Menu mobile :** Overlay fullscreen via `clip-path: circle()` animé en `0.6s`, hamburger morphing, fond `--background`
 - **Countdown :** Timer synchro avec le fuseau horaire français (UTC+1/+2)
 - **Formulaire contact :** `useActionState` + honeypot + Resend API + template HTML pro
 - **Sanity :** Projet `tsuy1vy3`, dataset `production`, 9 types de schémas

@@ -17,6 +17,10 @@ export default async function InfosPratiquesPage() {
     getInfosPratiques().catch(() => null),
     getEvent().catch(() => null),
   ]);
+  const venueAddress = (event?.address ?? "11 All. François Mitterrand, 67400 Illkirch-Graffenstaden").replace(
+    /^L['’]Illiade[\s,-]*/i,
+    ""
+  );
 
   return (
     <div className="flex flex-col">
@@ -27,7 +31,7 @@ export default async function InfosPratiquesPage() {
             Infos Pratiques
           </h1>
           <p className="mt-4 text-lg text-white/80">
-            Tout ce qu'il faut savoir pour le Gala INSA Strasbourg 2026
+            Tout ce qu&apos;il faut savoir pour le Gala INSA Strasbourg 2026
           </p>
         </div>
       </section>
@@ -98,10 +102,10 @@ export default async function InfosPratiquesPage() {
       <section className="py-20 md:py-28 bg-muted/50">
         <div className="container mx-auto px-4 md:px-6">
           <h2 className="font-heading text-3xl font-bold text-gala-primary md:text-4xl">
-            Plan d'accès
+            Plan d&apos;accès
           </h2>
           <p className="mt-2 text-muted-foreground">
-            L'Illiade — {event?.address ?? "1 Rue de l'Illiade, 67400 Illkirch-Graffenstaden"}
+            L&apos;Illiade — {venueAddress}
           </p>
 
           <div className="mt-8 grid gap-8 md:grid-cols-2">
@@ -109,6 +113,7 @@ export default async function InfosPratiquesPage() {
             <MapSection
               lat={infos?.mapLat ?? 48.5239}
               lng={infos?.mapLng ?? 7.7152}
+              address={venueAddress}
             />
 
             {/* Plan téléchargeable */}

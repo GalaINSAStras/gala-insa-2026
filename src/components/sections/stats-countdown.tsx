@@ -2,17 +2,16 @@
 
 import {
   motion,
-  useScroll,
-  useTransform,
-  useSpring,
   useMotionValue,
   animate,
+  useInView,
 } from "motion/react";
 import { useRef, useEffect, useState } from "react";
 
 /**
  * Compteur animé qui passe de 0 à une valeur cible
  * Texte blanc sur fond bleu ardoise — contraste WCAG AA ✅
+ * L'animation ne démarre que lorsque le conteneur entre dans le viewport.
  */
 function AnimatedCounter({
   value,
@@ -25,29 +24,32 @@ function AnimatedCounter({
   label: string;
   delay?: number;
 }) {
+  const ref = useRef<HTMLDivElement>(null);
+  const isInView = useInView(ref, { once: true, margin: "-100px" });
   const count = useMotionValue(0);
-  const rounded = useSpring(count, { stiffness: 100, damping: 30 });
   const [display, setDisplay] = useState("0");
 
   useEffect(() => {
-    const controls = animate(count, value, {
-      duration: 2,
-      delay,
-      ease: [0.76, 0, 0.24, 1],
+    if (!isInView) return;
+
+    const unsubscribe = count.on("change", (v) => {
+      setDisplay(Math.round(v).toLocaleString("fr-FR"));
     });
 
-    const unsubscribe = rounded.on("change", (v) => {
-      setDisplay(Math.round(v).toString());
+    const controls = animate(count, value, {
+      duration: 0.8,
+      delay,
+      ease: "linear",
     });
 
     return () => {
       controls.stop();
       unsubscribe();
     };
-  }, [value, delay, count, rounded]);
+  }, [value, delay, count, isInView]);
 
   return (
-    <div className="text-center">
+    <div ref={ref} className="text-center">
       {/*
        * Chiffres : blanc pur sur fond bleu ardoise
        * Contraste #FFFFFF sur #5E708E = 4.6:1 ✅ WCAG AA
@@ -169,18 +171,9 @@ function CountdownTimer() {
 }
 
 export function StatsCountdown() {
-  const sectionRef = useRef<HTMLElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: sectionRef,
-    offset: ["start end", "end start"],
-  });
-
-  const backgroundY = useTransform(scrollYProgress, [0, 1], ["0%", "20%"]);
-
   return (
     <section
-      ref={sectionRef}
-      className="relative overflow-hidden py-24 md:py-32"
+      className="relative isolate overflow-hidden py-24 md:py-32 mb-24 md:mb-32"
     >
       {/*
        * Fond avec dégradé dynamique — palette V2
@@ -228,11 +221,8 @@ export function StatsCountdown() {
         }}
       />
 
-      <motion.div
-        className="container mx-auto px-4 md:px-6"
-        style={{ y: backgroundY }}
-      >
-        {/* Section Chiffres clés */}
+      <div className="container mx-auto px-4 md:px-6">
+        {/* Section Chiffres clés — Gala */}
         <div className="mb-20">
           {/*
            * Titre : blanc pur sur fond bleu ardoise
@@ -250,14 +240,39 @@ export function StatsCountdown() {
 
           <div className="grid grid-cols-2 gap-8 md:grid-cols-4">
             <AnimatedCounter value={1200} suffix="+" label="Participants" delay={0} />
-            <AnimatedCounter value={71} suffix="e" label="Édition 2026" delay={0.2} />
+            <AnimatedCounter value={72} suffix="e" label="Édition 2026" delay={0.2} />
             <AnimatedCounter value={30} suffix="+" label="Partenaires" delay={0.4} />
             <AnimatedCounter value={150} suffix="+" label="Bénévoles" delay={0.6} />
           </div>
         </div>
 
-        {/* Section Countdown */}
+        {/* Section Chiffres clés — Groupe INSA */}
         <div>
+          <motion.h3
+            className="mb-12 text-center font-display text-2xl font-bold text-white/90 md:text-3xl"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.3 }}
+          >
+            Le Groupe INSA en chiffres
+          </motion.h3>
+
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 md:gap-8 px-6 sm:px-0">
+            <div className="py-4">
+              <AnimatedCounter value={10} suffix="%" label="des ingénieurs français" delay={0.4} />
+            </div>
+            <div className="py-4">
+              <AnimatedCounter value={7} suffix="" label="écoles" delay={0.5} />
+            </div>
+            <div className="py-4">
+              <AnimatedCounter value={80000} suffix="" label="anciens élèves" delay={0.6} />
+            </div>
+          </div>
+        </div>
+
+        {/* Section Countdown */}
+        <div className="pb-12">
           <motion.h3
             className="mb-4 text-center font-display text-2xl font-bold text-white/90 md:text-3xl"
             initial={{ opacity: 0, y: 20 }}
@@ -275,12 +290,12 @@ export function StatsCountdown() {
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.4 }}
           >
-            21 novembre 2026 — L'Illiade, Illkirch-Graffenstaden
+            21 novembre 2026 — L&apos;Illiade, Illkirch-Graffenstaden
           </motion.p>
 
           <CountdownTimer />
         </div>
-      </motion.div>
+      </div>
     </section>
   );
 }

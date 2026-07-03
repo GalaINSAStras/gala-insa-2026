@@ -128,7 +128,7 @@ export function HeroSection({
 
       {/* Contenu central animé */}
       <motion.div
-        className="container mx-auto px-4 text-center md:px-6"
+        className="container mx-auto px-4 text-center md:px-6 pb-20 md:pb-32"
         style={{ y: contentY }}
       >
         <motion.div
@@ -156,9 +156,9 @@ export function HeroSection({
           </motion.span>
 
           {/* Titre avec effet de révélation — texte blanc pur sur fond sombre ✅ */}
-          <h1 className="font-display text-5xl font-bold tracking-tight text-white md:text-7xl lg:text-8xl">
+          <h1 className="font-display text-5xl font-bold tracking-tight text-white leading-[1.2] md:leading-none md:text-7xl lg:text-8xl">
             {title.split(" ").map((word, i, arr) => (
-              <span key={i} className="inline-block overflow-hidden">
+              <span key={i} className="inline-block overflow-hidden pb-4 pt-0">
                 <motion.span
                   className="inline-block"
                   initial={{ y: "100%" }}
@@ -200,7 +200,7 @@ export function HeroSection({
 
           {/* Boutons CTA */}
           <motion.div
-            className="mt-10 flex flex-col items-center gap-4 sm:flex-row sm:justify-center"
+            className="mt-16 flex flex-col items-center gap-4 sm:flex-row sm:justify-center"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.8 }}

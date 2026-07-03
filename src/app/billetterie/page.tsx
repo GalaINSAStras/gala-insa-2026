@@ -19,7 +19,7 @@ export default async function BilletteriePage() {
       <section className="flex min-h-[40vh] items-center justify-center bg-gradient-to-br from-gala-primary via-gala-primary-dark to-gala-primary px-4 text-white">
         <div className="text-center max-w-3xl">
           <p className="mb-2 text-sm font-medium uppercase tracking-widest text-gala-gold">
-            71<sup>e</sup> Édition
+            72<sup>e</sup> Édition
           </p>
           <h1 className="font-heading text-4xl font-bold tracking-tight md:text-5xl lg:text-6xl">
             Billetterie

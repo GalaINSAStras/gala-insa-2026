@@ -69,7 +69,7 @@ export function Footer() {
               Gala INSA Strasbourg
             </h3>
             <p className="text-sm text-white/70">
-              71<sup>e</sup> Édition — 21 Novembre 2026
+              72<sup>e</sup> Édition — 21 Novembre 2026
             </p>
             <p className="text-sm text-white/60">
               L'Illiade, Illkirch-Graffenstaden

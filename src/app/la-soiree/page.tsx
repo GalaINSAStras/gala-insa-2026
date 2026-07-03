@@ -38,7 +38,7 @@ export default async function LaSoireePage() {
         )}
         <div className="text-center max-w-3xl">
           <p className="mb-2 text-sm font-medium uppercase tracking-widest text-gala-gold">
-            71<sup>e</sup> Édition
+            72<sup>e</sup> Édition
           </p>
           <h1 className="font-heading text-4xl font-bold tracking-tight md:text-6xl lg:text-7xl">
             {soiree?.theme ?? "L'Éclat de la Nuit"}

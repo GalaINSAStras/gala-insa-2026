@@ -1,8 +1,9 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
-import { Menu, X } from "lucide-react";
+import { useLayoutEffect, useState, useCallback } from "react";
+import { createPortal } from "react-dom";
+import { motion, AnimatePresence } from "motion/react";
 import {
   NavigationMenu,
   NavigationMenuItem,
@@ -10,12 +11,152 @@ import {
   NavigationMenuList,
   navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu";
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import { Button } from "@/components/ui/button";
-import { NAVIGATION, LEGAL } from "@/lib/constants";
+import { NAVIGATION } from "@/lib/constants";
+
+/**
+ * Bouton hamburger animé — 3 lignes → croix (morphing)
+ */
+function BurgerButton({
+  open,
+  onClick,
+  renderWhenOpen = false,
+}: {
+  open: boolean;
+  onClick: () => void;
+  renderWhenOpen?: boolean;
+}) {
+  if (open && !renderWhenOpen) {
+    return null;
+  }
+
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      className="fixed top-[calc(env(safe-area-inset-top,0px)+1rem)] right-4 z-[70] flex h-11 w-11 items-center justify-center bg-transparent md:hidden"
+      aria-label={open ? "Fermer le menu" : "Menu de navigation"}
+      aria-expanded={open}
+    >
+      <span className="sr-only">{open ? "Fermer" : "Menu"}</span>
+      <div className="relative flex h-8 w-8 items-center justify-center">
+        <motion.span
+          className="absolute block h-[2.5px] w-7 rounded-full bg-[var(--foreground)]"
+          animate={open ? { y: 0, rotate: 45 } : { y: -7, rotate: 0 }}
+          transition={{ duration: 0.28, ease: [0.76, 0, 0.24, 1] }}
+        />
+        <motion.span
+          className="absolute block h-[2.5px] w-7 rounded-full bg-[var(--foreground)]"
+          animate={open ? { opacity: 0, scaleX: 0.2 } : { opacity: 1, scaleX: 1 }}
+          transition={{ duration: 0.18 }}
+        />
+        <motion.span
+          className="absolute block h-[2.5px] w-7 rounded-full bg-[var(--foreground)]"
+          animate={open ? { y: 0, rotate: -45 } : { y: 7, rotate: 0 }}
+          transition={{ duration: 0.28, ease: [0.76, 0, 0.24, 1] }}
+        />
+      </div>
+    </button>
+  );
+}
 
 export function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  const closeMenu = useCallback(() => setIsMobileMenuOpen(false), []);
+
+  useLayoutEffect(() => {
+    if (!isMobileMenuOpen) return;
+
+    const { body, documentElement } = document;
+    const previousBodyOverflow = body.style.overflow;
+    const previousBodyPosition = body.style.position;
+    const previousBodyTop = body.style.top;
+    const previousBodyLeft = body.style.left;
+    const previousBodyRight = body.style.right;
+    const previousBodyWidth = body.style.width;
+    const previousBodyOverscrollBehavior = body.style.overscrollBehavior;
+    const previousHtmlOverflow = documentElement.style.overflow;
+    const previousScrollY = window.scrollY;
+
+    body.style.overflow = "hidden";
+    body.style.position = "fixed";
+    body.style.top = `-${previousScrollY}px`;
+    body.style.left = "0";
+    body.style.right = "0";
+    body.style.width = "100%";
+    body.style.overscrollBehavior = "none";
+    documentElement.style.overflow = "hidden";
+
+    return () => {
+      body.style.overflow = previousBodyOverflow;
+      body.style.position = previousBodyPosition;
+      body.style.top = previousBodyTop;
+      body.style.left = previousBodyLeft;
+      body.style.right = previousBodyRight;
+      body.style.width = previousBodyWidth;
+      body.style.overscrollBehavior = previousBodyOverscrollBehavior;
+      documentElement.style.overflow = previousHtmlOverflow;
+      window.scrollTo(0, previousScrollY);
+    };
+  }, [isMobileMenuOpen]);
+
+  const mobileMenuOriginX = "calc(100% - 2.25rem)";
+  const mobileMenuOriginY = "calc(env(safe-area-inset-top, 0px) + 2.25rem)";
+
+  const mobileMenu =
+    typeof document !== "undefined"
+      ? createPortal(
+          <AnimatePresence>
+            {isMobileMenuOpen && (
+              <motion.div
+                className="fixed inset-0 z-50 flex items-stretch justify-stretch"
+                style={{ backgroundColor: "var(--background)" }}
+                initial={{
+                  clipPath: `circle(0% at ${mobileMenuOriginX} ${mobileMenuOriginY})`,
+                }}
+                animate={{
+                  clipPath: `circle(150% at ${mobileMenuOriginX} ${mobileMenuOriginY})`,
+                }}
+                exit={{
+                  clipPath: `circle(0% at ${mobileMenuOriginX} ${mobileMenuOriginY})`,
+                }}
+                transition={{
+                  duration: 0.6,
+                  ease: [0.76, 0, 0.24, 1],
+                }}
+              >
+                <BurgerButton open={true} onClick={closeMenu} renderWhenOpen />
+                <nav className="flex h-full w-full flex-col items-center justify-center px-6 pt-[calc(env(safe-area-inset-top,0px)+5rem)] pb-[calc(env(safe-area-inset-bottom,0px)+2rem)] text-center">
+                  <div className="flex flex-col items-center gap-8">
+                    {NAVIGATION.map((item, i) => (
+                      <motion.span
+                        key={item.href}
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{
+                          duration: 0.4,
+                          delay: 0.15 + i * 0.08,
+                          ease: [0.76, 0, 0.24, 1],
+                        }}
+                      >
+                        <Link
+                          href={item.href}
+                          onClick={closeMenu}
+                          className="text-4xl font-medium tracking-tight transition-colors hover:text-gala-primary md:text-3xl"
+                          style={{ color: "var(--text-primary)" }}
+                        >
+                          {item.label}
+                        </Link>
+                      </motion.span>
+                    ))}
+                  </div>
+                </nav>
+              </motion.div>
+            )}
+          </AnimatePresence>,
+          document.body
+        )
+      : null;
 
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/80">
@@ -45,43 +186,14 @@ export function Header() {
           </NavigationMenuList>
         </NavigationMenu>
 
-        {/* Bouton mobile */}
-        <Sheet open={isMobileMenuOpen} onOpenChange={setIsMobileMenuOpen}>
-          <SheetTrigger
-            render={
-              <Button
-                variant="ghost"
-                size="icon"
-                className="md:hidden"
-                aria-label="Menu de navigation"
-              />
-            }
-          >
-            {isMobileMenuOpen ? (
-              <X className="h-5 w-5" />
-            ) : (
-              <Menu className="h-5 w-5" />
-            )}
-          </SheetTrigger>
-          <SheetContent side="right" className="w-[280px] sm:w-[350px]">
-            <nav className="flex flex-col gap-4 mt-8">
-              {NAVIGATION.map((item) => (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  onClick={() => setIsMobileMenuOpen(false)}
-                  className="text-lg font-medium text-foreground hover:text-gala-primary transition-colors"
-                >
-                  {item.label}
-                </Link>
-              ))}
-              <div className="mt-6 pt-6 border-t text-sm text-muted-foreground">
-                <p>{LEGAL.associationName}</p>
-                <p>SIRET : {LEGAL.siret}</p>
-              </div>
-            </nav>
-          </SheetContent>
-        </Sheet>
+        {/* Bouton hamburger mobile */}
+        <BurgerButton
+          open={isMobileMenuOpen}
+          onClick={() => setIsMobileMenuOpen((prev) => !prev)}
+        />
+
+        {/* Fond opaque fixe pour le menu mobile */}
+        {mobileMenu}
       </div>
     </header>
   );

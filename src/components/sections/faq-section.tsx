@@ -18,6 +18,9 @@ import type { FAQ } from "@/lib/sanity/types";
 function FaqItem({ faq, index }: { faq: FAQ; index: number }) {
   const [isOpen, setIsOpen] = useState(false);
 
+  // Découpage de la réponse en mots pour l'animation stagger
+  const words = faq.reponse?.split(" ") ?? [];
+
   return (
     <motion.div
       className="border-b border-border last:border-0"
@@ -61,9 +64,25 @@ function FaqItem({ faq, index }: { faq: FAQ; index: number }) {
             {/*
              * Réponse : text-muted-foreground (#5C6475) sur fond crème (#FFFBF2)
              * Contraste = 5.1:1 ✅ WCAG AA
+             * Animation stagger : chaque mot apparaît avec un léger délai
              */}
             <p className="pb-5 text-sm leading-relaxed text-muted-foreground">
-              {faq.reponse}
+              {words.map((word, i) => (
+                <motion.span
+                  key={i}
+                  className="inline-block"
+                  initial={{ opacity: 0, y: 4 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{
+                    duration: 0.35,
+                    delay: i * 0.035,
+                    ease: "easeOut",
+                  }}
+                >
+                  {word}
+                  {i < words.length - 1 && "\u00A0"}
+                </motion.span>
+              ))}
             </p>
           </motion.div>
         )}
