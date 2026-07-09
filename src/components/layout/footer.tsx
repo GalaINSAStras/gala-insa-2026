@@ -61,7 +61,7 @@ export function Footer() {
 
   return (
     <footer className="w-full border-t bg-gala-primary text-white">
-      <div className="container mx-auto px-4 py-10 md:px-6 md:py-12">
+      <div className="container mx-auto px-5 py-10 md:px-6 md:py-12">
         <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
           {/* Colonne 1 : Logo & description */}
           <div className="space-y-3">

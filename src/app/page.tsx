@@ -52,10 +52,10 @@ export default async function HomePage() {
       {/* Séparateur floral — centré exactement sur la démarcation */}
       <div className="relative z-10 h-0 overflow-visible my-0">
         <img
-          src="/separateur.svg"
+          src="/separateur2.svg"
           alt=""
           aria-hidden="true"
-          className="absolute left-1/2 -translate-x-1/2 -translate-y-1/2 w-3/4 max-w-md md:max-w-2xl h-16 md:h-24"
+          className="absolute left-1/2 -translate-x-1/2 -translate-y-1/2 w-4/5 max-md:max-w-xl md:max-w-3xl h-16 md:h-24"
         />
       </div>
 
@@ -67,19 +67,19 @@ export default async function HomePage() {
         <InstagramFeed />
       </div>
 
-      {/* Séparateur floral — centré exactement sur la démarcation */}
-      <div className="relative z-10 h-0 overflow-visible my-0">
+      {/* Séparateur floral — remonté pour annuler le mb de StatsCountdown */}
+      <div className="relative z-10 h-0 overflow-visible -mt-12 sm:-mt-24 md:-mt-32 mb-0">
         <img
-          src="/separateur.svg"
+          src="/separateur2.svg"
           alt=""
           aria-hidden="true"
-          className="absolute left-1/2 -translate-x-1/2 -translate-y-1/2 w-3/4 max-w-md md:max-w-2xl h-16 md:h-24"
+          className="absolute left-1/2 -translate-x-1/2 -translate-y-1/2 w-4/5 max-md:max-w-xl md:max-w-3xl h-16 md:h-24"
         />
       </div>
 
       {/* Section À propos */}
-      <section id="about" className="pt-32 md:pt-44 pb-20 md:pb-28">
-        <div className="container mx-auto px-4 md:px-6">
+      <section id="about" className="pt-16 sm:pt-32 md:pt-44 pb-10 sm:pb-20 md:pb-28">
+        <div className="container mx-auto px-5 md:px-6">
           {/*
            * Titre : font-display (Cormorant Garamond), text-gala-primary (#5E708E)
            * Contraste #5E708E sur #FFFBF2 = 4.5:1 ✅ WCAG AA
@@ -96,8 +96,8 @@ export default async function HomePage() {
       </section>
 
       {/* Section Partenaires */}
-      <section id="partners" className="bg-muted/50 py-20 md:py-28">
-        <div className="container mx-auto px-4 md:px-6">
+      <section id="partners" className="bg-muted/50 py-10 sm:py-20 md:py-28">
+        <div className="container mx-auto px-5 md:px-6">
           <h2 className="font-display text-3xl font-bold text-gala-primary md:text-4xl text-center md:text-left">
             Nos partenaires
           </h2>
@@ -108,8 +108,8 @@ export default async function HomePage() {
       </section>
 
       {/* Section Billetterie */}
-      <section id="tickets" className="py-20 md:py-28">
-        <div className="container mx-auto px-4 md:px-6">
+      <section id="tickets" className="py-10 sm:py-20 md:py-28">
+        <div className="container mx-auto px-5 md:px-6">
           <h2 className="font-display text-3xl font-bold text-gala-primary md:text-4xl text-center md:text-left">
             Billetterie
           </h2>
@@ -120,8 +120,8 @@ export default async function HomePage() {
       </section>
 
       {/* Section Équipe */}
-      <section id="team" className="bg-muted/50 py-20 md:py-28">
-        <div className="container mx-auto px-4 md:px-6">
+      <section id="team" className="bg-muted/50 py-10 sm:py-20 md:py-28">
+        <div className="container mx-auto px-5 md:px-6">
           <h2 className="font-display text-3xl font-bold text-gala-primary md:text-4xl text-center md:text-left">
             L'équipe organisatrice
           </h2>
@@ -136,8 +136,8 @@ export default async function HomePage() {
       </section>
 
       {/* Section FAQ */}
-      <section id="faq" className="py-20 md:py-28">
-        <div className="container mx-auto px-4 md:px-6">
+      <section id="faq" className="py-10 sm:py-20 md:py-28">
+        <div className="container mx-auto px-5 md:px-6">
           <h2 className="font-display text-3xl font-bold text-gala-primary md:text-4xl text-center md:text-left">
             Questions fréquentes
           </h2>
@@ -151,8 +151,8 @@ export default async function HomePage() {
       </section>
 
       {/* Section Contact */}
-      <section id="contact" className="bg-muted/50 py-20 md:py-28">
-        <div className="container mx-auto px-4 md:px-6">
+      <section id="contact" className="bg-muted/50 py-10 sm:py-20 md:py-28">
+        <div className="container mx-auto px-5 md:px-6">
           <h2 className="font-display text-3xl font-bold text-gala-primary md:text-4xl text-center md:text-left">
             Contact
           </h2>
@@ -168,10 +168,10 @@ export default async function HomePage() {
       {/* Séparateur floral — centré exactement sur la démarcation */}
       <div className="relative z-10 h-0 overflow-visible my-0">
         <img
-          src="/separateur.svg"
+          src="/separateur2.svg"
           alt=""
           aria-hidden="true"
-          className="absolute left-1/2 -translate-x-1/2 -translate-y-1/2 w-3/4 max-w-md md:max-w-2xl h-16 md:h-24"
+          className="absolute left-1/2 -translate-x-1/2 -translate-y-1/2 w-4/5 max-md:max-w-xl md:max-w-3xl h-16 md:h-24"
         />
       </div>
     </div>

@@ -127,7 +127,7 @@ export function HeroSection({
 
       {/* Contenu central animé */}
       <motion.div
-        className="container mx-auto px-4 text-center md:px-6 pt-10 pb-20 md:pt-32 md:pb-32"
+        className="container mx-auto px-5 text-center md:px-6 pt-6 sm:pt-10 pb-12 sm:pb-20 md:pt-32 md:pb-32"
         style={{ y: contentY }}
       >
         <motion.div
@@ -199,7 +199,7 @@ export function HeroSection({
 
           {/* Boutons CTA */}
           <motion.div
-            className="mt-16 flex flex-col items-center gap-4 sm:flex-row sm:justify-center"
+            className="mt-10 sm:mt-16 flex flex-col items-center gap-4 sm:flex-row sm:justify-center"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.8 }}

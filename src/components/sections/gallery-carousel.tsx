@@ -154,12 +154,13 @@ const GALLERY_IMAGES: GalleryImage[] = [
   },
 ];
 
-const AUTOPLAY_DURATION = 10;
+const AUTOPLAY_DURATION = 25;
 
 export function GalleryCarousel() {
   const trackRef = useRef<HTMLDivElement>(null);
   const x = useMotionValue(0);
   const autoplayRef = useRef<ReturnType<typeof animate> | null>(null);
+  const resumeTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const startAutoplayRef = useRef<() => void>(() => {});
 
   const getTrackHalfWidth = useCallback(() => {
@@ -170,6 +171,10 @@ export function GalleryCarousel() {
   const stopAutoplay = useCallback(() => {
     autoplayRef.current?.stop();
     autoplayRef.current = null;
+    if (resumeTimeoutRef.current) {
+      clearTimeout(resumeTimeoutRef.current);
+      resumeTimeoutRef.current = null;
+    }
   }, []);
 
   const startAutoplay = useCallback(() => {
@@ -208,17 +213,23 @@ export function GalleryCarousel() {
         type: "spring",
         stiffness: 300,
         damping: 30,
-        onComplete: () => {
-          startAutoplay();
-        },
       });
+
+      // Relance l'autoplay après 1s si l'utilisateur ne maintient pas le clic
+      if (resumeTimeoutRef.current) {
+        clearTimeout(resumeTimeoutRef.current);
+      }
+      resumeTimeoutRef.current = setTimeout(() => {
+        startAutoplay();
+        resumeTimeoutRef.current = null;
+      }, 1000);
     },
     [x, startAutoplay]
   );
 
   return (
-    <section className="relative overflow-hidden py-24 md:py-32">
-      <div className="container mx-auto mb-16 px-4 md:px-6">
+    <section className="relative overflow-hidden py-12 sm:py-24 md:py-32">
+      <div className="container mx-auto mb-8 sm:mb-16 px-5 md:px-6">
         <motion.h2
           className="font-display text-3xl font-bold text-gala-primary md:text-4xl"
           initial={{ opacity: 0, y: 30 }}
@@ -249,7 +260,13 @@ export function GalleryCarousel() {
           style={{ x, touchAction: "pan-y" }}
           drag="x"
           dragMomentum={false}
-          onDragStart={stopAutoplay}
+          onDragStart={() => {
+            stopAutoplay();
+            if (resumeTimeoutRef.current) {
+              clearTimeout(resumeTimeoutRef.current);
+              resumeTimeoutRef.current = null;
+            }
+          }}
           onDragEnd={handleDragEnd}
         >
           {[...GALLERY_IMAGES, ...GALLERY_IMAGES].map((image, index) => (
