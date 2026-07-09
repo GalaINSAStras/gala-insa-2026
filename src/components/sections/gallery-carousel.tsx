@@ -13,24 +13,144 @@ interface GalleryImage {
 
 const GALLERY_IMAGES: GalleryImage[] = [
   {
-    src: "/gala_2024.webp",
-    alt: "Affiche Gala 2024 \u2014 69e \u00e9dition",
-    label: "Gala 2024 \u2014 69e \u00e9dition",
-  },
-  {
-    src: "/gala_2025.webp",
-    alt: "Affiche Gala 2025 \u2014 70e \u00e9dition",
-    label: "Gala 2025 \u2014 70e \u00e9dition",
-  },
-  {
     gradient: "from-gala-primary to-gala-gold",
     alt: "Affiche Gala 2026 \u2014 72e \u00e9dition",
     label: "Gala 2026 \u2014 72e \u00e9dition",
   },
   {
-    src: "/gala_2024.webp",
-    alt: "Affiche Gala 2024 \u2014 69e \u00e9dition",
-    label: "Gala 2024 \u2014 69e \u00e9dition",
+    src: "/affiches/aff_2025.webp",
+    alt: "Affiche Gala 2025 \u2014 71e \u00e9dition",
+    label: "Gala 2025 \u2014 71e \u00e9dition",
+  },
+  {
+    src: "/affiches/aff_2024.webp",
+    alt: "Affiche Gala 2024 \u2014 70e \u00e9dition",
+    label: "Gala 2024 \u2014 70e \u00e9dition",
+  },
+  {
+    src: "/affiches/aff_2023.webp",
+    alt: "Affiche Gala 2023 \u2014 69e \u00e9dition",
+    label: "Gala 2023 \u2014 69e \u00e9dition",
+  },
+  {
+    src: "/affiches/aff_2022.webp",
+    alt: "Affiche Gala 2022 \u2014 68e \u00e9dition",
+    label: "Gala 2022 \u2014 68e \u00e9dition",
+  },
+  {
+    src: "/affiches/aff_2021.webp",
+    alt: "Affiche Gala 2021 \u2014 67e \u00e9dition",
+    label: "Gala 2021 \u2014 67e \u00e9dition",
+  },
+  {
+    src: "/affiches/aff_2020.webp",
+    alt: "Affiche Gala 2020 \u2014 66e \u00e9dition",
+    label: "Gala 2020 \u2014 66e \u00e9dition",
+  },
+  {
+    src: "/affiches/aff_2019.webp",
+    alt: "Affiche Gala 2019 \u2014 65e \u00e9dition",
+    label: "Gala 2019 \u2014 65e \u00e9dition",
+  },
+  {
+    src: "/affiches/aff_2018.webp",
+    alt: "Affiche Gala 2018 \u2014 64e \u00e9dition",
+    label: "Gala 2018 \u2014 64e \u00e9dition",
+  },
+  {
+    src: "/affiches/aff_2017.webp",
+    alt: "Affiche Gala 2017 \u2014 63e \u00e9dition",
+    label: "Gala 2017 \u2014 63e \u00e9dition",
+  },
+  {
+    src: "/affiches/aff_2016.webp",
+    alt: "Affiche Gala 2016 \u2014 62e \u00e9dition",
+    label: "Gala 2016 \u2014 62e \u00e9dition",
+  },
+  {
+    src: "/affiches/aff_2015.webp",
+    alt: "Affiche Gala 2015 \u2014 61e \u00e9dition",
+    label: "Gala 2015 \u2014 61e \u00e9dition",
+  },
+  {
+    src: "/affiches/aff_2014.webp",
+    alt: "Affiche Gala 2014 \u2014 60e \u00e9dition",
+    label: "Gala 2014 \u2014 60e \u00e9dition",
+  },
+  {
+    src: "/affiches/aff_2013.webp",
+    alt: "Affiche Gala 2013 \u2014 59e \u00e9dition",
+    label: "Gala 2013 \u2014 59e \u00e9dition",
+  },
+  {
+    src: "/affiches/aff_2012.webp",
+    alt: "Affiche Gala 2012 \u2014 58e \u00e9dition",
+    label: "Gala 2012 \u2014 58e \u00e9dition",
+  },
+  {
+    src: "/affiches/aff_2011.webp",
+    alt: "Affiche Gala 2011 \u2014 57e \u00e9dition",
+    label: "Gala 2011 \u2014 57e \u00e9dition",
+  },
+  {
+    src: "/affiches/aff_2010.webp",
+    alt: "Affiche Gala 2010 \u2014 56e \u00e9dition",
+    label: "Gala 2010 \u2014 56e \u00e9dition",
+  },
+  {
+    src: "/affiches/aff_2009.webp",
+    alt: "Affiche Gala 2009 \u2014 55e \u00e9dition",
+    label: "Gala 2009 \u2014 55e \u00e9dition",
+  },
+  {
+    src: "/affiches/aff_2008.webp",
+    alt: "Affiche Gala 2008 \u2014 54e \u00e9dition",
+    label: "Gala 2008 \u2014 54e \u00e9dition",
+  },
+  {
+    src: "/affiches/aff_2007.webp",
+    alt: "Affiche Gala 2007 \u2014 53e \u00e9dition",
+    label: "Gala 2007 \u2014 53e \u00e9dition",
+  },
+  {
+    src: "/affiches/aff_2006.webp",
+    alt: "Affiche Gala 2006 \u2014 52e \u00e9dition",
+    label: "Gala 2006 \u2014 52e \u00e9dition",
+  },
+  {
+    src: "/affiches/aff_2005.webp",
+    alt: "Affiche Gala 2005 \u2014 51e \u00e9dition",
+    label: "Gala 2005 \u2014 51e \u00e9dition",
+  },
+  {
+    src: "/affiches/aff_2004.webp",
+    alt: "Affiche Gala 2004 \u2014 50e \u00e9dition",
+    label: "Gala 2004 \u2014 50e \u00e9dition",
+  },
+  {
+    src: "/affiches/aff_2003.webp",
+    alt: "Affiche Gala 2003 \u2014 49e \u00e9dition",
+    label: "Gala 2003 \u2014 49e \u00e9dition",
+  },
+  {
+    src: "/affiches/aff_2002.webp",
+    alt: "Affiche Gala 2002 \u2014 48e \u00e9dition",
+    label: "Gala 2002 \u2014 48e \u00e9dition",
+  },
+  {
+    src: "/affiches/aff_2001.webp",
+    alt: "Affiche Gala 2001 \u2014 47e \u00e9dition",
+    label: "Gala 2001 \u2014 47e \u00e9dition",
+  },
+  {
+    src: "/affiches/aff_2000.webp",
+    alt: "Affiche Gala 2000 \u2014 46e \u00e9dition",
+    label: "Gala 2000 \u2014 46e \u00e9dition",
+  },
+  {
+    src: "/affiches/aff_1999.webp",
+    alt: "Affiche Gala 1999 \u2014 45e \u00e9dition",
+    label: "Gala 1999 \u2014 45e \u00e9dition",
   },
 ];
 

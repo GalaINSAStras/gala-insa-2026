@@ -87,9 +87,9 @@ function CountdownBlock({
   const display = String(value).padStart(2, "0");
 
   return (
-    <div className="flex flex-col items-center">
+    <div className="flex flex-col items-center min-w-0">
       <div
-        className="relative flex h-24 w-20 items-center justify-center overflow-hidden rounded-xl backdrop-blur-sm md:h-28 md:w-24"
+        className="relative flex h-20 w-[clamp(3.5rem,20vw,5rem)] items-center justify-center overflow-hidden rounded-xl backdrop-blur-sm sm:h-24 sm:w-[clamp(4rem,22vw,6rem)] md:h-28 md:w-24"
         style={{
           border: "1px solid rgba(217,169,86,0.25)",
           backgroundColor: "rgba(255,255,255,0.06)",
@@ -115,7 +115,7 @@ function CountdownBlock({
         </motion.span>
       </div>
       {/* Label : blanc/60 sur fond bleu ardoise ✅ */}
-      <span className="mt-2 text-[10px] font-medium uppercase tracking-[0.2em] text-white/60">
+      <span className="mt-1 sm:mt-2 text-[8px] font-medium uppercase tracking-[0.17em] text-white/60 sm:text-[10px] sm:tracking-[0.2em]">
         {label}
       </span>
     </div>
@@ -161,7 +161,7 @@ function CountdownTimer() {
   }, []);
 
   return (
-    <div className="flex justify-center gap-4 md:gap-6">
+    <div className="flex justify-center gap-2 sm:gap-4 md:gap-6">
       <CountdownBlock value={timeLeft.days} label="Jours" />
       <CountdownBlock value={timeLeft.hours} label="Heures" />
       <CountdownBlock value={timeLeft.minutes} label="Minutes" />

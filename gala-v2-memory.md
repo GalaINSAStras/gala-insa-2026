@@ -22,6 +22,8 @@
 | 03/07/2026 | **Migration OSM → Google Maps custom** — carte Google Maps stylisée aux couleurs du Design System V2 via `@vis.gl/react-google-maps`, style JSON personnalisé, marqueur SVG pin doré + cercle ardoise, fallback gracieux sans clé API | `map-section.tsx`, `.env.example`, `package.json` |
 | 03/07/2026 | **Stabilisation du compteur landing** — suppression du parallax vertical sur `StatsCountdown` pour éviter le chevauchement mobile avec la section suivante | `stats-countdown.tsx` |
 | 03/07/2026 | **Finalisation Google Maps** — routes en bleu ardoise, parcs en vert sauge, correction du marqueur SVG et usage de `NEXT_PUBLIC_GOOGLE_MAPS_API_KEY` côté client | `map-section.tsx` |
+| 03/07/2026 | **Intégration séparateur floral** — Asset `separateur.svg` copié dans `public/`, inséré aux 3 articulations de la landing page (après galerie, après countdown/Instagram, avant footer) avec marges responsives et dimensionnement Tailwind | `public/separateur.svg`, `page.tsx` |
+| 03/07/2026 | **Redimensionnement séparateur floral** — Upscaling desktop `max-w-md`→`max-w-2xl`, mobile `w-1/2`→`w-3/4`, hauteur explicite `h-16 md:h-24`, réduction marges `my-12`→`my-8`, chevauchement `-mb-4` sur premier séparateur pour transition vers fond bleu | `page.tsx` |
 
 ---
 

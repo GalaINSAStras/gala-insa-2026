@@ -49,12 +49,32 @@ export default async function HomePage() {
       {/* Galerie immersive */}
       <GalleryCarousel />
 
+      {/* Séparateur floral — centré exactement sur la démarcation */}
+      <div className="relative z-10 h-0 overflow-visible my-0">
+        <img
+          src="/separateur.svg"
+          alt=""
+          aria-hidden="true"
+          className="absolute left-1/2 -translate-x-1/2 -translate-y-1/2 w-3/4 max-w-md md:max-w-2xl h-16 md:h-24"
+        />
+      </div>
+
       {/* Compteurs animés + Countdown */}
       <StatsCountdown />
 
       {/* Section Instagram — Dernière publication — temporairement masquée */}
       <div className="hidden">
         <InstagramFeed />
+      </div>
+
+      {/* Séparateur floral — centré exactement sur la démarcation */}
+      <div className="relative z-10 h-0 overflow-visible my-0">
+        <img
+          src="/separateur.svg"
+          alt=""
+          aria-hidden="true"
+          className="absolute left-1/2 -translate-x-1/2 -translate-y-1/2 w-3/4 max-w-md md:max-w-2xl h-16 md:h-24"
+        />
       </div>
 
       {/* Section À propos */}
@@ -137,13 +157,23 @@ export default async function HomePage() {
             Contact
           </h2>
           <p className="mt-2 text-muted-foreground text-center md:text-left">
-            Une question, une suggestion ? Écrivez-nous !
+            Une question, une suggestion ?<br className="sm:hidden" /> Écrivez-nous !
           </p>
           <div className="mt-8">
             <ContactSection />
           </div>
         </div>
       </section>
+
+      {/* Séparateur floral — centré exactement sur la démarcation */}
+      <div className="relative z-10 h-0 overflow-visible my-0">
+        <img
+          src="/separateur.svg"
+          alt=""
+          aria-hidden="true"
+          className="absolute left-1/2 -translate-x-1/2 -translate-y-1/2 w-3/4 max-w-md md:max-w-2xl h-16 md:h-24"
+        />
+      </div>
     </div>
   );
 }
