@@ -160,7 +160,6 @@ export function GalleryCarousel() {
   const trackRef = useRef<HTMLDivElement>(null);
   const x = useMotionValue(0);
   const autoplayRef = useRef<ReturnType<typeof animate> | null>(null);
-  const resumeTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const startAutoplayRef = useRef<() => void>(() => {});
 
   const getTrackHalfWidth = useCallback(() => {
@@ -171,10 +170,6 @@ export function GalleryCarousel() {
   const stopAutoplay = useCallback(() => {
     autoplayRef.current?.stop();
     autoplayRef.current = null;
-    if (resumeTimeoutRef.current) {
-      clearTimeout(resumeTimeoutRef.current);
-      resumeTimeoutRef.current = null;
-    }
   }, []);
 
   const startAutoplay = useCallback(() => {
@@ -204,28 +199,6 @@ export function GalleryCarousel() {
     startAutoplay();
     return () => stopAutoplay();
   }, [startAutoplay, stopAutoplay]);
-
-  const handleDragEnd = useCallback(
-    (_: unknown, info: { velocity: { x: number } }) => {
-      const velocity = info.velocity.x;
-
-      animate(x, x.get() + velocity * 0.15, {
-        type: "spring",
-        stiffness: 300,
-        damping: 30,
-      });
-
-      // Relance l'autoplay après 1s si l'utilisateur ne maintient pas le clic
-      if (resumeTimeoutRef.current) {
-        clearTimeout(resumeTimeoutRef.current);
-      }
-      resumeTimeoutRef.current = setTimeout(() => {
-        startAutoplay();
-        resumeTimeoutRef.current = null;
-      }, 1000);
-    },
-    [x, startAutoplay]
-  );
 
   return (
     <section className="relative overflow-hidden py-12 sm:py-24 md:py-32">
@@ -260,14 +233,10 @@ export function GalleryCarousel() {
           style={{ x, touchAction: "pan-y" }}
           drag="x"
           dragMomentum={false}
-          onDragStart={() => {
-            stopAutoplay();
-            if (resumeTimeoutRef.current) {
-              clearTimeout(resumeTimeoutRef.current);
-              resumeTimeoutRef.current = null;
-            }
-          }}
-          onDragEnd={handleDragEnd}
+          onPointerDown={() => stopAutoplay()}
+          onPointerUp={() => startAutoplay()}
+          onPointerLeave={() => startAutoplay()}
+          onDragEnd={() => startAutoplay()}
         >
           {[...GALLERY_IMAGES, ...GALLERY_IMAGES].map((image, index) => (
             <div
