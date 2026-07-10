@@ -64,7 +64,7 @@ export function Footer() {
       <div className="container mx-auto px-5 py-10 md:px-6 md:py-12">
         <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
           {/* Colonne 1 : Logo & description */}
-          <div className="space-y-3">
+          <div className="space-y-3 text-center md:text-left">
             <h3 className="font-heading text-lg font-bold">
               Gala INSA Strasbourg
             </h3>
@@ -77,11 +77,11 @@ export function Footer() {
           </div>
 
           {/* Colonne 2 : Liens rapides */}
-          <div className="space-y-3">
+          <div className="space-y-3 text-center md:text-left">
             <h4 className="font-heading text-sm font-semibold uppercase tracking-wider text-white/80">
-              Liens utiles
+              Accès rapide
             </h4>
-            <nav className="flex flex-col gap-2">
+            <nav className="grid grid-cols-2 gap-2 md:flex md:flex-col">
               <Link
                 href="/#about"
                 className="text-sm text-white/60 hover:text-white transition-colors"
@@ -116,11 +116,11 @@ export function Footer() {
           </div>
 
           {/* Colonne 3 : Réseaux sociaux & mentions légales */}
-          <div className="space-y-3">
+          <div className="space-y-3 text-center md:text-left">
             <h4 className="font-heading text-sm font-semibold uppercase tracking-wider text-white/80">
               Suivez-nous
             </h4>
-            <div className="flex gap-4">
+            <div className="flex gap-4 justify-center md:justify-start">
               <a
                 href={SOCIAL.instagram}
                 target="_blank"

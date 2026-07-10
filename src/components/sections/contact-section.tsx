@@ -59,7 +59,7 @@ export function ContactSection() {
               Message envoyé avec succès ! 🎉
             </p>
             <p className="mt-2 text-sm text-muted-foreground">
-              Nous vous répondrons dans les plus brefs délais.
+              On revient vers vous au plus vite !
             </p>
           </motion.div>
         ) : (

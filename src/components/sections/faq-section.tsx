@@ -129,7 +129,7 @@ export function FaqSection() {
   if (!faqs.length) {
     return (
       <p className="italic text-muted-foreground">
-        Aucune question fréquente pour le moment.
+        Les questions fréquentes arrivent bientôt !
       </p>
     );
   }

@@ -280,7 +280,7 @@ export function StatsCountdown() {
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.2 }}
           >
-            Ouverture des portes dans
+            Le compte à rebours est lancé
           </motion.h3>
 
           <motion.p

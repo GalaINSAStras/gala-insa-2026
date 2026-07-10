@@ -27,7 +27,7 @@ export default async function HomePage() {
   const location = event?.location ?? "L'Illiade, Illkirch-Graffenstaden";
   const description =
     event?.description ??
-    "Le Gala de l'INSA Strasbourg est un événement annuel organisé par les étudiants de l'école.";
+    "Chaque année, les étudiants de l'INSA Strasbourg donnent vie à une soirée d'exception. Un gala pensé, organisé et vécu par ceux qui font battre le cœur de l'école.";
 
   const posterUrl = event?.poster
     ? urlFor(event.poster).width(1920).height(1080).fit("crop").url()
@@ -126,8 +126,8 @@ export default async function HomePage() {
             L'équipe organisatrice
           </h2>
           <p className="mt-2 text-muted-foreground text-center md:text-left">
-            Découvrez les étudiants qui œuvrent dans l'ombre pour faire de
-            cette soirée un moment inoubliable.
+            Découvrez les étudiants qui façonnent cette soirée de A à Z —
+            avec passion, rigueur et une bonne dose de folie.
           </p>
           <div className="mt-8">
             <TeamSection />
@@ -142,7 +142,7 @@ export default async function HomePage() {
             Questions fréquentes
           </h2>
           <p className="mt-2 text-muted-foreground text-center md:text-left">
-            Vous avez une question ? Consultez nos réponses ci-dessous.
+            Une interrogation ? On a sûrement la réponse.
           </p>
           <div className="mt-8">
             <FaqSection />
@@ -157,7 +157,7 @@ export default async function HomePage() {
             Contact
           </h2>
           <p className="mt-2 text-muted-foreground text-center md:text-left">
-            Une question, une suggestion ?<br className="sm:hidden" /> Écrivez-nous !
+            Une idée, une question, un mot doux ?<br className="sm:hidden" /> On vous lit !
           </p>
           <div className="mt-8">
             <ContactSection />

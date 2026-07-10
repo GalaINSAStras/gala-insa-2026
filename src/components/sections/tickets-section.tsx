@@ -19,7 +19,7 @@ export function TicketsSection() {
   }, []);
 
   if (loading) return <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">{Array.from({ length: 3 }).map((_, i) => <div key={i} className="h-48 animate-pulse rounded-xl border bg-muted" />)}</div>;
-  if (!tickets.length) return <p className="text-muted-foreground italic">Billetterie à venir.</p>;
+  if (!tickets.length) return <p className="text-muted-foreground italic">La billetterie ouvre bientôt. Restez à l&rsquo;affût !</p>;
 
   return (
     <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">

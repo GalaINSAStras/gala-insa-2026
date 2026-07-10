@@ -25,7 +25,7 @@ export default async function BilletteriePage() {
             Billetterie
           </h1>
           <p className="mt-4 text-lg text-white/80">
-            Réservez vos places dès maintenant et préparez-vous à vivre une soirée inoubliable.
+            Réservez votre place et rejoignez-nous pour une soirée qui promet d&rsquo;être mémorable.
           </p>
         </div>
       </section>
@@ -92,7 +92,7 @@ export default async function BilletteriePage() {
           ) : (
             <div className="text-center py-20">
               <p className="text-muted-foreground italic">
-                La billetterie ouvrira prochainement.
+                La billetterie n&rsquo;a pas encore ouvert ses portes... patience !
               </p>
             </div>
           )}
@@ -100,7 +100,7 @@ export default async function BilletteriePage() {
           {/* Info HelloAsso */}
           <div className="mt-12 text-center">
             <p className="text-sm text-muted-foreground">
-              Les réservations sont gérées via notre partenaire HelloAsso.
+              Les réservations passent par HelloAsso, notre partenaire de confiance.
             </p>
             <Link
               href="https://www.helloasso.com"
