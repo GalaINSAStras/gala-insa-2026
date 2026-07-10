@@ -1,7 +1,6 @@
 "use client";
 
 import { motion, useMotionValue, animate } from "motion/react";
-import Image from "next/image";
 import { useRef, useCallback, useEffect } from "react";
 
 interface GalleryImage {
@@ -14,143 +13,163 @@ interface GalleryImage {
 const GALLERY_IMAGES: GalleryImage[] = [
   {
     gradient: "from-gala-primary to-gala-gold",
-    alt: "Affiche Gala 2026 \u2014 72e \u00e9dition",
-    label: "Gala 2026 \u2014 72e \u00e9dition",
+    alt: "Affiche Gala 2026 — 72e édition",
+    label: "Gala 2026 — 72e édition",
   },
   {
     src: "/affiches/aff_2025.webp",
-    alt: "Affiche Gala 2025 \u2014 71e \u00e9dition",
-    label: "Gala 2025 \u2014 71e \u00e9dition",
+    alt: "Affiche Gala 2025 — 71e édition",
+    label: "Gala 2025 — 71e édition",
   },
   {
     src: "/affiches/aff_2024.webp",
-    alt: "Affiche Gala 2024 \u2014 70e \u00e9dition",
-    label: "Gala 2024 \u2014 70e \u00e9dition",
+    alt: "Affiche Gala 2024 — 70e édition",
+    label: "Gala 2024 — 70e édition",
   },
   {
     src: "/affiches/aff_2023.webp",
-    alt: "Affiche Gala 2023 \u2014 69e \u00e9dition",
-    label: "Gala 2023 \u2014 69e \u00e9dition",
+    alt: "Affiche Gala 2023 — 69e édition",
+    label: "Gala 2023 — 69e édition",
   },
   {
     src: "/affiches/aff_2022.webp",
-    alt: "Affiche Gala 2022 \u2014 68e \u00e9dition",
-    label: "Gala 2022 \u2014 68e \u00e9dition",
+    alt: "Affiche Gala 2022 — 68e édition",
+    label: "Gala 2022 — 68e édition",
   },
   {
     src: "/affiches/aff_2021.webp",
-    alt: "Affiche Gala 2021 \u2014 67e \u00e9dition",
-    label: "Gala 2021 \u2014 67e \u00e9dition",
+    alt: "Affiche Gala 2021 — 67e édition",
+    label: "Gala 2021 — 67e édition",
   },
   {
     src: "/affiches/aff_2020.webp",
-    alt: "Affiche Gala 2020 \u2014 66e \u00e9dition",
-    label: "Gala 2020 \u2014 66e \u00e9dition",
+    alt: "Affiche Gala 2020 — 66e édition",
+    label: "Gala 2020 — 66e édition",
   },
   {
     src: "/affiches/aff_2019.webp",
-    alt: "Affiche Gala 2019 \u2014 65e \u00e9dition",
-    label: "Gala 2019 \u2014 65e \u00e9dition",
+    alt: "Affiche Gala 2019 — 65e édition",
+    label: "Gala 2019 — 65e édition",
   },
   {
     src: "/affiches/aff_2018.webp",
-    alt: "Affiche Gala 2018 \u2014 64e \u00e9dition",
-    label: "Gala 2018 \u2014 64e \u00e9dition",
+    alt: "Affiche Gala 2018 — 64e édition",
+    label: "Gala 2018 — 64e édition",
   },
   {
     src: "/affiches/aff_2017.webp",
-    alt: "Affiche Gala 2017 \u2014 63e \u00e9dition",
-    label: "Gala 2017 \u2014 63e \u00e9dition",
+    alt: "Affiche Gala 2017 — 63e édition",
+    label: "Gala 2017 — 63e édition",
   },
   {
     src: "/affiches/aff_2016.webp",
-    alt: "Affiche Gala 2016 \u2014 62e \u00e9dition",
-    label: "Gala 2016 \u2014 62e \u00e9dition",
+    alt: "Affiche Gala 2016 — 62e édition",
+    label: "Gala 2016 — 62e édition",
   },
   {
     src: "/affiches/aff_2015.webp",
-    alt: "Affiche Gala 2015 \u2014 61e \u00e9dition",
-    label: "Gala 2015 \u2014 61e \u00e9dition",
+    alt: "Affiche Gala 2015 — 61e édition",
+    label: "Gala 2015 — 61e édition",
   },
   {
     src: "/affiches/aff_2014.webp",
-    alt: "Affiche Gala 2014 \u2014 60e \u00e9dition",
-    label: "Gala 2014 \u2014 60e \u00e9dition",
+    alt: "Affiche Gala 2014 — 60e édition",
+    label: "Gala 2014 — 60e édition",
   },
   {
     src: "/affiches/aff_2013.webp",
-    alt: "Affiche Gala 2013 \u2014 59e \u00e9dition",
-    label: "Gala 2013 \u2014 59e \u00e9dition",
+    alt: "Affiche Gala 2013 — 59e édition",
+    label: "Gala 2013 — 59e édition",
   },
   {
     src: "/affiches/aff_2012.webp",
-    alt: "Affiche Gala 2012 \u2014 58e \u00e9dition",
-    label: "Gala 2012 \u2014 58e \u00e9dition",
+    alt: "Affiche Gala 2012 — 58e édition",
+    label: "Gala 2012 — 58e édition",
   },
   {
     src: "/affiches/aff_2011.webp",
-    alt: "Affiche Gala 2011 \u2014 57e \u00e9dition",
-    label: "Gala 2011 \u2014 57e \u00e9dition",
+    alt: "Affiche Gala 2011 — 57e édition",
+    label: "Gala 2011 — 57e édition",
   },
   {
     src: "/affiches/aff_2010.webp",
-    alt: "Affiche Gala 2010 \u2014 56e \u00e9dition",
-    label: "Gala 2010 \u2014 56e \u00e9dition",
+    alt: "Affiche Gala 2010 — 56e édition",
+    label: "Gala 2010 — 56e édition",
   },
   {
     src: "/affiches/aff_2009.webp",
-    alt: "Affiche Gala 2009 \u2014 55e \u00e9dition",
-    label: "Gala 2009 \u2014 55e \u00e9dition",
+    alt: "Affiche Gala 2009 — 55e édition",
+    label: "Gala 2009 — 55e édition",
   },
   {
     src: "/affiches/aff_2008.webp",
-    alt: "Affiche Gala 2008 \u2014 54e \u00e9dition",
-    label: "Gala 2008 \u2014 54e \u00e9dition",
+    alt: "Affiche Gala 2008 — 54e édition",
+    label: "Gala 2008 — 54e édition",
   },
   {
     src: "/affiches/aff_2007.webp",
-    alt: "Affiche Gala 2007 \u2014 53e \u00e9dition",
-    label: "Gala 2007 \u2014 53e \u00e9dition",
+    alt: "Affiche Gala 2007 — 53e édition",
+    label: "Gala 2007 — 53e édition",
   },
   {
     src: "/affiches/aff_2006.webp",
-    alt: "Affiche Gala 2006 \u2014 52e \u00e9dition",
-    label: "Gala 2006 \u2014 52e \u00e9dition",
+    alt: "Affiche Gala 2006 — 52e édition",
+    label: "Gala 2006 — 52e édition",
   },
   {
     src: "/affiches/aff_2005.webp",
-    alt: "Affiche Gala 2005 \u2014 51e \u00e9dition",
-    label: "Gala 2005 \u2014 51e \u00e9dition",
+    alt: "Affiche Gala 2005 — 51e édition",
+    label: "Gala 2005 — 51e édition",
   },
   {
     src: "/affiches/aff_2004.webp",
-    alt: "Affiche Gala 2004 \u2014 50e \u00e9dition",
-    label: "Gala 2004 \u2014 50e \u00e9dition",
+    alt: "Affiche Gala 2004 — 50e édition",
+    label: "Gala 2004 — 50e édition",
   },
   {
     src: "/affiches/aff_2003.webp",
-    alt: "Affiche Gala 2003 \u2014 49e \u00e9dition",
-    label: "Gala 2003 \u2014 49e \u00e9dition",
+    alt: "Affiche Gala 2003 — 49e édition",
+    label: "Gala 2003 — 49e édition",
   },
   {
     src: "/affiches/aff_2002.webp",
-    alt: "Affiche Gala 2002 \u2014 48e \u00e9dition",
-    label: "Gala 2002 \u2014 48e \u00e9dition",
+    alt: "Affiche Gala 2002 — 48e édition",
+    label: "Gala 2002 — 48e édition",
   },
   {
     src: "/affiches/aff_2001.webp",
-    alt: "Affiche Gala 2001 \u2014 47e \u00e9dition",
-    label: "Gala 2001 \u2014 47e \u00e9dition",
+    alt: "Affiche Gala 2001 — 47e édition",
+    label: "Gala 2001 — 47e édition",
   },
   {
     src: "/affiches/aff_2000.webp",
-    alt: "Affiche Gala 2000 \u2014 46e \u00e9dition",
-    label: "Gala 2000 \u2014 46e \u00e9dition",
+    alt: "Affiche Gala 2000 — 46e édition",
+    label: "Gala 2000 — 46e édition",
   },
   {
     src: "/affiches/aff_1999.webp",
-    alt: "Affiche Gala 1999 \u2014 45e \u00e9dition",
-    label: "Gala 1999 \u2014 45e \u00e9dition",
+    alt: "Affiche Gala 1999 — 45e édition",
+    label: "Gala 1999 — 45e édition",
+  },
+  {
+    src: "/affiches/aff_1994.webp",
+    alt: "Affiche Gala 1994 — 40e édition",
+    label: "Gala 1994 — 40e édition",
+  },
+  {
+    src: "/affiches/aff_1992.webp",
+    alt: "Affiche Gala 1992 — 38e édition",
+    label: "Gala 1992 — 38e édition",
+  },
+  {
+    src: "/affiches/aff_1991.webp",
+    alt: "Affiche Gala 1991 — 37e édition",
+    label: "Gala 1991 — 37e édition",
+  },
+  {
+    src: "/affiches/aff_1990.webp",
+    alt: "Affiche Gala 1990 — 36e édition",
+    label: "Gala 1990 — 36e édition",
   },
 ];
 
@@ -210,7 +229,7 @@ export function GalleryCarousel() {
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.6, ease: [0.76, 0, 0.24, 1] }}
         >
-          Galerie des &eacute;ditions pr&eacute;c&eacute;dentes
+          Galerie des éditions précédentes
         </motion.h2>
         <motion.p
           className="mt-2 text-muted-foreground"
@@ -219,7 +238,7 @@ export function GalleryCarousel() {
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.6, delay: 0.1 }}
         >
-          Plongez dans l&rsquo;ambiance des ann&eacute;es pass&eacute;es
+          Plongez dans l&rsquo;ambiance des années passées
         </motion.p>
       </div>
 
@@ -241,18 +260,16 @@ export function GalleryCarousel() {
           {[...GALLERY_IMAGES, ...GALLERY_IMAGES].map((image, index) => (
             <div
               key={`${image.label}-${index}`}
-              className="relative w-40 flex-shrink-0 overflow-hidden aspect-[3/4] md:w-[420px]"
+              className="relative h-64 flex-shrink-0 overflow-hidden md:h-[420px]"
               style={{
                 boxShadow: "var(--shadow-md)",
               }}
             >
               {image.src ? (
-                <Image
+                <img
                   src={image.src}
                   alt={image.alt}
-                  fill
-                  className="object-cover pointer-events-none"
-                  sizes="(max-width: 768px) 160px, 420px"
+                  className="h-full w-auto object-contain pointer-events-none"
                 />
               ) : (
                 <div

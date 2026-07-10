@@ -58,16 +58,16 @@ export async function generateMetadata(): Promise<Metadata> {
 
   return {
     title: {
-      default: `${title} ${edition}e Édition — ${date}`,
-      template: `%s | ${title} ${edition}e`,
+      default: `Gala INSA Strasbourg 2026`,
+      template: `%s | Gala INSA Strasbourg 2026`,
     },
     description,
     openGraph: {
-      title: `${title} ${edition}e Édition — ${date}`,
+      title: `Gala INSA Strasbourg 2026`,
       description,
       type: "website",
       locale: "fr_FR",
-      siteName: `${title} ${edition}e Édition`,
+      siteName: `Gala INSA Strasbourg 2026`,
     },
     robots: {
       index: true,
