@@ -8,6 +8,7 @@ interface GalleryImage {
   alt: string;
   label: string;
   gradient?: string;
+  cancelled?: boolean;
 }
 
 const GALLERY_IMAGES: GalleryImage[] = [
@@ -18,8 +19,9 @@ const GALLERY_IMAGES: GalleryImage[] = [
   },
   {
     src: "/affiches/aff_2025.webp",
-    alt: "Affiche Gala 2025 — 71e édition",
+    alt: "Affiche Gala 2025 — 71e édition (édition annulée)",
     label: "Gala 2025 — 71e édition",
+    cancelled: true,
   },
   {
     src: "/affiches/aff_2024.webp",
@@ -269,12 +271,22 @@ export function GalleryCarousel() {
                 <img
                   src={image.src}
                   alt={image.alt}
-                  className="h-full w-auto object-contain pointer-events-none"
+                  className={`h-full w-auto object-contain pointer-events-none ${
+                    image.cancelled ? "grayscale opacity-60" : ""
+                  }`}
                 />
               ) : (
                 <div
                   className={`h-full w-full bg-gradient-to-br ${image.gradient}`}
                 />
+              )}
+
+              {image.cancelled && (
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <span className="rounded-full bg-black/70 px-4 py-1.5 text-sm font-semibold text-white">
+                    Édition annulée
+                  </span>
+                </div>
               )}
 
               <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/60 to-transparent p-6 pt-16">

@@ -62,9 +62,9 @@ export function Footer() {
   return (
     <footer className="w-full border-t bg-gala-primary text-white">
       <div className="container mx-auto px-5 py-10 md:px-6 md:py-12">
-        <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
+        <div className="grid grid-cols-1 gap-8 md:grid-cols-[1fr_auto_1fr] md:gap-20 lg:gap-32">
           {/* Colonne 1 : Logo & description */}
-          <div className="space-y-3 text-center md:text-left">
+          <div className="space-y-3 text-center md:text-right">
             <h3 className="font-heading text-lg font-bold">
               Gala INSA Strasbourg
             </h3>
@@ -77,8 +77,8 @@ export function Footer() {
           </div>
 
           {/* Colonne 2 : Liens rapides */}
-          <div className="space-y-3 text-center md:text-left">
-            <h4 className="font-heading text-sm font-semibold uppercase tracking-wider text-white/80">
+          <div className="space-y-3 text-center md:text-center">
+            <h4 className="font-heading text-sm md:text-lg font-semibold uppercase tracking-wider text-gala-gold">
               Accès rapide
             </h4>
             <nav className="grid grid-cols-2 gap-2 md:flex md:flex-col">
@@ -117,65 +117,71 @@ export function Footer() {
 
           {/* Colonne 3 : Réseaux sociaux & mentions légales */}
           <div className="space-y-3 text-center md:text-left">
-            <h4 className="font-heading text-sm font-semibold uppercase tracking-wider text-white/80">
+            <h4 className="font-heading text-sm md:text-lg font-semibold uppercase tracking-wider text-gala-gold">
               Suivez-nous
             </h4>
-            <div className="flex gap-4 justify-center md:justify-start">
+            <div className="flex gap-6 justify-center md:justify-start">
               <a
                 href={SOCIAL.instagram}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-white/60 hover:text-white transition-colors"
+                className="text-gala-gold hover:text-gala-gold-light transition-colors"
                 aria-label="Instagram du Gala INSA Strasbourg"
               >
-                <InstagramIcon className="h-5 w-5" />
+                <InstagramIcon className="h-7 w-7" />
               </a>
               <a
                 href={SOCIAL.linkedin}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-white/60 hover:text-white transition-colors"
+                className="text-gala-gold hover:text-gala-gold-light transition-colors"
                 aria-label="LinkedIn du Gala INSA Strasbourg"
               >
-                <LinkedinIcon className="h-5 w-5" />
+                <LinkedinIcon className="h-7 w-7" />
               </a>
               <a
                 href={SOCIAL.facebook}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-white/60 hover:text-white transition-colors"
+                className="text-gala-gold hover:text-gala-gold-light transition-colors"
                 aria-label="Facebook du Gala INSA Strasbourg"
               >
-                <FacebookIcon className="h-5 w-5" />
+                <FacebookIcon className="h-7 w-7" />
               </a>
-            </div>
-
-            <div className="pt-4 space-y-1">
-              <Link
-                href={APP_URLS.mentionsLegales}
-                className="block text-xs text-white/50 hover:text-white transition-colors"
-              >
-                Mentions légales
-              </Link>
-              <Link
-                href={APP_URLS.politiqueConfidentialite}
-                className="block text-xs text-white/50 hover:text-white transition-colors"
-              >
-                Politique de confidentialité
-              </Link>
             </div>
           </div>
         </div>
 
-        {/* Barre inférieure avec mentions légales obligatoires */}
-        <div className="mt-8 pt-6 border-t border-white/10 text-center text-xs text-white/40">
-          <p>
-            {LEGAL.associationName} — SIRET : {LEGAL.siret}
-          </p>
-          <p className="mt-1">
-            © {currentYear} Association du Gala INSA Strasbourg. Tous droits
-            réservés.
-          </p>
+        {/* Barre inférieure : séparateur doré à bords fondus + mentions légales obligatoires */}
+        <div className="mt-8 text-xs text-white/40">
+          <div className="h-px w-full bg-gala-gold [mask-image:linear-gradient(to_right,transparent,black_15%,black_85%,transparent)]" />
+          <div className="pt-6">
+            <div className="grid grid-cols-1 gap-4 md:grid-cols-2 md:items-center">
+              <div className="text-center md:text-left">
+                <p>
+                  {LEGAL.associationName} — SIRET : {LEGAL.siret}
+                </p>
+                <p className="mt-1">
+                  © {currentYear} Association du Gala INSA Strasbourg. Tous droits
+                  réservés.
+                </p>
+              </div>
+              <div className="flex flex-col items-center gap-2 md:items-end">
+                <Link
+                  href={APP_URLS.mentionsLegales}
+                  className="text-white/50 hover:text-white transition-colors"
+                >
+                  Mentions légales
+                </Link>
+                <Link
+                  href={APP_URLS.politiqueConfidentialite}
+                  className="text-white/50 hover:text-white transition-colors"
+                >
+                  Politique de confidentialité
+                </Link>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </footer>
