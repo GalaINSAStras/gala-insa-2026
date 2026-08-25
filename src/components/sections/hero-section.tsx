@@ -69,7 +69,7 @@ export function HeroSection({
           loop
           muted
           playsInline
-          poster={posterUrl ?? undefined}
+          poster={posterUrl ?? "/fallback_background.webp"}
           className="h-full w-full object-cover"
           onError={handleVideoError}
         >
@@ -155,7 +155,10 @@ export function HeroSection({
           </motion.span>
 
           {/* Titre avec effet de révélation — texte blanc pur sur fond sombre ✅ */}
-          <h1 className="font-display text-5xl font-bold tracking-tight text-white leading-[1.2] md:leading-none md:text-7xl lg:text-8xl">
+          <h1
+            className="text-5xl font-bold tracking-tight text-white leading-[1.2] md:leading-none md:text-7xl lg:text-8xl"
+            style={{ fontFamily: "var(--font-title)" }}
+          >
             {title.split(" ").map((word, i, arr) => (
               <span key={i} className="inline-block overflow-hidden pb-0 pt-0 -mb-2 md:pb-4">
                 <motion.span

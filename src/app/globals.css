@@ -8,6 +8,16 @@
    🎨 GALA INSA Strasbourg 2026 — Design System V2
    ═══════════════════════════════════════════════════ */
 
+/* ─── Police custom Renaissance (titre principal) ─── */
+@font-face {
+  font-family: "Renaissance";
+  src: url("/fonts/renaissance.woff2") format("woff2"),
+       url("/fonts/renaissance.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
 /* ─── Typography: imported via next/font in layout.tsx ─── */
 /* --font-display: "Cormorant Garamond", serif;   // Titres H1/H2/Branding */
 /* --font-body: "Inter", sans-serif;               // Corps de texte, UI */
@@ -102,6 +112,9 @@
    🌞 LIGHT MODE
    ═══════════════════════════════════════════════════ */
 :root {
+  /* ─── Police du titre principal ─── */
+  --font-title: "Renaissance", "Cormorant Garamond", serif;
+
   /* ─── Surfaces ─── */
   --background: #FFFBF2;               /* Crème */
   --foreground: #2E3342;               /* text-primary */

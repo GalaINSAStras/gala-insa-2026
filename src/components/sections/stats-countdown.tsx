@@ -274,7 +274,7 @@ export function StatsCountdown() {
         {/* Section Countdown */}
         <div className="pb-6 sm:pb-12">
           <motion.h3
-            className="mb-4 text-center font-display text-2xl font-bold text-white/90 md:text-3xl"
+            className="mb-4 mt-8 text-center font-display text-2xl font-bold text-white/90 md:text-3xl"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}

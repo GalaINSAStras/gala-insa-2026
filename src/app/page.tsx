@@ -15,7 +15,7 @@ export const revalidate = 60;
 export default async function HomePage() {
   const event = await getEvent().catch(() => null);
 
-  const title = event?.title ?? "Gala INSA Strasbourg";
+  const title = event?.title ?? "Gala INSA Strasbourg 2026";
   const edition = event?.edition ?? 72;
   const date = event?.date
     ? new Date(event.date).toLocaleDateString("fr-FR", {
