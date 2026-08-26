@@ -96,6 +96,21 @@
   --font-display: "Cormorant Garamond", serif;
   --font-body: "Inter", sans-serif;
   --font-mono: "Geist Mono", ui-monospace, monospace;
+  --font-titre: var(--font-display);
+
+  /* ─── Tickets Art nouveau (billets) ─── */
+  --color-blush: var(--blush);
+  --color-bleuPale: var(--bleu-pale);
+  --color-jaunePale: var(--jaune-pale);
+  --color-roseMoyen: var(--rose-moyen);
+  --color-bleuMoyen: var(--bleu-moyen);
+  --color-orMoyen: var(--or-moyen);
+  --color-mauve: var(--mauve);
+  --color-ardoise: var(--ardoise);
+  --color-orFonce: var(--or-fonce);
+  --color-vertPale: var(--vert-pale);
+  --color-vertMoyen: var(--vert-moyen);
+  --color-ivoire: var(--ivoire);
 
   /* ─── Radius shadcn legacy mapping ─── */
   --radius: 0.625rem;
@@ -185,6 +200,20 @@
   --decoration-pink: #FCD8E4;          /* Rose pastel */
   --decoration-blue: #BACCE9;          /* Bleu pastel */
   --decoration-green: #D6EDCF;         /* Vert clair */
+
+  /* ─── Tickets Art nouveau (billets) ─── */
+  --blush: #FDF0F1;
+  --bleu-pale: #E3F2FB;
+  --jaune-pale: #FDF6E3;
+  --rose-moyen: #F9C9D4;
+  --bleu-moyen: #AFC6E3;
+  --or-moyen: #F0CE7D;
+  --mauve: #D9D6E3;
+  --ardoise: #3F5B76;
+  --or-fonce: #D69A2D;
+  --vert-pale: #C9E8CB;
+  --vert-moyen: #7FB878;
+  --ivoire: #FFFDF8;
 }
 
 /* ═══════════════════════════════════════════════════

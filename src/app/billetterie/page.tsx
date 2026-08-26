@@ -1,6 +1,10 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { getTickets } from "@/lib/sanity/queries";
+import { TicketGrid } from "@/components/tickets/TicketGrid";
+import type { TicketCardProps } from "@/components/tickets/TicketCard";
+import type { TicketVariant } from "@/components/tickets/lib/variants";
+import type { Ticket } from "@/lib/sanity/types";
 
 export const metadata: Metadata = {
   title: "Billetterie",
@@ -9,6 +13,44 @@ export const metadata: Metadata = {
 };
 
 export const revalidate = 60;
+
+/* ─── Mapping Sanity → TicketCardProps ─── */
+const VARIANT_CYCLE: TicketVariant[] = ["etudiant", "prevente", "normal"];
+
+function toVariant(type: string, index: number): TicketVariant {
+  const t = type.toLowerCase();
+  if (t.includes("étudiant") || t.includes("etudiant")) return "etudiant";
+  if (t.includes("vip") || t.includes("premium")) return "normal";
+  return VARIANT_CYCLE[index % VARIANT_CYCLE.length];
+}
+
+function toBadge(type: string): string | undefined {
+  const t = type.toLowerCase();
+  if (t.includes("vip") || t.includes("premium")) return "Premium";
+  return undefined;
+}
+
+function toQuantityLabel(ticket: Ticket): string {
+  if (ticket.soldOut) return "Complet";
+  if (ticket.quantityAvailable !== undefined && ticket.quantityAvailable > 0) {
+    return `Il reste ${ticket.quantityAvailable} place${ticket.quantityAvailable > 1 ? "s" : ""}`;
+  }
+  return "Places limitées";
+}
+
+function toTicketCardProps(ticket: Ticket, index: number): TicketCardProps {
+  return {
+    id: ticket._id,
+    variant: toVariant(ticket.type, index),
+    title: ticket.type,
+    price: ticket.price,
+    description: ticket.description ?? "",
+    quantityLabel: toQuantityLabel(ticket),
+    href: ticket.externalLink,
+    soldOut: ticket.soldOut,
+    badge: toBadge(ticket.type),
+  };
+}
 
 export default async function BilletteriePage() {
   const tickets = await getTickets().catch(() => null);
@@ -30,65 +72,15 @@ export default async function BilletteriePage() {
         </div>
       </section>
 
-      {/* === Cartes de billets === */}
-      <section className="py-20 md:py-28">
+      {/* === Nos billets === */}
+      <section className="py-[clamp(3rem,7vw,6rem)]">
         <div className="container mx-auto px-4 md:px-6">
+          <h2 className="mb-[clamp(2rem,4vw,3.5rem)] text-center text-[clamp(1.8rem,4vw,2.6rem)] italic text-ardoise">
+            Nos billets
+          </h2>
+
           {tickets && tickets.length > 0 ? (
-            <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
-              {tickets.map((ticket) => (
-                <div
-                  key={ticket._id}
-                  className="group relative flex flex-col rounded-2xl border border-border bg-card p-8 shadow-sm transition-all hover:shadow-lg hover:-translate-y-1"
-                >
-                  {/* Badge épuisé */}
-                  {ticket.soldOut && (
-                    <span className="absolute top-4 right-4 rounded-full bg-destructive px-3 py-1 text-xs font-semibold text-destructive-foreground">
-                      Épuisé
-                    </span>
-                  )}
-
-                  <h3 className="font-heading text-xl font-bold text-foreground">
-                    {ticket.type}
-                  </h3>
-
-                  {ticket.description && (
-                    <p className="mt-3 text-sm text-muted-foreground leading-relaxed flex-1">
-                      {ticket.description}
-                    </p>
-                  )}
-
-                  <div className="mt-6 flex items-baseline gap-1">
-                    <span className="text-3xl font-bold text-gala-primary">
-                      {ticket.price} €
-                    </span>
-                  </div>
-
-                  {ticket.quantityAvailable !== undefined && (
-                    <p className="mt-2 text-xs text-muted-foreground">
-                      {ticket.soldOut
-                        ? "Aucune place disponible"
-                        : ticket.quantityAvailable > 0
-                          ? `Il reste ${ticket.quantityAvailable} place${ticket.quantityAvailable > 1 ? "s" : ""}`
-                          : "Places limitées"}
-                    </p>
-                  )}
-
-                  <Link
-                    href={ticket.externalLink ?? "#"}
-                    target={ticket.externalLink ? "_blank" : undefined}
-                    rel={ticket.externalLink ? "noopener noreferrer" : undefined}
-                    className={`mt-6 inline-flex items-center justify-center rounded-lg px-6 py-3 text-sm font-semibold transition-colors ${
-                      ticket.soldOut
-                        ? "bg-muted text-muted-foreground cursor-not-allowed pointer-events-none"
-                        : "bg-gala-primary text-white hover:bg-gala-primary-light"
-                    }`}
-                    aria-disabled={ticket.soldOut}
-                  >
-                    {ticket.soldOut ? "Indisponible" : "Réserver sur HelloAsso"}
-                  </Link>
-                </div>
-              ))}
-            </div>
+            <TicketGrid tickets={tickets.map(toTicketCardProps)} />
           ) : (
             <div className="text-center py-20">
               <p className="text-muted-foreground italic">
