@@ -4,6 +4,7 @@ import Script from "next/script";
 import { LEGAL } from "@/lib/constants";
 import { sanityFetch } from "@/lib/sanity/client";
 import { SiteShellClient } from "./site-shell-client";
+import { PreloaderGate } from "@/components/preloader/PreloaderGate";
 import "./globals.css";
 
 /* ─── Body Font : Inter (lisibilité maximale) ─── */
@@ -131,7 +132,9 @@ export default function RootLayout({
           `}
         </Script>
 
-        <SiteShellClient>{children}</SiteShellClient>
+        <PreloaderGate>
+          <SiteShellClient>{children}</SiteShellClient>
+        </PreloaderGate>
 
         {umamiWebsiteId && umamiUrl && (
           <Script

@@ -160,11 +160,20 @@ export function Header() {
 
   return (
     <header className="sticky top-0 z-50 w-full border-b-2 border-gala-gold bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/80">
-      <div className="container mx-auto flex h-18 items-center justify-between px-4 md:px-6">
+      {/* Motif floral — coin gauche, chevauche la ligne de démarcation dorée */}
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        src="/ornaments/motif_floral.svg"
+        alt=""
+        aria-hidden
+        className="pointer-events-none absolute bottom-0 left-0 -z-10 w-22 translate-y-[15%] object-contain object-bottom-left sm:w-24 md:w-26"
+      />
+
+      <div className="container mx-auto flex h-18 items-center justify-center px-4 md:justify-between md:px-6">
         {/* Logo / Nom du site */}
         <Link
           href="/"
-          className="flex items-center gap-2 text-3xl font-bold text-gala-primary"
+          className="flex items-center gap-2 text-3xl font-bold leading-none text-gala-primary md:ml-24"
           style={{ fontFamily: "var(--font-title)" }}
         >
           <span className="sr-only">Gala INSA Strasbourg 2026</span>

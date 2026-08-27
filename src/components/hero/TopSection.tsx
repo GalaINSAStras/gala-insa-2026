@@ -15,7 +15,7 @@ export function TopSection() {
 
       {/* Teaser — conteneur d'origine */}
       <div className="relative mx-auto max-w-[1180px] px-4 sm:px-6 lg:px-8">
-        <div className="pt-6 md:pt-8">
+        <div className="pt-10 md:pt-8 lg:pt-12">
           <TeaserFrame>
             <TeaserCarousel slides={TEASER_SLIDES} />
           </TeaserFrame>

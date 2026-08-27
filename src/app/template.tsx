@@ -2,6 +2,7 @@
 
 import { motion, AnimatePresence } from "motion/react";
 import { usePathname } from "next/navigation";
+import { useEffect } from "react";
 
 /**
  * Transition inter-pages — Effet rideau "Curtains: Clip Wipe"
@@ -24,13 +25,39 @@ const EASE = [0.76, 0, 0.24, 1] as const;
 /** Durée d'une demi-transition (entrée ou sortie du rideau) */
 const CURTAIN_DURATION = 0.6;
 
+/**
+ * Drapeau module-scoped : survit aux remontages de <Template> lors des
+ * navigations côté client, mais est réinitialisé à chaque chargement
+ * complet (F5). Il permet de sauter l'animation du rideau au tout premier
+ * rendu sans la désactiver pour les navigations suivantes.
+ *
+ * ⚠️ Ne PAS utiliser un `useRef` ici : `template.tsx` se remonte à chaque
+ * navigation, le ref serait donc réinitialisé à chaque route.
+ */
+let hasCompletedInitialMount = false;
+
 export default function Template({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
+
+  // Le rideau ne doit pas se jouer au tout premier rendu (chargement
+  // complet / F5) : il est réservé aux navigations côté client.
+  const isInitialMount = !hasCompletedInitialMount;
+
+  useEffect(() => {
+    hasCompletedInitialMount = true;
+  }, []);
 
   // Désactiver l'animation pour les routes du studio Sanity
   if (pathname.startsWith("/studio")) {
     return <>{children}</>;
   }
+
+  // État initial du rideau :
+  // - premier rendu du document → déjà ouvert (masqué) : aucune animation
+  // - navigation suivante → fermé (visible) : il s'ouvre sur la nouvelle page
+  const curtainInitial: { clipPath: string } = isInitialMount
+    ? { clipPath: "inset(100% 0 0% 0)" }
+    : { clipPath: "inset(0 0 0% 0)" };
 
   return (
     <AnimatePresence mode="wait">
@@ -52,7 +79,7 @@ export default function Template({ children }: { children: React.ReactNode }) {
          */}
         <motion.div
           className="pointer-events-none fixed inset-0 z-[9999]"
-          initial={{ clipPath: "inset(0 0 0% 0)" }}
+          initial={curtainInitial}
           animate={{ clipPath: "inset(100% 0 0% 0)" }}
           exit={{ clipPath: "inset(0 0 0% 0)" }}
           transition={{

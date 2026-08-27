@@ -5,36 +5,56 @@ import { useReducedMotion } from "motion/react";
 import type { TeaserSlide } from "@/lib/hero-data";
 
 const AUTOPLAY_MS = 6500;
+const GAP_MS = 1200; // petit vide entre la fin du carrousel et le retour au début
 
 export function TeaserCarousel({ slides }: { slides: TeaserSlide[] }) {
   const [index, setIndex] = useState(0);
+  const [showGap, setShowGap] = useState(false);
   const [paused, setPaused] = useState(false);
   const reduced = useReducedMotion();
   const videoRefs = useRef<(HTMLVideoElement | null)[]>([]);
 
   const go = useCallback(
-    (dir: 1 | -1) => setIndex((i) => (i + dir + slides.length) % slides.length),
+    (dir: 1 | -1) => {
+      setShowGap(false);
+      setIndex((i) => (i + dir + slides.length) % slides.length);
+    },
     [slides.length]
   );
 
-  // autoplay
+  // autoplay — à la fin, petit vide puis retour au premier slide (boucle infinie)
   useEffect(() => {
     if (paused || reduced || slides.length < 2) return;
-    const t = setTimeout(() => go(1), AUTOPLAY_MS);
-    return () => clearTimeout(t);
-  }, [index, paused, reduced, go, slides.length]);
 
-  // ne lire que la vidéo active
+    if (showGap) {
+      const t = setTimeout(() => {
+        setShowGap(false);
+        setIndex(0);
+      }, GAP_MS);
+      return () => clearTimeout(t);
+    }
+
+    const t = setTimeout(() => {
+      if (index === slides.length - 1) {
+        setShowGap(true);
+      } else {
+        setIndex(index + 1);
+      }
+    }, AUTOPLAY_MS);
+    return () => clearTimeout(t);
+  }, [index, showGap, paused, reduced, slides.length]);
+
+  // ne lire que la vidéo active (aucune vidéo pendant le vide)
   useEffect(() => {
     videoRefs.current.forEach((v, i) => {
       if (!v) return;
-      if (i === index) void v.play().catch(() => {});
+      if (!showGap && i === index) void v.play().catch(() => {});
       else {
         v.pause();
         v.currentTime = 0;
       }
     });
-  }, [index]);
+  }, [index, showGap]);
 
   // clavier
   const onKey = (e: React.KeyboardEvent) => {
@@ -64,9 +84,9 @@ export function TeaserCarousel({ slides }: { slides: TeaserSlide[] }) {
       {slides.map((s, i) => (
         <div
           key={s.id}
-          aria-hidden={i !== index}
+          aria-hidden={showGap || i !== index}
           className="absolute inset-0 transition-opacity duration-[900ms] ease-out"
-          style={{ opacity: i === index ? 1 : 0 }}
+          style={{ opacity: !showGap && i === index ? 1 : 0 }}
         >
           {s.kind === "video" ? (
             <video
@@ -109,11 +129,14 @@ export function TeaserCarousel({ slides }: { slides: TeaserSlide[] }) {
           {slides.map((s, i) => (
             <button
               key={s.id}
-              onClick={() => setIndex(i)}
+              onClick={() => {
+                setShowGap(false);
+                setIndex(i);
+              }}
               aria-label={`Aller au slide ${i + 1} : ${s.alt}`}
-              aria-current={i === index}
+              aria-current={!showGap && i === index}
               className={`h-2 rounded-full transition-all duration-300 ${
-                i === index ? "w-6 bg-[var(--or-moyen)]" : "w-2 bg-white/60 hover:bg-white/85"
+                !showGap && i === index ? "w-6 bg-[var(--or-moyen)]" : "w-2 bg-white/60 hover:bg-white/85"
               }`}
             />
           ))}
@@ -121,7 +144,9 @@ export function TeaserCarousel({ slides }: { slides: TeaserSlide[] }) {
       )}
 
       <p aria-live="polite" className="sr-only">
-        Slide {index + 1} sur {slides.length} : {slides[index].alt}
+        {showGap
+          ? "Fin du carrousel"
+          : `Slide ${index + 1} sur ${slides.length} : ${slides[index].alt}`}
       </p>
     </div>
   );

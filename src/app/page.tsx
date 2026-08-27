@@ -124,14 +124,43 @@ export default async function HomePage() {
       {/* Section FAQ */}
       <section id="faq" className="py-10 sm:py-20 md:py-28">
         <div className="container mx-auto px-5 md:px-6">
-          <h2 className="font-display text-3xl font-bold text-gala-primary md:text-4xl text-center">
-            Questions fréquentes
-          </h2>
-          <p className="mt-2 text-muted-foreground text-center">
-            Une interrogation ? On a sûrement la réponse.
-          </p>
-          <div className="mt-8">
-            <FaqSection />
+          <div className="grid grid-cols-1 items-stretch md:grid-cols-[clamp(90px,12vw,170px)_minmax(0,1fr)_clamp(90px,12vw,170px)] lg:grid-cols-[clamp(130px,16vw,240px)_minmax(0,1fr)_clamp(130px,16vw,240px)]">
+            {/* Fleur gauche */}
+            <div className="relative hidden md:block">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="/ornaments/fleurs_gauche.svg"
+                alt=""
+                aria-hidden
+                loading="lazy"
+                className="absolute inset-0 h-full w-full object-contain object-bottom"
+              />
+            </div>
+
+            {/* Contenu FAQ */}
+            <div className="relative">
+              <h2 className="font-display text-3xl font-bold text-gala-primary md:text-4xl text-center">
+                Questions fréquentes
+              </h2>
+              <p className="mt-2 text-muted-foreground text-center">
+                Une interrogation ? On a sûrement la réponse.
+              </p>
+              <div className="mt-8">
+                <FaqSection />
+              </div>
+            </div>
+
+            {/* Fleur droite */}
+            <div className="relative hidden md:block">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="/ornaments/fleurs_droite.svg"
+                alt=""
+                aria-hidden
+                loading="lazy"
+                className="absolute inset-0 h-full w-full object-contain object-bottom"
+              />
+            </div>
           </div>
         </div>
       </section>

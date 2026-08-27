@@ -1,4 +1,4 @@
-// Optimise les colonnes SVG d'origine (exports Inkscape) pour la prod :
+// Optimise des SVG d'origine (exports Inkscape) pour la prod :
 // - supprime les métadonnées Inkscape (namedview, comments, inkscape:/sodipodi:*)
 // - supprime les id (aucune référence url(#)/use/xlink) et class redondantes
 //   (le fill est porté par style="fill:…" inline sur chaque forme)
@@ -12,9 +12,20 @@ import { fileURLToPath } from "node:url";
 
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 
-const SOURCES = ["public/colonne_gauche.svg", "public/colonne_droite.svg"];
+const SOURCES = [
+  "public/colonne_gauche.svg",
+  "public/colonne_droite.svg",
+  "public/motif_floral.svg",
+  "public/fleurs_gauche.svg",
+  "public/fleurs_droite.svg",
+];
 
 function optimize(svg) {
+  // ids référencés par url(#…) (ex: dégradés) — à préserver
+  const referenced = new Set(
+    [...svg.matchAll(/url\(\s*['"]?#([^)'"\s]+)['"]?\s*\)/g)].map((m) => m[1])
+  );
+
   return svg
     .replace(/<\?xml[^>]*\?>/g, "") // déclaration XML
     .replace(/<!--[\s\S]*?-->/g, "") // commentaires
@@ -22,7 +33,7 @@ function optimize(svg) {
     .replace(/<metadata[\s\S]*?<\/metadata>/g, "") // métadonnées (sécurité)
     .replace(/\s+(?:inkscape|sodipodi):[A-Za-z0-9_.-]+="[^"]*"/g, "") // attributs éditeurs
     .replace(/\s+xmlns:(?:inkscape|sodipodi|dc|cc|rdf)="[^"]*"/g, "") // namespaces éditeurs
-    .replace(/\s+id="[^"]*"/g, "") // ids inutilisés
+    .replace(/\s+id="([^"]*)"/g, (m, id) => (referenced.has(id) ? m : "")) // ids (conserve les référencés)
     .replace(/\s+class="[^"]*"/g, ""); // classes redondantes
 }
 

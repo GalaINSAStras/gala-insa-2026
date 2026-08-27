@@ -1,5 +1,4 @@
 import type { ReactNode } from "react";
-import { FloralEdge } from "@/components/ornaments/FloralEdge";
 
 function Corner({
   className,
@@ -45,11 +44,39 @@ export function TeaserFrame({ children }: { children: ReactNode }) {
         <div className="relative overflow-hidden rounded-[4px] bg-ardoise">{children}</div>
       </div>
 
-      {/* bouquets qui débordent */}
-      <FloralEdge className="pointer-events-none absolute -left-6 -top-8 h-28 w-28 md:h-40 md:w-40" flipY />
-      <FloralEdge className="pointer-events-none absolute -right-6 -top-8 h-28 w-28 md:h-40 md:w-40" flipX flipY scale={0.95} />
-      <FloralEdge className="pointer-events-none absolute -bottom-8 -left-6 h-28 w-28 md:h-40 md:w-40" scale={1.05} />
-      <FloralEdge className="pointer-events-none absolute -bottom-8 -right-6 h-28 w-28 md:h-40 md:w-40" flipX />
+      {/* motifs floraux qui débordent (4 coins) */}
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        src="/ornaments/motif_floral.svg"
+        alt=""
+        aria-hidden
+        style={{ transform: "rotate(180deg)" }}
+        className="pointer-events-none absolute -left-2 -top-4 md:-left-6 md:-top-8 h-20 w-20 object-contain md:h-40 md:w-40"
+      />
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        src="/ornaments/motif_floral.svg"
+        alt=""
+        aria-hidden
+        style={{ transform: "scaleX(-1) rotate(180deg)" }}
+        className="pointer-events-none absolute -right-2 -top-4 md:-right-6 md:-top-8 h-20 w-20 object-contain md:h-40 md:w-40"
+      />
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        src="/ornaments/motif_floral.svg"
+        alt=""
+        aria-hidden
+        style={{ transform: "scaleX(1)" }}
+        className="pointer-events-none absolute -bottom-4 -right-2 md:-bottom-8 md:-right-6 h-20 w-20 object-contain md:h-40 md:w-40"
+      />
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        src="/ornaments/motif_floral.svg"
+        alt=""
+        aria-hidden
+        style={{ transform: "scaleX(-1)" }}
+        className="pointer-events-none absolute -bottom-4 -left-2 md:-bottom-8 md:-left-6 h-20 w-20 object-contain md:h-40 md:w-40"
+      />
     </div>
   );
 }
