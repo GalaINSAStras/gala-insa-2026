@@ -6,6 +6,7 @@ import { FloralCorner } from "./ornaments/FloralCorner";
 import { Divider } from "./ornaments/Divider";
 import { TICKET_THEMES, type TicketVariant } from "./lib/variants";
 import { DEFAULT_GEOMETRY, type TicketGeometry } from "./lib/ticketPath";
+import { CartoucheButton } from "@/components/ui/CartoucheButton";
 
 const EASE = [0.22, 0.61, 0.36, 1] as const;
 
@@ -37,7 +38,7 @@ export function TicketCard({
   currency = "€",
   description,
   quantityLabel,
-  ctaLabel = "Réserver",
+  ctaLabel = "RÉSERVER",
   href,
   onSelect,
   disabled = false,
@@ -54,31 +55,7 @@ export function TicketCard({
 
   const isAnchor = Boolean(href) && !isLocked;
   const isExternal = href ? /^https?:\/\//.test(href) : false;
-  const ariaLabel = `${soldOut ? "Complet" : ctaLabel} — ${title}, ${price} ${currency}`;
-
-  const ctaClassName = [
-    "relative inline-flex items-center justify-center",
-    "rounded-[3px] border border-orMoyen bg-ardoise",
-    "px-[clamp(1.4rem,3vw,2.4rem)] py-[clamp(0.6rem,1.2vw,0.8rem)]",
-    "font-titre text-[clamp(0.72rem,1.15vw,0.88rem)]",
-    "uppercase tracking-[0.14em] text-jaunePale",
-    "shadow-[0_2px_10px_rgba(63,91,118,0.28)]",
-    "transition-all duration-300",
-    "hover:-translate-y-[1px] hover:bg-[#35506A]",
-    "hover:shadow-[0_5px_16px_rgba(63,91,118,0.34)]",
-    "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-[3px] focus-visible:outline-orFonce",
-    "disabled:cursor-not-allowed disabled:opacity-45 disabled:hover:translate-y-0",
-  ].join(" ");
-
-  const ctaContent = (
-    <>
-      <span
-        aria-hidden
-        className="pointer-events-none absolute inset-[3px] rounded-[2px] border border-orMoyen/45"
-      />
-      {soldOut ? "Complet" : ctaLabel}
-    </>
-  );
+  const ariaLabel = `${soldOut ? "COMPLET" : ctaLabel} — ${title}, ${price} ${currency}`;
 
   return (
     <motion.article
@@ -133,28 +110,16 @@ export function TicketCard({
         </div>
 
         <div className="mt-auto pt-[8%]">
-          {isAnchor ? (
-            <a
-              href={href}
-              aria-label={ariaLabel}
-              className={ctaClassName}
-              {...(isExternal
-                ? { target: "_blank", rel: "noopener noreferrer" }
-                : {})}
-            >
-              {ctaContent}
-            </a>
-          ) : (
-            <button
-              type="button"
-              onClick={onSelect}
-              disabled={isLocked}
-              aria-label={ariaLabel}
-              className={ctaClassName}
-            >
-              {ctaContent}
-            </button>
-          )}
+          <CartoucheButton
+            size="sm"
+            href={isAnchor ? href : undefined}
+            external={isAnchor && isExternal}
+            onClick={onSelect}
+            disabled={isLocked}
+            aria-label={ariaLabel}
+          >
+            {soldOut ? "COMPLET" : ctaLabel}
+          </CartoucheButton>
         </div>
       </div>
     </motion.article>

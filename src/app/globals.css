@@ -96,7 +96,7 @@
   --font-display: "Cormorant Garamond", serif;
   --font-body: "Inter", sans-serif;
   --font-mono: "Geist Mono", ui-monospace, monospace;
-  --font-titre: var(--font-display);
+  --font-titre: var(--font-titre); /* Playfair Display — injectée via next/font */
 
   /* ─── Tickets Art nouveau (billets) ─── */
   --color-blush: var(--blush);
@@ -207,13 +207,25 @@
   --jaune-pale: #FDF6E3;
   --rose-moyen: #F9C9D4;
   --bleu-moyen: #AFC6E3;
-  --or-moyen: #F0CE7D;
+  --or-moyen: #C9A76B;
   --mauve: #D9D6E3;
   --ardoise: #3F5B76;
-  --or-fonce: #D69A2D;
-  --vert-pale: #C9E8CB;
+  --or-fonce: #A8863F;
+  --vert-pale: #CFE3CC;
   --vert-moyen: #7FB878;
   --ivoire: #FFFDF8;
+
+  /* ─── Boutons cartouche (refonte) ─── */
+  --marine: #2C3E5C;        /* fond primaire */
+  --marine-clair: #3A4F70;  /* haut du dégradé */
+  --marine-fonce: #22314A;  /* bas du dégradé */
+
+  --sauge: #CFE3CC;         /* fond secondaire */
+  --sauge-clair: #DCEDD9;
+  --sauge-texte: #3A5A72;
+
+  /* Or de relief (liseré + fleurons) */
+  --or-clair: #E8CFA0;
 }
 
 /* ═══════════════════════════════════════════════════

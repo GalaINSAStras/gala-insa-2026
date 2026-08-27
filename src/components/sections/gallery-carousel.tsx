@@ -222,10 +222,10 @@ export function GalleryCarousel() {
   }, [startAutoplay, stopAutoplay]);
 
   return (
-    <section className="relative overflow-hidden py-12 sm:py-24 md:py-32">
+    <section className="relative overflow-hidden py-12 sm:py-24 md:pb-32 md:pt-24">
       <div className="container mx-auto mb-8 sm:mb-16 px-5 md:px-6">
         <motion.h2
-          className="font-display text-3xl font-bold text-gala-primary md:text-4xl"
+          className="font-display text-center text-3xl font-bold text-gala-primary md:text-4xl"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
@@ -234,7 +234,7 @@ export function GalleryCarousel() {
           Galerie des éditions précédentes
         </motion.h2>
         <motion.p
-          className="mt-2 text-muted-foreground"
+          className="mt-2 text-center text-muted-foreground"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}

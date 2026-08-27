@@ -1,4 +1,4 @@
-import { HeroSection } from "@/components/sections/hero-section";
+import { TopSection } from "@/components/hero/TopSection";
 import { PartnersGrid } from "@/components/sections/partners-grid";
 import { TicketsSection } from "@/components/sections/tickets-section";
 import { FaqSection } from "@/components/sections/faq-section";
@@ -8,43 +8,20 @@ import { StatsCountdown } from "@/components/sections/stats-countdown";
 import { GalleryCarousel } from "@/components/sections/gallery-carousel";
 import { InstagramFeed } from "@/components/sections/instagram-feed";
 import { getEvent } from "@/lib/sanity/queries";
-import { urlFor } from "@/lib/sanity/client";
 
 export const revalidate = 60;
 
 export default async function HomePage() {
   const event = await getEvent().catch(() => null);
 
-  const title = event?.title ?? "Gala INSA Strasbourg 2026";
-  const edition = event?.edition ?? 72;
-  const date = event?.date
-    ? new Date(event.date).toLocaleDateString("fr-FR", {
-        day: "numeric",
-        month: "long",
-        year: "numeric",
-      })
-    : "21 novembre 2026";
-  const location = event?.location ?? "L'Illiade, Illkirch-Graffenstaden";
   const description =
     event?.description ??
     "Chaque année, les étudiants de l'INSA Strasbourg donnent vie à une soirée d'exception. Un gala pensé, organisé et vécu par ceux qui font battre le cœur de l'école.";
 
-  const posterUrl = event?.poster
-    ? urlFor(event.poster).width(1920).height(1080).fit("crop").url()
-    : undefined;
-
   return (
     <div className="flex flex-col">
-      {/* Hero Section V2 — Vidéo background + animations */}
-      <HeroSection
-        title={title}
-        edition={edition}
-        date={date}
-        location={location}
-        description={description}
-        posterUrl={posterUrl}
-        videoUrl="/video_background.mp4"
-      />
+      {/* Bloc supérieur — Teaser + Hero à colonnes */}
+      <TopSection />
 
       {/* Galerie immersive */}
       <GalleryCarousel />
@@ -78,27 +55,36 @@ export default async function HomePage() {
       </div>
 
       {/* Section À propos */}
-      <section id="about" className="pt-16 sm:pt-32 md:pt-44 pb-10 sm:pb-20 md:pb-28">
+      <section id="about" className="pt-16 sm:pt-32 md:pt-44 lg:pt-24 pb-10 sm:pb-20 md:pb-28">
         <div className="container mx-auto px-5 md:px-6">
           {/*
            * Titre : font-display (Cormorant Garamond), text-gala-primary (#5E708E)
            * Contraste #5E708E sur #FFFBF2 = 4.5:1 ✅ WCAG AA
            */}
-          <h2 className="font-display text-3xl font-bold text-gala-primary md:text-4xl text-center md:text-left">
+          <h2 className="font-display text-3xl font-bold text-gala-primary md:text-4xl text-center">
             À propos
           </h2>
           {/*
            * Corps : text-muted-foreground (#5C6475) sur fond crème (#FFFBF2)
            * Contraste = 5.1:1 ✅ WCAG AA
            */}
-          <p className="mt-4 max-w-2xl text-muted-foreground text-center md:text-left">{description}</p>
+          <div className="mt-4 flex flex-col items-center gap-8 lg:flex-row lg:items-center lg:justify-center lg:gap-10">
+            <p className="max-w-2xl text-muted-foreground text-center lg:text-justify">{description}</p>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/logo_transparent.webp"
+              alt="Logo du Gala INSA Strasbourg"
+              loading="lazy"
+              className="hidden w-72 shrink-0 object-contain lg:block"
+            />
+          </div>
         </div>
       </section>
 
       {/* Section Partenaires */}
       <section id="partners" className="bg-muted/50 py-10 sm:py-20 md:py-28">
         <div className="container mx-auto px-5 md:px-6">
-          <h2 className="font-display text-3xl font-bold text-gala-primary md:text-4xl text-center md:text-left">
+          <h2 className="font-display text-3xl font-bold text-gala-primary md:text-4xl text-center">
             Nos partenaires
           </h2>
           <div className="mt-8">
@@ -110,7 +96,7 @@ export default async function HomePage() {
       {/* Section Billetterie */}
       <section id="tickets" className="py-10 sm:py-20 md:py-28">
         <div className="container mx-auto px-5 md:px-6">
-          <h2 className="font-display text-3xl font-bold text-gala-primary md:text-4xl text-center md:text-left">
+          <h2 className="font-display text-3xl font-bold text-gala-primary md:text-4xl text-center">
             Billetterie
           </h2>
           <div className="mt-8">
@@ -122,10 +108,10 @@ export default async function HomePage() {
       {/* Section Équipe */}
       <section id="team" className="bg-muted/50 py-10 sm:py-20 md:py-28">
         <div className="container mx-auto px-5 md:px-6">
-          <h2 className="font-display text-3xl font-bold text-gala-primary md:text-4xl text-center md:text-left">
+          <h2 className="font-display text-3xl font-bold text-gala-primary md:text-4xl text-center">
             L'équipe organisatrice
           </h2>
-          <p className="mt-2 text-muted-foreground text-center md:text-left">
+          <p className="mt-2 text-muted-foreground text-center">
             Découvrez les étudiants qui façonnent cette soirée de A à Z —
             avec passion, rigueur et une bonne dose de folie.
           </p>
@@ -138,10 +124,10 @@ export default async function HomePage() {
       {/* Section FAQ */}
       <section id="faq" className="py-10 sm:py-20 md:py-28">
         <div className="container mx-auto px-5 md:px-6">
-          <h2 className="font-display text-3xl font-bold text-gala-primary md:text-4xl text-center md:text-left">
+          <h2 className="font-display text-3xl font-bold text-gala-primary md:text-4xl text-center">
             Questions fréquentes
           </h2>
-          <p className="mt-2 text-muted-foreground text-center md:text-left">
+          <p className="mt-2 text-muted-foreground text-center">
             Une interrogation ? On a sûrement la réponse.
           </p>
           <div className="mt-8">
@@ -153,10 +139,10 @@ export default async function HomePage() {
       {/* Section Contact */}
       <section id="contact" className="bg-muted/50 py-10 sm:py-20 md:py-28">
         <div className="container mx-auto px-5 md:px-6">
-          <h2 className="font-display text-3xl font-bold text-gala-primary md:text-4xl text-center md:text-left">
+          <h2 className="font-display text-3xl font-bold text-gala-primary md:text-4xl text-center">
             Contact
           </h2>
-          <p className="mt-2 text-muted-foreground text-center md:text-left">
+          <p className="mt-2 text-muted-foreground text-center">
             Une idée, une question, un mot doux ?<br className="sm:hidden" /> On vous lit !
           </p>
           <div className="mt-8">
