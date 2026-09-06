@@ -1,6 +1,6 @@
 # 🧠 Gala V2 — Mémoire de Projet & Feedback Continu
 
-> **Dernière mise à jour :** 03 Juillet 2026
+> **Dernière mise à jour :** 06 Septembre 2026
 > **Objectif :** Ne jamais répéter une erreur passée. Capitaliser sur les préférences validées.
 
 ---
@@ -24,6 +24,8 @@
 | 03/07/2026 | **Finalisation Google Maps** — routes en bleu ardoise, parcs en vert sauge, correction du marqueur SVG et usage de `NEXT_PUBLIC_GOOGLE_MAPS_API_KEY` côté client | `map-section.tsx` |
 | 03/07/2026 | **Intégration séparateur floral** — Asset `separateur.svg` copié dans `public/`, inséré aux 3 articulations de la landing page (après galerie, après countdown/Instagram, avant footer) avec marges responsives et dimensionnement Tailwind | `public/separateur.svg`, `page.tsx` |
 | 03/07/2026 | **Redimensionnement séparateur floral** — Upscaling desktop `max-w-md`→`max-w-2xl`, mobile `w-1/2`→`w-3/4`, hauteur explicite `h-16 md:h-24`, réduction marges `my-12`→`my-8`, chevauchement `-mb-4` sur premier séparateur pour transition vers fond bleu | `page.tsx` |
+
+| 06/09/2026 | **Correctif « 0e édition » en prod (mobile)** — valeur réelle rendue dès le SSR (fini le `useState("0")`), déclencheur `useInView` aligné sur le `whileInView` (marge 0px : suppression de la zone morte -100px où le chiffre apparaissait figé sur « 0 »), normalisation `??` des valeurs `null` Sanity (les default params ne couvrent que `undefined` ; `animate()` levait une exception avec `null` → crash React latent), tri déterministe `order(edition desc)` des requêtes event | `stats-countdown.tsx`, `queries.ts`, `types.ts`, `layout.tsx` |
 
 ---
 

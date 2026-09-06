@@ -288,7 +288,7 @@ import { sanityFetch } from "./client";
 import type { Partner, Event, Ticket, FAQ, TeamMember, Hero, Soiree, LineupItem, InfosPratiques } from "./types";
 
 export async function getEvent(): Promise<Event | null> {
-  return sanityFetch<Event | null>(`*[_type == "event" && status == "upcoming"][0]`);
+  return sanityFetch<Event | null>(`*[_type == "event" && status == "upcoming"] | order(edition desc) [0]`);
 }
 
 export async function getPartners(): Promise<Partner[]> {

@@ -8,10 +8,18 @@ import {
 } from "motion/react";
 import { useRef, useEffect, useState } from "react";
 
+import { GALA } from "@/lib/hero-data";
+
+/** Formate un entier pour l'affichage du compteur (72 → « 72 », 900 → « 900 »). */
+function formatCount(value: number): string {
+  return Math.round(value).toLocaleString("fr-FR");
+}
+
 /**
  * Compteur animé qui passe de 0 à une valeur cible
  * Texte blanc sur fond bleu ardoise — contraste WCAG AA ✅
- * L'animation ne démarre que lorsque le conteneur entre dans le viewport.
+ * La valeur cible est rendue telle quelle au SSR ; le count-up n'est qu'un
+ * embellissement une fois le conteneur entré dans le viewport.
  */
 function AnimatedCounter({
   value,
@@ -25,15 +33,25 @@ function AnimatedCounter({
   delay?: number;
 }) {
   const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
+  // Même déclencheur que le fade-in du chiffre (whileInView, marge 0) : plus
+  // de zone morte où le chiffre s'affiche mais reste figé sur son état initial.
+  const isInView = useInView(ref, { once: true });
   const count = useMotionValue(0);
-  const [display, setDisplay] = useState("0");
+
+  /**
+   * Correctif « 0e édition » : `animated` reste `null` tant que le count-up
+   * n'a pas démarré, et c'est alors la valeur réelle qui est affichée —
+   * dès le rendu serveur (SSR) inclus. Hydratation lente, observer muet ou
+   * onglet restauré (bfcache) : la donnée ne dépend plus de l'animation.
+   */
+  const [animated, setAnimated] = useState<string | null>(null);
+  const display = animated ?? formatCount(value);
 
   useEffect(() => {
     if (!isInView) return;
 
     const unsubscribe = count.on("change", (v) => {
-      setDisplay(Math.round(v).toLocaleString("fr-FR"));
+      setAnimated(formatCount(v));
     });
 
     const controls = animate(count, value, {
@@ -171,12 +189,18 @@ function CountdownTimer() {
 }
 
 export function StatsCountdown({
-  edition = 72,
-  participants = 900,
+  edition,
+  participants,
 }: {
-  edition?: number;
-  participants?: number;
+  /** Piloté depuis Sanity — `null` si le champ est vidé dans le Studio. */
+  edition?: number | null;
+  participants?: number | null;
 }) {
+  // `??` et non valeurs par défaut de paramètres : Sanity renvoie `null` pour
+  // un champ vidé (les defaults ne s'appliquent qu'à `undefined`) et
+  // `animate()` lève une exception avec `null` — crash latent corrigé.
+  const safeEdition = edition ?? GALA.edition;
+  const safeParticipants = participants ?? 900;
   return (
     <section
       className="relative isolate overflow-hidden py-12 sm:py-24 md:py-32 mb-12 sm:mb-24 md:mb-32"
@@ -253,13 +277,18 @@ export function StatsCountdown({
 
           {/* Chiffres forts — vérifiés, pilotés depuis Sanity */}
           <div className="mb-10 flex items-center justify-center gap-8 sm:mb-14 sm:gap-14">
-            <AnimatedCounter value={edition} suffix="e" label="édition" delay={0} />
+            <AnimatedCounter
+              value={safeEdition}
+              suffix="e"
+              label="édition"
+              delay={0}
+            />
             <div
               className="h-16 w-px sm:h-20"
               style={{ backgroundColor: "rgba(217,169,86,0.35)" }}
             />
             <AnimatedCounter
-              value={participants}
+              value={safeParticipants}
               label="convives attendus"
               delay={0.2}
             />

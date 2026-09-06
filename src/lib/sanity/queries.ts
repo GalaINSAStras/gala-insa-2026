@@ -16,10 +16,15 @@ import type {
 // Requêtes GROQ — Sanity CMS
 // ============================================
 
-/** Récupère l'événement (édition courante) */
+/**
+ * Récupère l'événement (édition courante).
+ * `order(edition desc)` rend le résultat déterministe si plusieurs événements
+ * « upcoming » coexistent un jour — sans order(), le [0] dépend de l'ordre
+ * interne de GROQ. Le site affiche alors la plus grande édition à venir.
+ */
 export async function getEvent(): Promise<Event | null> {
   return sanityFetch<Event | null>(
-    `*[_type == "event" && status == "upcoming"][0]`
+    `*[_type == "event" && status == "upcoming"] | order(edition desc) [0]`
   );
 }
 

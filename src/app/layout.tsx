@@ -40,7 +40,7 @@ async function getEventMetadata() {
       location: string;
       description?: string;
     } | null>(
-      `*[_type == "event" && status == "upcoming"][0]{ title, edition, date, location, description }`
+      `*[_type == "event" && status == "upcoming"] | order(edition desc) [0]{ title, edition, date, location, description }`
     );
     return event;
   } catch {

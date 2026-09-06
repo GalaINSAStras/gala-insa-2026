@@ -25,8 +25,9 @@ export interface Event {
   _createdAt: string;
   _updatedAt: string;
   title: string;
-  edition: number;
-  participants?: number;
+  /** Sanity renvoie `null` (et non `undefined`) pour un champ vidé dans le Studio. */
+  edition: number | null;
+  participants?: number | null;
   date: string;
   location: string;
   address?: string;
