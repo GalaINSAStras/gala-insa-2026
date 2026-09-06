@@ -62,7 +62,13 @@ export async function getHero(): Promise<Hero | null> {
 
 /** Récupère le singleton Soirée */
 export async function getSoiree(): Promise<Soiree | null> {
-  return sanityFetch<Soiree | null>(`*[_type == "soiree"][0]`);
+  return sanityFetch<Soiree | null>(
+    `*[_type == "soiree"][0]{
+      ...,
+      "contratMineurPDF": contratMineurPDF.asset->{url, originalFilename, size},
+      "reglementInterieurPDF": reglementInterieurPDF.asset->{url, originalFilename, size}
+    }`
+  );
 }
 
 /** Récupère tous les artistes de la line-up triés par ordre de passage */

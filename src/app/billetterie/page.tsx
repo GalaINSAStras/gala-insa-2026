@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { getTickets } from "@/lib/sanity/queries";
 import { TicketGrid } from "@/components/tickets/TicketGrid";
 import type { TicketCardProps } from "@/components/tickets/TicketCard";
@@ -19,6 +18,8 @@ const VARIANT_CYCLE: TicketVariant[] = ["etudiant", "prevente", "normal"];
 
 function toVariant(type: string, index: number): TicketVariant {
   const t = type.toLowerCase();
+  // « Repas + Soirée — Étudiant & Diplômé » en jaune, comme le dernier billet
+  if (t.includes("repas") && (t.includes("étudiant") || t.includes("etudiant"))) return "normal";
   if (t.includes("étudiant") || t.includes("etudiant")) return "etudiant";
   if (t.includes("vip") || t.includes("premium")) return "normal";
   return VARIANT_CYCLE[index % VARIANT_CYCLE.length];
@@ -92,19 +93,8 @@ export default async function BilletteriePage() {
           {/* Info HelloAsso */}
           <div className="mt-12 text-center">
             <p className="text-sm text-muted-foreground">
-              Les réservations passent par HelloAsso, notre partenaire de confiance.
+              La billetterie passe par Helloasso
             </p>
-            <Link
-              href="https://www.helloasso.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="mt-2 inline-flex items-center gap-2 text-sm font-medium text-gala-primary hover:text-gala-primary-light transition-colors"
-            >
-              Accéder à HelloAsso
-              <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" />
-              </svg>
-            </Link>
           </div>
         </div>
       </section>

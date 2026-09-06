@@ -23,6 +23,13 @@ export default defineType({
       validation: (rule) => rule.required(),
     }),
     defineField({
+      name: "participants",
+      title: "Nombre de convives",
+      type: "number",
+      initialValue: 900,
+      description: "Affiché dans la section « chiffres » de la page d'accueil.",
+    }),
+    defineField({
       name: "date",
       title: "Date de l'événement",
       type: "datetime",

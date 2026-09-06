@@ -170,7 +170,13 @@ function CountdownTimer() {
   );
 }
 
-export function StatsCountdown() {
+export function StatsCountdown({
+  edition = 72,
+  participants = 900,
+}: {
+  edition?: number;
+  participants?: number;
+}) {
   return (
     <section
       className="relative isolate overflow-hidden py-12 sm:py-24 md:py-32 mb-12 sm:mb-24 md:mb-32"
@@ -222,52 +228,41 @@ export function StatsCountdown() {
       />
 
       <div className="container mx-auto px-5 md:px-6">
-        {/* Section Chiffres clés — Gala */}
+        {/* Section — Le Gala en un clin d'œil (chiffres forts) */}
         <div className="mb-10 sm:mb-20">
-          {/*
-           * Titre : blanc pur sur fond bleu ardoise
-           * Contraste #FFFFFF sur #5E708E = 4.6:1 ✅ WCAG AA
-           */}
           <motion.h2
-            className="mb-6 sm:mb-12 text-center font-display text-3xl font-bold text-white md:text-4xl"
+            className="mb-4 text-center font-display text-3xl font-bold text-white md:text-4xl"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            Le Gala en chiffres
+            Le Gala en un clin d&rsquo;œil
           </motion.h2>
 
-          <div className="grid grid-cols-2 gap-4 sm:gap-8 md:grid-cols-4">
-            <AnimatedCounter value={1200} suffix="+" label="Participants" delay={0} />
-            <AnimatedCounter value={72} suffix="e" label="Édition 2026" delay={0.2} />
-            <AnimatedCounter value={30} suffix="+" label="Partenaires" delay={0.4} />
-            <AnimatedCounter value={150} suffix="+" label="Bénévoles" delay={0.6} />
-          </div>
-        </div>
-
-        {/* Section Chiffres clés — Groupe INSA */}
-        <div>
-          <motion.h3
-            className="mb-6 sm:mb-12 text-center font-display text-2xl font-bold text-white/90 md:text-3xl"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
+          <motion.p
+            className="mx-auto mb-8 max-w-xl text-center text-sm text-white/70 sm:mb-12"
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.3 }}
+            transition={{ duration: 0.6, delay: 0.15 }}
           >
-            Le Groupe INSA en chiffres
-          </motion.h3>
+            Une soirée d&rsquo;exception, imaginée et vécue par les étudiants de
+            l&rsquo;INSA Strasbourg.
+          </motion.p>
 
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-8 md:gap-8 px-6 sm:px-0">
-            <div>
-              <AnimatedCounter value={10} suffix="%" label="des ingénieurs français" delay={0.4} />
-            </div>
-            <div>
-              <AnimatedCounter value={7} suffix="" label="écoles" delay={0.5} />
-            </div>
-            <div>
-              <AnimatedCounter value={80000} suffix="" label="anciens élèves" delay={0.6} />
-            </div>
+          {/* Chiffres forts — vérifiés, pilotés depuis Sanity */}
+          <div className="mb-10 flex items-center justify-center gap-8 sm:mb-14 sm:gap-14">
+            <AnimatedCounter value={edition} suffix="e" label="édition" delay={0} />
+            <div
+              className="h-16 w-px sm:h-20"
+              style={{ backgroundColor: "rgba(217,169,86,0.35)" }}
+            />
+            <AnimatedCounter
+              value={participants}
+              label="convives attendus"
+              delay={0.2}
+            />
           </div>
         </div>
 

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { getInfosPratiques, getEvent } from "@/lib/sanity/queries";
+import { pdfDownloadUrl } from "@/lib/sanity/pdf";
 import { MapSection } from "./map-section";
 import { DownloadPlanButton } from "./download-plan-button";
 import { TransportInfo } from "./transport-info";
@@ -7,7 +8,7 @@ import { TransportInfo } from "./transport-info";
 export const metadata: Metadata = {
   title: "Infos Pratiques",
   description:
-    "Horaires, tarifs, accès, accessibilité et protocoles de la Team Stop VSS pour le Gala INSA Strasbourg 2026.",
+    "Horaires, accès, accessibilité et protocoles de la Team Stop VSS pour le Gala INSA Strasbourg 2026.",
 };
 
 export const revalidate = 60;
@@ -17,6 +18,9 @@ export default async function InfosPratiquesPage() {
     getInfosPratiques().catch(() => null),
     getEvent().catch(() => null),
   ]);
+  // Plan PDF servi sous son nom d'origine via /documents/<nom-du-fichier>?download=1
+  // (masqué tant que le plan n'est pas uploadé dans Sanity)
+  const planPdfHref = infos?.planPDF ? pdfDownloadUrl(infos.planPDF) : null;
   const venueAddress = (event?.address ?? "11 Allée François Mitterrand, 67400 Illkirch-Graffenstaden").replace(
     /^L['']Illiade[\s,-]*/i,
     ""
@@ -37,10 +41,10 @@ export default async function InfosPratiquesPage() {
         </div>
       </section>
 
-      {/* === Horaires & Tarifs === */}
+      {/* === Horaires & Accessibilité === */}
       <section className="py-10 sm:py-14 md:py-20">
         <div className="container mx-auto px-5 md:px-6">
-          <div className="grid gap-8 md:gap-12 md:grid-cols-2">
+          <div className="grid gap-10 lg:grid-cols-2 lg:gap-14">
             {/* Horaires */}
             <div>
               <h2 className="font-heading text-2xl font-bold text-gala-primary md:text-3xl">
@@ -78,23 +82,27 @@ export default async function InfosPratiquesPage() {
               </div>
             </div>
 
-            {/* Tarifs */}
-            <div>
-              <h2 className="font-heading text-2xl font-bold text-gala-primary md:text-3xl">
-                Tarifs
-              </h2>
-              {infos?.tarifs ? (
-                <div className="mt-4 md:mt-6 p-4 rounded-xl border border-border bg-card">
-                  <pre className="whitespace-pre-wrap font-sans text-sm text-muted-foreground leading-relaxed">
-                    {infos.tarifs}
-                  </pre>
+            {/* Accessibilité */}
+            {infos?.accessibilite && (
+              <div>
+                <h2 className="font-heading text-2xl font-bold text-gala-primary md:text-3xl">
+                  Accessibilité
+                </h2>
+                <div className="mt-4 md:mt-6 p-6 rounded-xl border border-border bg-card">
+                  <div className="flex items-start gap-4">
+                    <div className="w-10 h-10 rounded-full bg-gala-primary/10 flex items-center justify-center shrink-0 mt-1">
+                      <svg className="w-5 h-5 text-gala-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+                        <circle cx="12" cy="12" r="10" />
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M8 12l2 2 4-4" />
+                      </svg>
+                    </div>
+                    <p className="text-sm text-muted-foreground leading-relaxed whitespace-pre-line">
+                      {infos.accessibilite}
+                    </p>
+                  </div>
                 </div>
-              ) : (
-                <p className="mt-4 md:mt-6 text-muted-foreground italic">
-                  Les tarifs seront bientôt communiqués.
-                </p>
-              )}
-            </div>
+              </div>
+            )}
           </div>
         </div>
       </section>
@@ -132,7 +140,7 @@ export default async function InfosPratiquesPage() {
                   </svg>
                   Voir l'itinéraire
                 </a>
-                <DownloadPlanButton />
+                {planPdfHref && <DownloadPlanButton href={planPdfHref} />}
               </div>
 
               {/* Informations transports */}
@@ -142,33 +150,9 @@ export default async function InfosPratiquesPage() {
         </div>
       </section>
 
-      {/* === Accessibilité === */}
-      {infos?.accessibilite && (
-        <section className="py-10 sm:py-14 md:py-20">
-          <div className="container mx-auto px-5 md:px-6">
-            <h2 className="font-heading text-3xl font-bold text-gala-primary md:text-4xl">
-              Accessibilité
-            </h2>
-            <div className="mt-4 md:mt-6 max-w-2xl p-6 rounded-xl border border-border bg-card">
-              <div className="flex items-start gap-4">
-                <div className="w-10 h-10 rounded-full bg-gala-primary/10 flex items-center justify-center shrink-0 mt-1">
-                  <svg className="w-5 h-5 text-gala-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
-                    <circle cx="12" cy="12" r="10" />
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M8 12l2 2 4-4" />
-                  </svg>
-                </div>
-                <p className="text-sm text-muted-foreground leading-relaxed whitespace-pre-line">
-                  {infos.accessibilite}
-                </p>
-              </div>
-            </div>
-          </div>
-        </section>
-      )}
-
       {/* === Team Stop VSS === */}
       {infos?.stopVSS && (
-        <section className="py-10 sm:py-14 md:py-20 bg-muted/50">
+        <section className="pt-4 sm:pt-6 md:pt-8 pb-10 sm:pb-14 md:pb-20 bg-muted/50">
           <div className="container mx-auto px-5 md:px-6">
             <h2 className="font-heading text-3xl font-bold text-gala-primary md:text-4xl">
               {infos.stopVSSTitle ?? "Team Stop VSS"}

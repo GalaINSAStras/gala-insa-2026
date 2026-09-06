@@ -95,7 +95,7 @@ export function Footer() {
                 Partenaires
               </Link>
               <Link
-                href="/#tickets"
+                href="/billetterie"
                 className="text-sm text-white/60 hover:text-white transition-colors"
               >
                 Billetterie

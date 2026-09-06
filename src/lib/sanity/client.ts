@@ -80,12 +80,15 @@ export function urlFor(source: SanityImageSource) {
 // ── Query helper lazy ───────────────────────────────────────────
 
 /**
- * Exécute une requête GROQ et retourne le résultat typé.
+ * Exécute une requête GROQ (paramètres $variable possibles via `params`) et retourne le résultat typé.
  * Si le client n'est pas configuré (variables absentes), retourne un fallback :
  *   - null pour les requêtes singleton
  *   - [] pour les requêtes de liste
  */
-export async function sanityFetch<T>(query: string): Promise<T> {
+export async function sanityFetch<T>(
+  query: string,
+  params: Record<string, unknown> = {}
+): Promise<T> {
   const c = ensureClient();
   if (!c) {
     // Retourne un fallback typé selon que la requête semble récupérer un singleton ([0]) ou une liste
@@ -93,7 +96,7 @@ export async function sanityFetch<T>(query: string): Promise<T> {
       ? (null as unknown as T)
       : ([] as unknown as T);
   }
-  return c.fetch<T>(query);
+  return c.fetch<T>(query, params);
 }
 
 /**

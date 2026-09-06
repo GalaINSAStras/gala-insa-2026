@@ -1,6 +1,5 @@
 import { TopSection } from "@/components/hero/TopSection";
 import { PartnersGrid } from "@/components/sections/partners-grid";
-import { TicketsSection } from "@/components/sections/tickets-section";
 import { FaqSection } from "@/components/sections/faq-section";
 import { TeamSection } from "@/components/sections/team-section";
 import { ContactSection } from "@/components/sections/contact-section";
@@ -37,7 +36,10 @@ export default async function HomePage() {
       </div>
 
       {/* Compteurs animés + Countdown */}
-      <StatsCountdown />
+      <StatsCountdown
+        edition={event?.edition}
+        participants={event?.participants}
+      />
 
       {/* Section Instagram — Dernière publication — temporairement masquée */}
       <div className="hidden">
@@ -89,18 +91,6 @@ export default async function HomePage() {
           </h2>
           <div className="mt-8">
             <PartnersGrid />
-          </div>
-        </div>
-      </section>
-
-      {/* Section Billetterie */}
-      <section id="tickets" className="py-10 sm:py-20 md:py-28">
-        <div className="container mx-auto px-5 md:px-6">
-          <h2 className="font-display text-3xl font-bold text-gala-primary md:text-4xl text-center">
-            Billetterie
-          </h2>
-          <div className="mt-8">
-            <TicketsSection />
           </div>
         </div>
       </section>

@@ -1,17 +1,26 @@
-"use client";
+import type { AnchorHTMLAttributes } from "react";
+
+type DownloadPlanButtonProps = {
+  /** URL de téléchargement du plan PDF (route /documents/<nom-du-fichier>). */
+  href: string;
+} & Omit<
+  AnchorHTMLAttributes<HTMLAnchorElement>,
+  "href" | "children" | "className" | "download"
+>;
 
 /**
- * Bouton "Télécharger le plan" — pour l'instant sans action.
- * Sera câblé plus tard avec le téléchargement du PDF.
+ * Lien « Télécharger le plan » — déclenche le téléchargement du PDF du plan
+ * servi par /documents/<nom-du-fichier>, enregistré sous son nom d'origine.
  *
  * Style identique au bouton "Voir l'itinéraire" de map-section.tsx.
  */
-export function DownloadPlanButton() {
+export function DownloadPlanButton({ href, ...props }: DownloadPlanButtonProps) {
   return (
-    <button
-      type="button"
+    <a
+      href={href}
       className="inline-flex items-center gap-2 rounded-lg border border-border bg-card px-4 py-2 md:px-6 md:py-3 text-sm md:text-base font-medium text-foreground hover:bg-muted transition-colors"
-      onClick={() => {}}
+      download
+      {...props}
     >
       <svg
         className="w-4 h-4 md:w-5 md:h-5"
@@ -27,6 +36,6 @@ export function DownloadPlanButton() {
         />
       </svg>
       Télécharger le plan
-    </button>
+    </a>
   );
 }

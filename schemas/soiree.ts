@@ -28,6 +28,41 @@ export default defineType({
       options: { hotspot: true },
     }),
     defineField({
+      name: "programme",
+      title: "Programme de la soirée (timeline)",
+      type: "array",
+      of: [
+        {
+          type: "object",
+          name: "programmePhase",
+          title: "Créneau / phase",
+          fields: [
+            {
+              name: "time",
+              type: "string",
+              title: "Horaire (ex : 19h — 21h)",
+            },
+            {
+              name: "title",
+              type: "string",
+              title: "Titre (ex : Buffet & animations)",
+            },
+            {
+              name: "note",
+              type: "string",
+              title: "Précision (ex : coupure à 3h30)",
+            },
+          ],
+          preview: {
+            select: {
+              title: "time",
+              subtitle: "title",
+            },
+          },
+        },
+      ],
+    }),
+    defineField({
       name: "dressCode",
       title: "Code vestimentaire (Dress Code)",
       type: "text",
@@ -68,6 +103,31 @@ export default defineType({
           fields: [
             { name: "dish", type: "string", title: "Plat" },
             {
+              name: "categorie",
+              type: "string",
+              title: "Catégorie",
+              options: {
+                list: [
+                  { title: "Salée froide", value: "salee-froide" },
+                  { title: "Salée chaude", value: "salee-chaude" },
+                  { title: "Sucrée", value: "sucre" },
+                ],
+                layout: "radio",
+              },
+            },
+            {
+              name: "regime",
+              type: "string",
+              title: "Régime alimentaire",
+              options: {
+                list: [
+                  { title: "Végétarien", value: "vegetarien" },
+                  { title: "Vegan", value: "vegan" },
+                ],
+                layout: "radio",
+              },
+            },
+            {
               name: "allergenes",
               type: "array",
               title: "Allergènes",
@@ -105,6 +165,92 @@ export default defineType({
       name: "buffetPrice",
       title: "Prix — Place Buffet + Soirée (€)",
       type: "number",
+    }),
+    defineField({
+      name: "carte",
+      title: "La Carte — Boissons",
+      type: "array",
+      of: [
+        {
+          type: "object",
+          name: "carteCategory",
+          title: "Catégorie (bar / repas)",
+          fields: [
+            {
+              name: "title",
+              type: "string",
+              title: "Titre de la catégorie",
+            },
+            {
+              name: "items",
+              type: "array",
+              title: "Boissons",
+              of: [
+                {
+                  type: "object",
+                  name: "carteItem",
+                  title: "Boisson",
+                  fields: [
+                    {
+                      name: "name",
+                      type: "string",
+                      title: "Nom",
+                    },
+                    {
+                      name: "format",
+                      type: "string",
+                      title: "Format (ex : bouteille, 25 cl, 12 cl)",
+                    },
+                    {
+                      name: "price",
+                      type: "number",
+                      title: "Prix (€)",
+                    },
+                    {
+                      name: "glassPrice",
+                      type: "number",
+                      title: "Prix au verre 12 cl (€) — si bouteille",
+                    },
+                  ],
+                  preview: {
+                    select: {
+                      title: "name",
+                      subtitle: "price",
+                    },
+                  },
+                },
+              ],
+            },
+          ],
+          preview: {
+            select: { title: "title" },
+          },
+        },
+      ],
+    }),
+    defineField({
+      name: "lineupRevealed",
+      title: "Programmation dévoilée",
+      type: "boolean",
+      initialValue: false,
+      description:
+        "Cochez pour afficher le line-up. Laissez décochée pour masquer la programmation tant qu'elle n'est pas finalisée.",
+    }),
+    defineField({
+      name: "contratMineurPDF",
+      title: "Contrat pour mineurs (PDF)",
+      type: "file",
+      options: { accept: "application/pdf" },
+      description:
+        "Contrat à signer par les participants mineurs. Téléchargeable depuis la page La Soirée.",
+    }),
+    defineField({
+      name: "reglementInterieurPDF",
+      title: "Règlement intérieur de la soirée (PDF)",
+      type: "file",
+      options: { accept: "application/pdf" },
+      description:
+        "Règlement intérieur de la soirée, téléchargeable depuis la page La Soirée.",
     }),
   ],
 });

@@ -26,6 +26,7 @@ export interface Event {
   _updatedAt: string;
   title: string;
   edition: number;
+  participants?: number;
   date: string;
   location: string;
   address?: string;
@@ -102,6 +103,7 @@ export interface Soiree {
   theme: string;
   themeDescription?: string;
   themeImage?: SanityImageSource;
+  programme?: ProgrammePhase[];
   dressCode?: string;
   dressCodeIllustration?: SanityImageSource;
   soireeSeuleDetails?: string;
@@ -109,11 +111,41 @@ export interface Soiree {
   menuBuffetTitle?: string;
   menuBuffet?: MenuItem[];
   buffetPrice?: number;
+  carte?: CarteCategory[];
+  lineupRevealed?: boolean;
+  contratMineurPDF?: SanityFileAsset;
+  reglementInterieurPDF?: SanityFileAsset;
 }
 
 export interface MenuItem {
   dish: string;
+  categorie?: "salee-froide" | "salee-chaude" | "sucre";
+  regime?: "vegetarien" | "vegan";
   allergenes?: string[];
+}
+
+/** Boisson de la carte (bar ou repas) */
+export interface CarteItem {
+  _key: string;
+  name: string;
+  format?: string;
+  price: number;
+  glassPrice?: number;
+}
+
+/** Catégorie de boissons de la carte (ex : À la soirée, Au repas) */
+export interface CarteCategory {
+  _key: string;
+  title?: string;
+  items?: CarteItem[];
+}
+
+/** Phase du programme de la soirée (créneau horaire) */
+export interface ProgrammePhase {
+  _key: string;
+  time?: string;
+  title?: string;
+  note?: string;
 }
 
 /** Line-Up artistique */
@@ -130,6 +162,34 @@ export interface LineupItem {
   displayOrder: number;
 }
 
+
+/**
+ * Asset fichier Sanity résolu via GROQ (PDF, etc.)
+ * — forme projetée utilisée par les pages ({url, originalFilename, size}).
+ */
+export interface SanityFileAsset {
+  url: string;
+  originalFilename?: string;
+  size?: number;
+}
+
+/**
+ * Document système `sanity.fileAsset` complet, tel que retourné par GROQ
+ * sans projection. Utilisé par le route handler /documents/[filename]
+ * pour résoudre un PDF par son nom de fichier d'origine.
+ */
+export interface SanityFileAssetDocument {
+  _id: string;
+  _type: "sanity.fileAsset";
+  _createdAt?: string;
+  _updatedAt?: string;
+  url: string;
+  originalFilename?: string;
+  mimeType?: string;
+  extension?: string;
+  size?: number;
+}
+
 /** Infos Pratiques */
 export interface InfosPratiques {
   _id: string;
@@ -139,7 +199,7 @@ export interface InfosPratiques {
   openingTime?: string;
   closingTime?: string;
   tarifs?: string;
-  planPDF?: { url: string; originalFilename?: string; size?: number };
+  planPDF?: SanityFileAsset;
   planImage?: SanityImageSource;
   mapLat: number;
   mapLng: number;
