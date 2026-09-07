@@ -95,34 +95,43 @@ export interface Hero {
   ctaLink: string;
 }
 
-/** Soirée — Thème, menu, dress code */
+/** Soirée — Thème, programme, buffet, carte, infos pratiques */
 export interface Soiree {
   _id: string;
   _type: "soiree";
   _createdAt: string;
   _updatedAt: string;
   theme: string;
-  themeDescription?: string;
+  accroche?: string;
   themeImage?: SanityImageSource;
   programme?: ProgrammePhase[];
+  prixBuffet?: number;
+  comptoirs?: Comptoir[];
+  carte?: CarteCategory[];
   dressCode?: string;
   dressCodeIllustration?: SanityImageSource;
   soireeSeuleDetails?: string;
   soireeSeulePrice?: number;
-  menuBuffetTitle?: string;
-  menuBuffet?: MenuItem[];
-  buffetPrice?: number;
-  carte?: CarteCategory[];
   lineupRevealed?: boolean;
   contratMineurPDF?: SanityFileAsset;
   reglementInterieurPDF?: SanityFileAsset;
 }
 
-export interface MenuItem {
-  dish: string;
-  categorie?: "salee-froide" | "salee-chaude" | "sucre";
-  regime?: "vegetarien" | "vegan";
+/** Plat du buffet (comptoir) */
+export interface Plat {
+  _key: string;
+  nom?: string;
+  provenance?: string;
   allergenes?: string[];
+  regime?: "vegetarien" | "vegan" | "sans_gluten";
+}
+
+/** Comptoir du buffet (carte en arche) */
+export interface Comptoir {
+  _key: string;
+  nom?: string;
+  sousTitre?: string;
+  plats?: Plat[];
 }
 
 /** Boisson de la carte (bar ou repas) */
@@ -144,9 +153,11 @@ export interface CarteCategory {
 /** Phase du programme de la soirée (créneau horaire) */
 export interface ProgrammePhase {
   _key: string;
-  time?: string;
-  title?: string;
-  note?: string;
+  heure?: string;
+  titre?: string;
+  description?: string;
+  statut?: "confirme" | "a_confirmer";
+  mentionAttente?: string;
 }
 
 /** Line-Up artistique */

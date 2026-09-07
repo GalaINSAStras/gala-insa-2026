@@ -97,6 +97,7 @@
   --font-body: "Inter", sans-serif;
   --font-mono: "Geist Mono", ui-monospace, monospace;
   --font-titre: var(--font-titre); /* Playfair Display — injectée via next/font */
+  --font-garamond: var(--font-garamond); /* EB Garamond — injectée via next/font */
 
   /* ─── Tickets Art nouveau (billets) ─── */
   --color-blush: var(--blush);
@@ -111,6 +112,14 @@
   --color-vertPale: var(--vert-pale);
   --color-vertMoyen: var(--vert-moyen);
   --color-ivoire: var(--ivoire);
+
+  /* ─── Soirée Art nouveau — boutons & accents (refonte) ─── */
+  --color-marine: var(--marine);
+  --color-sauge: var(--sauge);
+  --color-sauge-clair: var(--sauge-clair);
+  --color-sauge-texte: var(--sauge-texte);
+  --color-rosePoudre: var(--rose-poudre);
+  --color-orClair: var(--or-clair);
 
   /* ─── Radius shadcn legacy mapping ─── */
   --radius: 0.625rem;
@@ -226,6 +235,9 @@
 
   /* Or de relief (liseré + fleurons) */
   --or-clair: #E8CFA0;
+
+  /* Rose poudré — accents floraux (refonte La Soirée) */
+  --rose-poudre: #F5DCE3;
 }
 
 /* ═══════════════════════════════════════════════════

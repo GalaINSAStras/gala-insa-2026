@@ -11,7 +11,7 @@ import {
 } from "./lib/cartouchePath";
 import { ButtonFleuron } from "./ButtonFleuron";
 
-type Variant = "primary" | "secondary";
+type Variant = "primary" | "secondary" | "marine";
 type Size = "md" | "sm";
 
 type Props = {
@@ -29,12 +29,15 @@ type Props = {
 
 const SURFACE: Record<Variant, string> = {
   primary: "bg-[var(--ardoise)]",
+  marine:
+    "bg-[linear-gradient(180deg,var(--marine-clair)_0%,var(--marine)_55%,var(--marine-fonce)_100%)]",
   secondary:
     "bg-[linear-gradient(180deg,var(--sauge-clair)_0%,var(--sauge)_100%)]",
 };
 
 const LABEL_COLOR: Record<Variant, string> = {
   primary: "text-[#F5F0E4]",
+  marine: "text-[#F5F0E4]",
   secondary: "text-[var(--sauge-texte)]",
 };
 

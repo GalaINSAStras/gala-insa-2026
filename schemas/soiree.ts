@@ -2,24 +2,26 @@ import { defineType, defineField } from "sanity";
 
 /**
  * Schéma : Soirée (Singleton)
- * Thème, dress code, menu buffet + tableau des allergènes
+ * Thème, programme (timeline), buffet (comptoirs), carte, dress code & documents.
+ * Refonte « La Soirée » — style Art nouveau / papeterie de mariage.
  */
 export default defineType({
   name: "soiree",
   title: "La Soirée",
   type: "document",
   fields: [
+    // ── Hero ──────────────────────────────────────────────
     defineField({
       name: "theme",
-      title: "Thème de la 71e édition",
+      title: "Thème de l'édition",
       type: "string",
       validation: (rule) => rule.required(),
     }),
     defineField({
-      name: "themeDescription",
-      title: "Description du thème",
+      name: "accroche",
+      title: "Accroche (2 lignes max)",
       type: "text",
-      rows: 4,
+      rows: 2,
     }),
     defineField({
       name: "themeImage",
@@ -27,6 +29,8 @@ export default defineType({
       type: "image",
       options: { hotspot: true },
     }),
+
+    // ── Programme (timeline) ──────────────────────────────
     defineField({
       name: "programme",
       title: "Programme de la soirée (timeline)",
@@ -38,29 +42,185 @@ export default defineType({
           title: "Créneau / phase",
           fields: [
             {
-              name: "time",
+              name: "heure",
               type: "string",
               title: "Horaire (ex : 19h — 21h)",
             },
             {
-              name: "title",
+              name: "titre",
               type: "string",
               title: "Titre (ex : Buffet & animations)",
             },
             {
-              name: "note",
+              name: "description",
+              type: "text",
+              title: "Description courte",
+              rows: 3,
+            },
+            {
+              name: "statut",
               type: "string",
-              title: "Précision (ex : coupure à 3h30)",
+              title: "Statut",
+              options: {
+                list: [
+                  { title: "Confirmé", value: "confirme" },
+                  { title: "À confirmer", value: "a_confirmer" },
+                ],
+                layout: "radio",
+              },
+              initialValue: "confirme",
+            },
+            {
+              name: "mentionAttente",
+              type: "string",
+              title: "Mention discrète (si « À confirmer »)",
+              description: "Ex : Horaires susceptibles d'évoluer",
             },
           ],
           preview: {
-            select: {
-              title: "time",
-              subtitle: "title",
-            },
+            select: { title: "titre", subtitle: "heure" },
           },
         },
       ],
+    }),
+
+    // ── Buffet (comptoirs) ────────────────────────────────
+    defineField({
+      name: "prixBuffet",
+      title: "Prix — Place Buffet + Soirée (€)",
+      type: "number",
+    }),
+    defineField({
+      name: "comptoirs",
+      title: "Comptoirs du buffet",
+      type: "array",
+      of: [
+        {
+          type: "object",
+          name: "comptoir",
+          title: "Comptoir",
+          fields: [
+            { name: "nom", type: "string", title: "Nom du comptoir" },
+            { name: "sousTitre", type: "string", title: "Sous-titre" },
+            {
+              name: "plats",
+              type: "array",
+              title: "Plats",
+              of: [
+                {
+                  type: "object",
+                  name: "plat",
+                  title: "Plat / mets",
+                  fields: [
+                    { name: "nom", type: "string", title: "Nom du plat" },
+                    {
+                      name: "provenance",
+                      type: "string",
+                      title: "Provenance / description",
+                    },
+                    {
+                      name: "allergenes",
+                      type: "array",
+                      title: "Allergènes",
+                      of: [{ type: "string" }],
+                      options: {
+                        list: [
+                          { title: "Gluten", value: "gluten" },
+                          { title: "Lactose", value: "lactose" },
+                          { title: "Œufs", value: "oeufs" },
+                          { title: "Fruits à coque", value: "fruits_coque" },
+                          { title: "Soja", value: "soja" },
+                          { title: "Poisson", value: "poisson" },
+                          { title: "Crustacés", value: "crustaces" },
+                        ],
+                      },
+                    },
+                    {
+                      name: "regime",
+                      type: "string",
+                      title: "Régime alimentaire",
+                      options: {
+                        list: [
+                          { title: "Végétarien", value: "vegetarien" },
+                          { title: "Vegan", value: "vegan" },
+                          { title: "Sans gluten", value: "sans_gluten" },
+                        ],
+                        layout: "radio",
+                      },
+                    },
+                  ],
+                  preview: {
+                    select: { title: "nom", subtitle: "provenance" },
+                  },
+                },
+              ],
+            },
+          ],
+          preview: {
+            select: { title: "nom", subtitle: "sousTitre" },
+          },
+        },
+      ],
+    }),
+
+    // ── La Carte (boissons) ───────────────────────────────
+    defineField({
+      name: "carte",
+      title: "La Carte — Boissons",
+      type: "array",
+      of: [
+        {
+          type: "object",
+          name: "carteCategory",
+          title: "Catégorie (Alcools / Softs)",
+          fields: [
+            { name: "title", type: "string", title: "Titre de la catégorie" },
+            {
+              name: "items",
+              type: "array",
+              title: "Boissons",
+              of: [
+                {
+                  type: "object",
+                  name: "carteItem",
+                  title: "Boisson",
+                  fields: [
+                    { name: "name", type: "string", title: "Nom" },
+                    {
+                      name: "format",
+                      type: "string",
+                      title: "Format (ex : bouteille, 25 cl)",
+                    },
+                    { name: "price", type: "number", title: "Prix (€)" },
+                    {
+                      name: "glassPrice",
+                      type: "number",
+                      title: "Prix au verre 12 cl (€) — si bouteille",
+                    },
+                  ],
+                  preview: {
+                    select: { title: "name", subtitle: "price" },
+                  },
+                },
+              ],
+            },
+          ],
+          preview: { select: { title: "title" } },
+        },
+      ],
+    }),
+
+    // ── Infos pratiques ───────────────────────────────────
+    defineField({
+      name: "soireeSeuleDetails",
+      title: "Détails — Place Soirée seule",
+      type: "text",
+      rows: 3,
+    }),
+    defineField({
+      name: "soireeSeulePrice",
+      title: "Prix — Place Soirée seule (€)",
+      type: "number",
     }),
     defineField({
       name: "dressCode",
@@ -74,168 +234,8 @@ export default defineType({
       type: "image",
       options: { hotspot: true },
     }),
-    defineField({
-      name: "soireeSeuleDetails",
-      title: "Détails — Place Soirée seule",
-      type: "text",
-      rows: 3,
-    }),
-    defineField({
-      name: "soireeSeulePrice",
-      title: "Prix — Place Soirée seule (€)",
-      type: "number",
-    }),
-    defineField({
-      name: "menuBuffetTitle",
-      title: "Titre de la section Menu Buffet",
-      type: "string",
-      initialValue: "Menu Buffet + Soirée",
-    }),
-    defineField({
-      name: "menuBuffet",
-      title: "Menu du buffet",
-      type: "array",
-      of: [
-        {
-          type: "object",
-          name: "menuItem",
-          title: "Plat / Mets",
-          fields: [
-            { name: "dish", type: "string", title: "Plat" },
-            {
-              name: "categorie",
-              type: "string",
-              title: "Catégorie",
-              options: {
-                list: [
-                  { title: "Salée froide", value: "salee-froide" },
-                  { title: "Salée chaude", value: "salee-chaude" },
-                  { title: "Sucrée", value: "sucre" },
-                ],
-                layout: "radio",
-              },
-            },
-            {
-              name: "regime",
-              type: "string",
-              title: "Régime alimentaire",
-              options: {
-                list: [
-                  { title: "Végétarien", value: "vegetarien" },
-                  { title: "Vegan", value: "vegan" },
-                ],
-                layout: "radio",
-              },
-            },
-            {
-              name: "allergenes",
-              type: "array",
-              title: "Allergènes",
-              of: [{ type: "string" }],
-              options: {
-                list: [
-                  { title: "Gluten", value: "gluten" },
-                  { title: "Lactose", value: "lactose" },
-                  { title: "Œufs", value: "oeufs" },
-                  { title: "Arachides", value: "arachides" },
-                  { title: "Fruits à coque", value: "fruits-a-coque" },
-                  { title: "Poisson", value: "poisson" },
-                  { title: "Crustacés", value: "crustaces" },
-                  { title: "Soja", value: "soja" },
-                  { title: "Sésame", value: "sesame" },
-                  { title: "Sulfites", value: "sulfites" },
-                  { title: "Céleri", value: "celeri" },
-                  { title: "Moutarde", value: "moutarde" },
-                  { title: "Lupin", value: "lupin" },
-                  { title: "Mollusques", value: "mollusques" },
-                ],
-              },
-            },
-          ],
-          preview: {
-            select: {
-              title: "dish",
-              subtitle: "allergenes",
-            },
-          },
-        },
-      ],
-    }),
-    defineField({
-      name: "buffetPrice",
-      title: "Prix — Place Buffet + Soirée (€)",
-      type: "number",
-    }),
-    defineField({
-      name: "carte",
-      title: "La Carte — Boissons",
-      type: "array",
-      of: [
-        {
-          type: "object",
-          name: "carteCategory",
-          title: "Catégorie (bar / repas)",
-          fields: [
-            {
-              name: "title",
-              type: "string",
-              title: "Titre de la catégorie",
-            },
-            {
-              name: "items",
-              type: "array",
-              title: "Boissons",
-              of: [
-                {
-                  type: "object",
-                  name: "carteItem",
-                  title: "Boisson",
-                  fields: [
-                    {
-                      name: "name",
-                      type: "string",
-                      title: "Nom",
-                    },
-                    {
-                      name: "format",
-                      type: "string",
-                      title: "Format (ex : bouteille, 25 cl, 12 cl)",
-                    },
-                    {
-                      name: "price",
-                      type: "number",
-                      title: "Prix (€)",
-                    },
-                    {
-                      name: "glassPrice",
-                      type: "number",
-                      title: "Prix au verre 12 cl (€) — si bouteille",
-                    },
-                  ],
-                  preview: {
-                    select: {
-                      title: "name",
-                      subtitle: "price",
-                    },
-                  },
-                },
-              ],
-            },
-          ],
-          preview: {
-            select: { title: "title" },
-          },
-        },
-      ],
-    }),
-    defineField({
-      name: "lineupRevealed",
-      title: "Programmation dévoilée",
-      type: "boolean",
-      initialValue: false,
-      description:
-        "Cochez pour afficher le line-up. Laissez décochée pour masquer la programmation tant qu'elle n'est pas finalisée.",
-    }),
+
+    // ── Documents ─────────────────────────────────────────
     defineField({
       name: "contratMineurPDF",
       title: "Contrat pour mineurs (PDF)",
@@ -252,5 +252,16 @@ export default defineType({
       description:
         "Règlement intérieur de la soirée, téléchargeable depuis la page La Soirée.",
     }),
+
+    // ── Réglage ───────────────────────────────────────────
+    defineField({
+      name: "lineupRevealed",
+      title: "Programmation dévoilée",
+      type: "boolean",
+      initialValue: false,
+      description:
+        "Cochez pour afficher le line-up artistique dans la timeline. Laissez décochée pour afficher l'état « à venir ».",
+    }),
   ],
 });
+

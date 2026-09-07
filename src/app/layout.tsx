@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter, Cormorant_Garamond, Playfair_Display } from "next/font/google";
+import { Inter, Cormorant_Garamond, Playfair_Display, EB_Garamond } from "next/font/google";
 import Script from "next/script";
 import { LEGAL } from "@/lib/constants";
 import { sanityFetch } from "@/lib/sanity/client";
@@ -28,6 +28,15 @@ const titre = Playfair_Display({
   variable: "--font-titre",
   subsets: ["latin"],
   weight: ["600", "700"],
+  display: "swap",
+});
+
+/* ─── Sous-titres & prix : EB Garamond (papeterie haut de gamme) ─── */
+const ebGaramond = EB_Garamond({
+  variable: "--font-garamond",
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  style: ["normal", "italic"],
   display: "swap",
 });
 
@@ -96,7 +105,7 @@ export default function RootLayout({
   return (
     <html
       lang="fr"
-      className={`${inter.variable} ${cormorantGaramond.variable} ${titre.variable} h-full antialiased`}
+      className={`${inter.variable} ${cormorantGaramond.variable} ${titre.variable} ${ebGaramond.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col" suppressHydrationWarning>
         {/* Script anti-extension (bis_skin_checked) — s'exécute avant l'hydration */}

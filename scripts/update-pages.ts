@@ -43,7 +43,7 @@ async function main() {
       .set({
         soireeSeuleDetails:
           "Accès à la soirée à partir de 21h00. Danse, animations, open-bar soft drinks.",
-        themeDescription:
+        accroche:
           "Plongez dans une atmosphère féérique où l'élégance rencontre la magie. La 72e édition du Gala de l'INSA Strasbourg vous invite à vivre une nuit inoubliable sous le signe du prestige et de la féérie.",
       })
       .commit();
@@ -78,7 +78,7 @@ async function main() {
   console.log("\n🔍 Vérification :");
   const [i, s, l] = await Promise.all([
     client.fetch(`*[_type == "infosPratiques"][0]{openingTime, closingTime, tarifs, accessibilite}`),
-    client.fetch(`*[_type == "soiree"][0]{soireeSeuleDetails, themeDescription}`),
+    client.fetch(`*[_type == "soiree"][0]{soireeSeuleDetails, accroche}`),
     client.fetch(`*[_type == "lineup"] | order(displayOrder asc)`),
   ]);
   console.log("\nInfos Pratiques :");
