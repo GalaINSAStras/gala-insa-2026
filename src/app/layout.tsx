@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { Inter, Cormorant_Garamond, Playfair_Display, EB_Garamond } from "next/font/google";
 import Script from "next/script";
 import { LEGAL } from "@/lib/constants";
-import { sanityFetch } from "@/lib/sanity/client";
 import { SiteShellClient } from "./site-shell-client";
 import { PreloaderGate } from "@/components/preloader/PreloaderGate";
 import "./globals.css";
@@ -40,59 +39,34 @@ const ebGaramond = EB_Garamond({
   display: "swap",
 });
 
-async function getEventMetadata() {
-  try {
-    const event = await sanityFetch<{
-      title: string;
-      edition: number;
-      date: string;
-      location: string;
-      description?: string;
-    } | null>(
-      `*[_type == "event" && status == "upcoming"] | order(edition desc) [0]{ title, edition, date, location, description }`
-    );
-    return event;
-  } catch {
-    return null;
-  }
-}
-
-export async function generateMetadata(): Promise<Metadata> {
-  const event = await getEventMetadata();
-
-  const edition = event?.edition ?? 72;
-  const date = event?.date
-    ? new Date(event.date).toLocaleDateString("fr-FR", {
-        day: "numeric",
-        month: "long",
-        year: "numeric",
-      })
-    : "21 novembre 2026";
-  const location = event?.location ?? "L'Illiade, Illkirch-Graffenstaden";
-  const title = event?.title ?? "Gala INSA Strasbourg";
-  const description =
-    event?.description ??
-    `Site officiel du ${edition}e Gala de l'INSA Strasbourg. Rejoignez-nous le ${date} à ${location} pour une soirée exceptionnelle.`;
-
-  return {
-    title: {
-      default: `Gala INSA Strasbourg 2026`,
-      template: `%s | Gala INSA Strasbourg 2026`,
-    },
-    description,
-    openGraph: {
-      title: `Gala INSA Strasbourg 2026`,
-      description,
-      type: "website",
-      locale: "fr_FR",
-      siteName: `Gala INSA Strasbourg 2026`,
-    },
-    robots: {
-      index: true,
-      follow: true,
-    },
-  };
-}
+export const metadata: Metadata = {
+  title: "Gala 2026 — Bientôt",
+  description:
+    "Le Gala de l'école revient en 2026. Informations et billetterie très bientôt.",
+  metadataBase: new URL("https://DOMAINE_A_REMPLACER"),
+  openGraph: {
+    title: "Gala 2026 — Bientôt",
+    description: "Le Gala de l'école revient en 2026.",
+    url: "https://DOMAINE_A_REMPLACER",
+    siteName: "Gala 2026",
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "Gala 2026",
+      },
+    ],
+    locale: "fr_FR",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Gala 2026 — Bientôt",
+    description: "Le Gala de l'école revient en 2026.",
+    images: ["/og-image.png"],
+  },
+};
 
 export default function RootLayout({
   children,
