@@ -1,9 +1,6 @@
 import type { Metadata } from "next";
 import { Inter, Cormorant_Garamond, Playfair_Display, EB_Garamond } from "next/font/google";
 import Script from "next/script";
-import { LEGAL } from "@/lib/constants";
-import { SiteShellClient } from "./site-shell-client";
-import { PreloaderGate } from "@/components/preloader/PreloaderGate";
 import "./globals.css";
 
 /* ─── Body Font : Inter (lisibilité maximale) ─── */
@@ -115,9 +112,7 @@ export default function RootLayout({
           `}
         </Script>
 
-        <PreloaderGate>
-          <SiteShellClient>{children}</SiteShellClient>
-        </PreloaderGate>
+        {children}
 
         {umamiWebsiteId && umamiUrl && (
           <Script

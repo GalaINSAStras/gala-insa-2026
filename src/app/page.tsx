@@ -22,7 +22,7 @@ export default function ComingSoon() {
 
       <nav className="flex flex-wrap justify-center gap-6 text-sm text-neutral-400">
         <a
-          href="https://instagram.com/COMPTE_A_REMPLACER"
+          href="https://www.instagram.com/gala_insa_strasbourg/"
           target="_blank"
           rel="noopener noreferrer"
           className="transition-colors hover:text-white"
@@ -30,7 +30,15 @@ export default function ComingSoon() {
           Instagram
         </a>
         <a
-          href="mailto:EMAIL_A_REMPLACER"
+          href="https://www.facebook.com/GalaINSA2026"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="transition-colors hover:text-white"
+        >
+          Facebook
+        </a>
+        <a
+          href="mailto:gala@insa-strasbourg.fr"
           className="transition-colors hover:text-white"
         >
           Contact
