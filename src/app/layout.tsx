@@ -73,6 +73,19 @@ export const metadata: Metadata = {
   },
 };
 
+const organizationSchema = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: "Gala INSA",
+  url: "https://www.gala-insa.com",
+  logo: "https://www.gala-insa.com/logo/signature-logo.png",
+  sameAs: [
+    "https://www.facebook.com/GalaINSA2026",
+    "https://www.instagram.com/gala_insa_strasbourg/",
+    "https://www.linkedin.com/company/gala-insa-strasbourg-2024/home/",
+  ],
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -87,6 +100,10 @@ export default function RootLayout({
       className={`${inter.variable} ${cormorantGaramond.variable} ${titre.variable} ${ebGaramond.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col" suppressHydrationWarning>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
+        />
         {/* Script anti-extension (bis_skin_checked) — s'exécute avant l'hydration */}
         <Script id="sanitize-bis" strategy="beforeInteractive">
           {`
