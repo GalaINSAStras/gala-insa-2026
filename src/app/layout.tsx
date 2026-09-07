@@ -37,21 +37,25 @@ const ebGaramond = EB_Garamond({
 });
 
 export const metadata: Metadata = {
-  title: "Gala 2026 — Bientôt",
+  metadataBase: new URL("https://www.gala-insa.com"),
+  title: "Gala INSA 2026",
   description:
-    "Le Gala de l'école revient en 2026. Informations et billetterie très bientôt.",
-  metadataBase: new URL("https://DOMAINE_A_REMPLACER"),
+    "Le Gala revient — Édition 2026 à L'Illiade. Réservez votre place.",
+  robots: {
+    index: true,
+    follow: true,
+  },
   openGraph: {
-    title: "Gala 2026 — Bientôt",
-    description: "Le Gala de l'école revient en 2026.",
-    url: "https://DOMAINE_A_REMPLACER",
-    siteName: "Gala 2026",
+    title: "Gala INSA 2026",
+    description: "Le Gala revient — Édition 2026 à L'Illiade.",
+    url: "https://www.gala-insa.com",
+    siteName: "Gala INSA",
     images: [
       {
         url: "/og-image.png",
         width: 1200,
         height: 630,
-        alt: "Gala 2026",
+        alt: "Gala INSA 2026",
       },
     ],
     locale: "fr_FR",
@@ -59,9 +63,13 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Gala 2026 — Bientôt",
-    description: "Le Gala de l'école revient en 2026.",
+    title: "Gala INSA 2026",
+    description: "Le Gala revient — Édition 2026 à L'Illiade.",
     images: ["/og-image.png"],
+  },
+  icons: {
+    icon: "/favicon.ico",
+    apple: "/apple-touch-icon.png",
   },
 };
 
