@@ -79,13 +79,6 @@ export default function MentionsLegalesPage() {
             Données personnelles
           </h2>
           <p className="mt-2">
-            Conformément au Règlement Général sur la Protection des Données
-            (RGPD), vous disposez d'un droit d'accès, de
-            rectification et de suppression de vos données personnelles. Pour
-            exercer ces droits, veuillez nous contacter à l'adresse email
-            suivante : {LEGAL.email}.
-          </p>
-          <p className="mt-2">
             Ce site utilise <strong>Umami</strong>, un outil d'analyse
             respectueux de la vie privée, qui ne collecte aucune donnée
             personnelle et ne dépose pas de cookies tiers.
