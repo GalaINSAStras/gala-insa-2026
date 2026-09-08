@@ -60,9 +60,16 @@ export const SOCIAL = {
   facebook: "https://www.facebook.com/gala.insa.strasbourg/",
 } as const;
 
+/** Nom du fichier CGV servi via /documents/[filename] (asset Sanity). */
+const CGV_FILENAME = "CGV Gala 2026.pdf";
+
 /** URLs de l'application */
 export const APP_URLS = {
   base: process.env.NEXT_PUBLIC_APP_URL ?? "http://localhost:3000",
   mentionsLegales: "/mentions-legales",
   politiqueConfidentialite: "/politique-confidentialite",
+  /** CGV — ouverture dans le navigateur (visu PDF). */
+  cgv: `/documents/${encodeURIComponent(CGV_FILENAME)}`,
+  /** CGV — téléchargement forcé (Content-Disposition: attachment). */
+  cgvDownload: `/documents/${encodeURIComponent(CGV_FILENAME)}?download=1`,
 } as const;

@@ -177,6 +177,13 @@ const GALLERY_IMAGES: GalleryImage[] = [
 
 const AUTOPLAY_DURATION = 25;
 
+/** Sépare le libellé « Gala 2024 — 70e édition » en { year, edition }. */
+function splitLabel(label: string): { year: string; edition: string } {
+  const year = label.match(/(?:19|20)\d{2}/)?.[0] ?? "";
+  const edition = label.split(" — ")[1] ?? "";
+  return { year, edition };
+}
+
 export function GalleryCarousel() {
   const trackRef = useRef<HTMLDivElement>(null);
   const x = useMotionValue(0);
@@ -250,7 +257,7 @@ export function GalleryCarousel() {
 
         <motion.div
           ref={trackRef}
-          className="flex gap-3 md:gap-6 cursor-grab active:cursor-grabbing"
+          className="flex cursor-grab items-start gap-4 active:cursor-grabbing md:gap-8"
           style={{ x, touchAction: "pan-y" }}
           drag="x"
           dragMomentum={false}
@@ -259,43 +266,74 @@ export function GalleryCarousel() {
           onPointerLeave={() => startAutoplay()}
           onDragEnd={() => startAutoplay()}
         >
-          {[...GALLERY_IMAGES, ...GALLERY_IMAGES].map((image, index) => (
-            <div
-              key={`${image.label}-${index}`}
-              className="relative h-64 flex-shrink-0 overflow-hidden md:h-[420px]"
-              style={{
-                boxShadow: "var(--shadow-md)",
-              }}
-            >
-              {image.src ? (
-                <img
-                  src={image.src}
-                  alt={image.alt}
-                  className={`h-full w-auto object-contain pointer-events-none ${
-                    image.cancelled ? "grayscale opacity-60" : ""
-                  }`}
-                />
-              ) : (
+          {[...GALLERY_IMAGES, ...GALLERY_IMAGES].map((image, index) => {
+            const { year, edition } = splitLabel(image.label);
+            return (
+              <div
+                key={`${image.label}-${index}`}
+                className="relative flex flex-shrink-0 flex-col rounded-2xl border-2 border-[var(--or-moyen)]/60 bg-[linear-gradient(180deg,#FFFDF8,#F6F0E1)] p-4 shadow-[0_18px_48px_rgba(34,49,74,.22)] md:p-6"
+              >
+                {/* double liseré doré */}
                 <div
-                  className={`h-full w-full bg-gradient-to-br ${image.gradient}`}
+                  aria-hidden
+                  className="pointer-events-none absolute inset-2 rounded-xl border border-[var(--or-moyen)]/40"
                 />
-              )}
+                {/* fleuron sommital */}
+                <div
+                  aria-hidden
+                  className="absolute -top-2.5 left-1/2 h-4 w-4 -translate-x-1/2 rotate-45 border-2 border-[var(--or-moyen)] bg-ivoire"
+                />
 
-              {image.cancelled && (
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <span className="rounded-full bg-black/70 px-4 py-1.5 text-sm font-semibold text-white">
-                    Édition annulée
-                  </span>
+                {/* Affiche — hauteur fixe, largeur naturelle */}
+                <div className="relative self-center">
+                  {image.src ? (
+                    <img
+                      src={image.src}
+                      alt={image.alt}
+                      className={`block h-64 max-w-none w-auto rounded-t-lg md:h-[400px] ${
+                        image.cancelled ? "grayscale opacity-60" : ""
+                      }`}
+                    />
+                  ) : (
+                    <div
+                      className={`h-64 w-[180px] rounded-t-lg bg-gradient-to-br md:h-[400px] md:w-[286px] ${image.gradient}`}
+                    />
+                  )}
+
+                  {image.cancelled && (
+                    <div className="absolute inset-0 flex items-center justify-center">
+                      <span className="rounded-full bg-marine/85 px-4 py-1.5 text-sm font-semibold text-white">
+                        Édition annulée
+                      </span>
+                    </div>
+                  )}
                 </div>
-              )}
 
-              <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/60 to-transparent p-6 pt-16">
-                <p className="text-base font-medium text-white drop-shadow-sm">
-                  {image.label}
-                </p>
+                {/* trait de séparation doré */}
+                <div className="mt-4 flex items-center justify-center gap-2 md:mt-5">
+                  <span
+                    aria-hidden
+                    className="h-px w-12 bg-gradient-to-r from-transparent to-[var(--or-moyen)]"
+                  />
+                  <span aria-hidden className="h-1.5 w-1.5 rotate-45 bg-[var(--or-moyen)]" />
+                  <span
+                    aria-hidden
+                    className="h-px w-12 bg-gradient-to-l from-transparent to-[var(--or-moyen)]"
+                  />
+                </div>
+
+                {/* description (année + édition) */}
+                <div className="pt-3 text-center">
+                  <p className="font-garamond text-2xl font-bold italic text-marine">
+                    {year}
+                  </p>
+                  <p className="mt-0.5 font-garamond text-xs italic uppercase tracking-[0.18em] text-[var(--or-fonce)]">
+                    {edition}
+                  </p>
+                </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </motion.div>
       </div>
     </section>

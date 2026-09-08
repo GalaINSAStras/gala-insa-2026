@@ -179,6 +179,14 @@ export function Footer() {
                 >
                   Politique de confidentialité
                 </Link>
+                <a
+                  href={APP_URLS.cgv}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-white/50 hover:text-white transition-colors"
+                >
+                  Conditions Générales de Vente
+                </a>
               </div>
             </div>
           </div>

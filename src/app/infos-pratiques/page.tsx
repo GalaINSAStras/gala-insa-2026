@@ -3,6 +3,7 @@ import { getInfosPratiques, getEvent } from "@/lib/sanity/queries";
 import { pdfDownloadUrl } from "@/lib/sanity/pdf";
 import { MapSection } from "./map-section";
 import { DownloadPlanButton } from "./download-plan-button";
+import { DocumentsSection } from "./documents-section";
 import { TransportInfo } from "./transport-info";
 import { PageHero } from "@/components/ornaments/PageHero";
 import { FloralSeparator } from "@/components/ornaments/FloralSeparator";
@@ -184,6 +185,9 @@ export default async function InfosPratiquesPage() {
           </div>
         </section>
       )}
+
+      {/* === Documents officiels (CGV) === */}
+      <DocumentsSection />
     </div>
   );
 }
