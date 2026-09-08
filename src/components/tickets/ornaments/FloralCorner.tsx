@@ -10,12 +10,12 @@ interface FloralCornerProps {
 
 export function FloralCorner({
   className,
-  petal = "#FBDDE4",
-  petalDeep = "#F4BECB",
-  leaf = "#CFE4CB",
-  leafDeep = "#A8CBA2",
-  stem = "#8FB588",
-  heart = "#E8B94F",
+  petal = "#F5DCE3",
+  petalDeep = "#F9C9D4",
+  leaf = "#D6EDCF",
+  leafDeep = "#9DBE8B",
+  stem = "#88AA76",
+  heart = "#D9A956",
 }: FloralCornerProps) {
   return (
     <svg

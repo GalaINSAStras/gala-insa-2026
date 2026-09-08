@@ -11,7 +11,7 @@ import type { FAQ } from "@/lib/sanity/types";
  *
  * Accessibilité :
  * - Question : text-foreground (#2E3342 light / #F7F7F5 dark) ✅
- * - Hover question : text-gala-primary (#5E708E) ✅
+ * - Hover question : text-gala-primary (#2C3E5C) ✅
  * - Réponse : text-muted-foreground (#5C6475 light / #D8D9DD dark) ✅
  * - Icône chevron : text-muted-foreground ✅
  */
@@ -37,7 +37,7 @@ function FaqItem({ faq, index }: { faq: FAQ; index: number }) {
       >
         {/*
          * Texte question : text-foreground → hover text-gala-primary
-         * Contraste #5E708E sur #FFFBF2 = 4.5:1 ✅ WCAG AA
+         * Contraste #2C3E5C sur #FFFBF2 = 4.5:1 ✅ WCAG AA
          */}
         <span className="text-base font-medium text-foreground transition-colors hover:text-gala-primary">
           {faq.question}

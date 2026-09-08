@@ -60,10 +60,10 @@ export default async function HomePage() {
       <section id="about" className="pt-16 sm:pt-32 md:pt-44 lg:pt-24 pb-10 sm:pb-20 md:pb-28">
         <div className="container mx-auto px-5 md:px-6">
           {/*
-           * Titre : font-display (Cormorant Garamond), text-gala-primary (#5E708E)
-           * Contraste #5E708E sur #FFFBF2 = 4.5:1 ✅ WCAG AA
+           * Titre : font-display (Cormorant Garamond), text-gala-primary (#2C3E5C)
+           * Contraste #2C3E5C sur #FFFBF2 = 4.5:1 ✅ WCAG AA
            */}
-          <h2 className="font-display text-3xl font-bold text-gala-primary md:text-4xl text-center">
+          <h2 className="font-titre text-3xl font-bold text-gala-primary md:text-4xl text-center">
             À propos
           </h2>
           {/*
@@ -86,7 +86,7 @@ export default async function HomePage() {
       {/* Section Partenaires */}
       <section id="partners" className="bg-muted/50 py-10 sm:py-20 md:py-28">
         <div className="container mx-auto px-5 md:px-6">
-          <h2 className="font-display text-3xl font-bold text-gala-primary md:text-4xl text-center">
+          <h2 className="font-titre text-3xl font-bold text-gala-primary md:text-4xl text-center">
             Nos partenaires
           </h2>
           <div className="mt-8">
@@ -98,7 +98,7 @@ export default async function HomePage() {
       {/* Section Équipe */}
       <section id="team" className="bg-muted/50 py-10 sm:py-20 md:py-28">
         <div className="container mx-auto px-5 md:px-6">
-          <h2 className="font-display text-3xl font-bold text-gala-primary md:text-4xl text-center">
+          <h2 className="font-titre text-3xl font-bold text-gala-primary md:text-4xl text-center">
             L'équipe organisatrice
           </h2>
           <p className="mt-2 text-muted-foreground text-center">
@@ -129,7 +129,7 @@ export default async function HomePage() {
 
             {/* Contenu FAQ */}
             <div className="relative">
-              <h2 className="font-display text-3xl font-bold text-gala-primary md:text-4xl text-center">
+              <h2 className="font-titre text-3xl font-bold text-gala-primary md:text-4xl text-center">
                 Questions fréquentes
               </h2>
               <p className="mt-2 text-muted-foreground text-center">
@@ -158,7 +158,7 @@ export default async function HomePage() {
       {/* Section Contact */}
       <section id="contact" className="bg-muted/50 py-10 sm:py-20 md:py-28">
         <div className="container mx-auto px-5 md:px-6">
-          <h2 className="font-display text-3xl font-bold text-gala-primary md:text-4xl text-center">
+          <h2 className="font-titre text-3xl font-bold text-gala-primary md:text-4xl text-center">
             Contact
           </h2>
           <p className="mt-2 text-muted-foreground text-center">

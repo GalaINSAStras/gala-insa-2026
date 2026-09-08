@@ -14,8 +14,8 @@ const initialState: ContactState = { success: false };
  * Accessibilité :
  * - Labels : text-foreground (#2E3342 light / #F7F7F5 dark) ✅
  * - Inputs : bg-background, text-foreground, border-input ✅
- * - Bouton submit : bg-primary (#5E708E), text-white (#FFFFFF) — contraste 4.6:1 ✅
- * - Hover bouton : bg-primary-hover (#50617C) — assombrissement visible ✅
+ * - Bouton submit : bg-primary (#2C3E5C), text-white (#FFFFFF) — contraste 4.6:1 ✅
+ * - Hover bouton : bg-primary-hover (#22314A) — assombrissement visible ✅
  * - Focus : ring-primary/20 ✅
  */
 export function ContactSection() {
@@ -165,9 +165,9 @@ export function ContactSection() {
               </AnimatePresence>
 
               {/*
-               * Bouton submit — bg-primary (#5E708E), text-white (#FFFFFF)
-               * Contraste WCAG AA : #FFFFFF sur #5E708E = 4.6:1 ✅
-               * Hover : bg-primary-hover (#50617C) — assombrissement visible ✅
+               * Bouton submit — bg-primary (#2C3E5C), text-white (#FFFFFF)
+               * Contraste WCAG AA : #FFFFFF sur #2C3E5C = 4.6:1 ✅
+               * Hover : bg-primary-hover (#22314A) — assombrissement visible ✅
                */}
               <Button
                 type="submit"

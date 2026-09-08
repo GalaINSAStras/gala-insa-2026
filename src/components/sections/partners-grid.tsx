@@ -3,15 +3,14 @@
 import { useEffect, useState } from "react";
 import { clientFetch, urlFor } from "@/lib/sanity/client";
 import Image from "next/image";
-import Link from "next/link";
+import { ButtonFleuron } from "@/components/ui/ButtonFleuron";
 import type { Partner } from "@/lib/sanity/types";
 
-const categoryStyles = {
-  premium: { label: "Premium", className: "border-gala-gold/60 bg-gala-gold/10", badge: "bg-gala-gold text-gala-primary-dark" },
-  gold: { label: "Or", className: "border-gala-gold/40 bg-gala-gold/5", badge: "bg-gala-gold text-gala-primary-dark" },
-  silver: { label: "Argent", className: "border-gala-silver/40 bg-gala-silver/5", badge: "bg-gala-silver text-white" },
-} as const;
-
+/**
+ * Grille des partenaires — « plaques gravées » Art nouveau.
+ * Cartes non-cliquables : fond blanc (absorbe le blanc des logos webp opaques),
+ * double liseré doré, pastilles d'angle, fleuron, logo en haute résolution sans crop.
+ */
 export function PartnersGrid() {
   const [partners, setPartners] = useState<Partner[]>([]);
   const [loading, setLoading] = useState(true);
@@ -19,36 +18,91 @@ export function PartnersGrid() {
   useEffect(() => {
     let cancelled = false;
     clientFetch<Partner[]>(`*[_type == "partner"] | order(displayOrder asc)`)
-      .then((data) => { if (!cancelled) { setPartners(data ?? []); setLoading(false); } })
-      .catch(() => { if (!cancelled) setLoading(false); });
-    return () => { cancelled = true; };
+      .then((data) => {
+        if (!cancelled) {
+          setPartners(data ?? []);
+          setLoading(false);
+        }
+      })
+      .catch(() => {
+        if (!cancelled) setLoading(false);
+      });
+    return () => {
+      cancelled = true;
+    };
   }, []);
 
-  if (loading) return <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">{Array.from({ length: 4 }).map((_, i) => <div key={i} className="h-40 animate-pulse rounded-xl border bg-muted" />)}</div>;
-  if (!partners.length) return <p className="text-muted-foreground italic">Aucun partenaire pour le moment.</p>;
+  if (loading) {
+    return (
+      <div className="grid grid-cols-1 gap-7 sm:grid-cols-2 lg:grid-cols-3">
+        {Array.from({ length: 6 }).map((_, i) => (
+          <div key={i} className="h-44 animate-pulse rounded-md border bg-muted" />
+        ))}
+      </div>
+    );
+  }
+
+  if (!partners.length) {
+    return <p className="text-muted-foreground italic">Aucun partenaire pour le moment.</p>;
+  }
 
   return (
-    <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-      {partners.map((p) => {
-        const c = categoryStyles[p.category] ?? categoryStyles.silver;
-        return (
-          <Link key={p._id} href={p.websiteUrl ?? "#"} target={p.websiteUrl ? "_blank" : undefined} rel={p.websiteUrl ? "noopener noreferrer" : undefined}
-            className={`group relative flex flex-col items-center justify-center rounded-2xl border-2 p-6 transition-all hover:shadow-lg hover:-translate-y-1 ${c.className}`}>
-            <span aria-hidden className="pointer-events-none absolute inset-[3px] rounded-[14px] border border-[var(--or-clair)]/40" />
-            <span className={`absolute top-3 right-3 z-10 rounded-full px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-wider ${c.badge}`}>{c.label}</span>
+    <div className="grid grid-cols-1 gap-7 sm:grid-cols-2 lg:grid-cols-3">
+      {partners.map((p) => (
+        <div
+          key={p._id}
+          className="relative flex flex-col items-center rounded-md border-[1.5px] border-[var(--or-moyen)]/55 bg-white px-7 pb-6 pt-8 shadow-[0_6px_20px_rgba(63,91,118,.07)]"
+        >
+          {/* Liseré intérieur doré */}
+          <span
+            aria-hidden
+            className="pointer-events-none absolute inset-[5px] rounded-[4px] border border-[var(--or-clair)]/55"
+          />
+
+          {/* Pastilles d'angle */}
+          <span
+            aria-hidden
+            className="absolute left-0 top-0 h-[7px] w-[7px] -translate-x-1/2 -translate-y-1/2 rotate-45 bg-[var(--or-moyen)]"
+          />
+          <span
+            aria-hidden
+            className="absolute right-0 top-0 h-[7px] w-[7px] -translate-y-1/2 translate-x-1/2 rotate-45 bg-[var(--or-moyen)]"
+          />
+          <span
+            aria-hidden
+            className="absolute bottom-0 left-0 h-[7px] w-[7px] -translate-x-1/2 translate-y-1/2 rotate-45 bg-[var(--or-moyen)]"
+          />
+          <span
+            aria-hidden
+            className="absolute bottom-0 right-0 h-[7px] w-[7px] translate-x-1/2 translate-y-1/2 rotate-45 bg-[var(--or-moyen)]"
+          />
+
+          {/* Fleuron sommet */}
+          <ButtonFleuron className="h-5 w-5 drop-shadow-[0_1px_2px_rgba(168,134,63,.3)]" />
+
+          {/* Logo — haute résolution, sans crop */}
+          <div className="relative mt-4 flex h-20 w-full items-center justify-center">
             {p.logo ? (
-              <div className="relative h-20 w-40 overflow-hidden">
-                <Image src={urlFor(p.logo).width(160).height(80).fit("max").url()} alt={`Logo ${p.name}`} fill className="object-contain transition-transform group-hover:scale-105" sizes="160px" />
-              </div>
+              <Image
+                src={urlFor(p.logo).width(480).url()}
+                alt={`Logo ${p.name}`}
+                fill
+                className="object-contain"
+                sizes="(min-width:1024px) 220px, (min-width:640px) 300px, 90vw"
+              />
             ) : (
-              <div className="flex h-20 w-40 items-center justify-center rounded-lg border border-dashed border-muted-foreground/30">
-                <span className="text-sm text-muted-foreground/50">{p.name}</span>
-              </div>
+              <span className="font-garamond text-sm font-semibold italic text-muted-foreground/60">
+                {p.name}
+              </span>
             )}
-            <p className="mt-4 text-sm font-semibold text-foreground">{p.name}</p>
-          </Link>
-        );
-      })}
+          </div>
+
+          {/* Nom */}
+          <p className="mt-3 text-center font-garamond text-[15px] font-semibold italic text-marine">
+            {p.name}
+          </p>
+        </div>
+      ))}
     </div>
   );
 }

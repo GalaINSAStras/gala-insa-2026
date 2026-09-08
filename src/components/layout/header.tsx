@@ -145,7 +145,7 @@ export function Header() {
                         <Link
                           href={item.href}
                           onClick={closeMenu}
-                          className="text-4xl font-semibold tracking-tight transition-colors hover:text-gala-primary md:text-3xl font-display"
+                          className="text-4xl font-semibold tracking-tight transition-colors hover:text-gala-primary md:text-3xl font-titre"
                           style={{ color: "var(--text-primary)" }}
                         >
                           {item.label}
@@ -189,7 +189,7 @@ export function Header() {
             {NAVIGATION.map((item) => (
               <NavigationMenuItem key={item.href}>
                 <NavigationMenuLink
-                  className={`${navigationMenuTriggerStyle()} font-display text-xl font-semibold`}
+                  className={`${navigationMenuTriggerStyle()} font-titre text-xl font-semibold`}
                   render={<Link href={item.href} />}
                 >
                   {item.label}

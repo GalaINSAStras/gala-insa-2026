@@ -104,18 +104,18 @@ export function InstagramFeed() {
                 <div className="flex h-10 w-10 items-center justify-center rounded-full bg-gala-primary/10">
                   <InstagramIcon
                     className="h-5 w-5"
-                    style={{ color: "#5E708E" }}
+                    style={{ color: "#2C3E5C" }}
                   />
                 </div>
               )}
               <span
                 className="text-sm font-medium uppercase tracking-[0.15em]"
-                style={{ color: "#5E708E" }}
+                style={{ color: "#2C3E5C" }}
               >
                 Instagram
               </span>
             </div>
-            <h2 className="font-display text-3xl font-bold text-gala-primary md:text-4xl">
+            <h2 className="font-titre text-3xl font-bold text-gala-primary md:text-4xl">
               Suivez l&rsquo;aventure
             </h2>
             <p className="mt-2 text-muted-foreground">
@@ -131,7 +131,7 @@ export function InstagramFeed() {
             className="group flex items-center gap-2 rounded-xl px-5 py-2.5 text-sm font-semibold transition-all duration-300"
             style={{
               backgroundColor: "rgba(94,112,142,0.08)",
-              color: "#5E708E",
+              color: "#2C3E5C",
               border: "1px solid rgba(94,112,142,0.2)",
             }}
             whileHover={{ scale: 1.02 }}

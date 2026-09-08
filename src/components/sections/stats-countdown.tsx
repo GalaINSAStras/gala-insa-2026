@@ -9,6 +9,7 @@ import {
 import { useRef, useEffect, useState } from "react";
 
 import { GALA } from "@/lib/hero-data";
+import { Grain } from "@/components/ornaments/Grain";
 
 /** Formate un entier pour l'affichage du compteur (72 → « 72 », 900 → « 900 »). */
 function formatCount(value: number): string {
@@ -69,10 +70,10 @@ function AnimatedCounter({
   return (
     <div ref={ref} className="text-center">
       {/*
-       * Chiffres : blanc pur sur fond bleu ardoise
-       * Contraste #FFFFFF sur #5E708E = 4.6:1 ✅ WCAG AA
+       * Chiffres : blanc pur sur fond bleu marine
+       * Contraste #FFFFFF sur #2C3E5C = 11.5:1 ✅ WCAG AAA
        */}
-      <div className="font-display text-4xl font-bold text-white md:text-5xl lg:text-6xl">
+      <div className="font-garamond text-4xl font-bold text-white md:text-5xl lg:text-6xl">
         <motion.span
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -93,7 +94,7 @@ function AnimatedCounter({
 
 /**
  * Bloc de countdown (Jours / Heures / Minutes / Secondes)
- * Chiffres accent (#D9A956) sur fond glassmorphism sombre ✅
+ * Tuiles parchemin (grain de papier), chiffres marine.
  */
 function CountdownBlock({
   value,
@@ -107,23 +108,22 @@ function CountdownBlock({
   return (
     <div className="flex flex-col items-center min-w-0">
       <div
-        className="relative flex h-20 w-[clamp(3.5rem,20vw,5rem)] items-center justify-center overflow-hidden rounded-xl backdrop-blur-sm sm:h-24 sm:w-[clamp(4rem,22vw,6rem)] md:h-28 md:w-24"
+        className="relative flex h-20 w-[clamp(3.5rem,20vw,5rem)] items-center justify-center overflow-hidden rounded-xl sm:h-24 sm:w-[clamp(4rem,22vw,6rem)] md:h-28 md:w-24"
         style={{
-          border: "1px solid rgba(217,169,86,0.25)",
-          backgroundColor: "rgba(255,255,255,0.06)",
+          border: "1px solid rgba(168,134,63,0.5)",
+          background: "linear-gradient(180deg,#FFFDF8,#F4EBD6)",
+          boxShadow:
+            "inset 0 2px 5px rgba(44,62,92,0.16), inset 0 -1px 0 rgba(255,255,255,0.6)",
         }}
       >
-        {/* Effet glassmorphism */}
-        <div className="absolute inset-0 rounded-xl bg-gradient-to-b from-white/10 to-transparent" />
+        {/* Grain de papier (parchemin) */}
+        <Grain opacity={0.28} />
 
-        {/*
-         * Chiffres : accent clair (#F3DAA2) sur fond sombre
-         * Contraste #F3DAA2 sur rgba(0,0,0,0.5) ≈ 7.2:1 ✅ WCAG AAA
-         */}
+        {/* Chiffres marine sur parchemin (léger relief) */}
         <motion.span
           key={display}
-          className="relative font-display text-3xl font-bold tracking-tight md:text-4xl"
-          style={{ color: "#F3DAA2" }}
+          className="relative font-garamond text-3xl font-bold tracking-tight md:text-4xl"
+          style={{ color: "#2C3E5C", textShadow: "0 1px 0 rgba(255,255,255,0.85)" }}
           initial={{ y: -20, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           exit={{ y: 20, opacity: 0 }}
@@ -207,13 +207,13 @@ export function StatsCountdown({
     >
       {/*
        * Fond avec dégradé dynamique — palette V2
-       * Bleu ardoise primaire (#5E708E) → hover (#50617C) → profond (#3D4F6A)
+       * Bleu marine (#2C3E5C) → clair (#3A4F70) → profond (#22314A)
        */}
       <div
         className="absolute inset-0 -z-10"
         style={{
           background:
-            "linear-gradient(135deg, #5E708E 0%, #50617C 50%, #3D4F6A 100%)",
+            "linear-gradient(135deg, #3A4F70 0%, #2C3E5C 50%, #22314A 100%)",
         }}
       />
 
@@ -255,7 +255,7 @@ export function StatsCountdown({
         {/* Section — Le Gala en un clin d'œil (chiffres forts) */}
         <div className="mb-10 sm:mb-20">
           <motion.h2
-            className="mb-4 text-center font-display text-3xl font-bold text-white md:text-4xl"
+            className="mb-4 text-center font-titre text-3xl font-bold text-white md:text-4xl"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -298,7 +298,7 @@ export function StatsCountdown({
         {/* Section Countdown */}
         <div className="pb-6 sm:pb-12">
           <motion.h3
-            className="mb-4 mt-8 text-center font-display text-2xl font-bold text-white/90 md:text-3xl"
+            className="mb-4 mt-8 text-center font-titre text-2xl font-bold text-white/90 md:text-3xl"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}

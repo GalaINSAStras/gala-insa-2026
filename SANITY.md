@@ -202,7 +202,7 @@ export const schemaTypes = [
 | Schéma | Type | Description | Champs principaux |
 |---|---|---|---|
 | **event** | `document` | Édition courante du Gala | title, edition, date, location, poster, status, ticketLink |
-| **partner** | `document` | Partenaires (catégories Or/Argent/Premium) | name, logo, websiteUrl, category, displayOrder |
+| **partner** | `document` | Partenaires | name, logo, description, displayOrder |
 | **ticket** | `document` | Types de billets disponibles | type, price, quantityAvailable, soldOut, displayOrder |
 | **faq** | `document` | Questions fréquentes | question, reponse, displayOrder |
 | **teamMember** | `document` | Membres de l'association organisatrice | name, role, photo, bio, displayOrder |
@@ -351,9 +351,7 @@ export interface Partner {
   _updatedAt: string;
   name: string;
   logo: SanityImageSource;
-  websiteUrl?: string;
   description?: string;
-  category: "premium" | "gold" | "silver";
   displayOrder: number;
 }
 ```

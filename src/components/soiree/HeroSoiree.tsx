@@ -73,7 +73,7 @@ export function HeroSoiree({ theme, accroche, themeImageUrl }: HeroSoireeProps) 
               aria-hidden
               className="h-px w-12 bg-gradient-to-r from-transparent to-[var(--or-moyen)] md:w-20"
             />
-            <span className="font-garamond text-[clamp(.72rem,1.6vw,.9rem)] font-medium uppercase tracking-[.32em] text-[var(--or-fonce)]">
+            <span className="font-titre text-[clamp(.72rem,1.6vw,.9rem)] font-semibold uppercase tracking-[.32em] text-[var(--or-fonce)]">
               Édition 2026
             </span>
             <span
@@ -85,8 +85,8 @@ export function HeroSoiree({ theme, accroche, themeImageUrl }: HeroSoireeProps) 
           {/* Titre */}
           <motion.div {...fadeUp(0.08)}>
             <h1
-              className="mt-6 font-titre italic text-marine [text-shadow:0_2px_18px_rgba(44,62,92,.12)]"
-              style={{ fontSize: "clamp(3.5rem, 9vw, 7rem)", lineHeight: 1 }}
+              className="mt-6 text-marine [text-shadow:0_2px_18px_rgba(44,62,92,.12)]"
+              style={{ fontFamily: "var(--font-title)", fontSize: "clamp(3.5rem, 9vw, 7rem)", lineHeight: 1 }}
             >
               {theme}
             </h1>
@@ -123,7 +123,7 @@ export function HeroSoiree({ theme, accroche, themeImageUrl }: HeroSoireeProps) 
             <div className="rounded-2xl border border-[var(--or-moyen)]/40 bg-white/40 px-6 py-5 shadow-[0_4px_20px_rgba(63,91,118,.06)] backdrop-blur-md">
               <div className="flex items-center gap-2 text-[var(--or-fonce)]">
                 <ButtonFleuron className="h-4 w-4" />
-                <span className="font-garamond text-xs font-medium uppercase tracking-[.18em]">
+                <span className="font-titre text-xs font-semibold uppercase tracking-[.18em]">
                   Restauration
                 </span>
               </div>
@@ -134,7 +134,7 @@ export function HeroSoiree({ theme, accroche, themeImageUrl }: HeroSoireeProps) 
             <div className="rounded-2xl border border-[var(--or-moyen)]/40 bg-white/40 px-6 py-5 shadow-[0_4px_20px_rgba(63,91,118,.06)] backdrop-blur-md">
               <div className="flex items-center gap-2 text-[var(--or-fonce)]">
                 <ButtonFleuron className="h-4 w-4" />
-                <span className="font-garamond text-xs font-medium uppercase tracking-[.18em]">
+                <span className="font-titre text-xs font-semibold uppercase tracking-[.18em]">
                   Ambiance
                 </span>
               </div>

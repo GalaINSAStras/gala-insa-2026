@@ -151,10 +151,10 @@
   --surface-alt: #F6F7F8;
 
   /* ─── Primary — Bleu ardoise ─── */
-  --primary: #5E708E;
+  --primary: #2C3E5C;
   --primary-foreground: #FFFFFF;
-  --primary-light: #BACCE9;
-  --primary-hover: #50617C;
+  --primary-light: #3A4F70;
+  --primary-hover: #22314A;
 
   /* ─── Secondary — Vert sauge ─── */
   --secondary: #9DBE8B;
@@ -175,7 +175,7 @@
   /* ─── Borders / Inputs ─── */
   --border: #E5E7EB;
   --input: #E5E7EB;
-  --ring: #BACCE9;
+  --ring: #3A4F70;
 
   /* ─── Destructive ─── */
   --destructive: #D9534F;
@@ -186,43 +186,43 @@
   --muted-foreground: #5C6475;
 
   /* ─── Charts (hérité pour compatibilité) ─── */
-  --chart-1: #5E708E;
+  --chart-1: #2C3E5C;
   --chart-2: #9DBE8B;
   --chart-3: #D9A956;
   --chart-4: #F3DAA2;
-  --chart-5: #BACCE9;
+  --chart-5: #3A4F70;
 
   /* ─── Sidebar ─── */
   --sidebar: #FFFFFF;
   --sidebar-foreground: #2E3342;
-  --sidebar-primary: #5E708E;
+  --sidebar-primary: #2C3E5C;
   --sidebar-primary-foreground: #FFFFFF;
   --sidebar-accent: #F6F7F8;
   --sidebar-accent-foreground: #2E3342;
   --sidebar-border: #E5E7EB;
-  --sidebar-ring: #BACCE9;
+  --sidebar-ring: #3A4F70;
 
   /* ─── Decorative Surface Colors ─── */
   --surface-1: #FFFBF2;                /* Crème */
-  --surface-2: #E9F5FF;                /* Bleu très clair */
+  --surface-2: #E8EEF6;                /* Bleu très clair */
   --surface-3: #FFF2F6;                /* Rose très clair */
   --highlight: #F3DAA2;                /* Jaune pastel */
-  --decoration-pink: #FCD8E4;          /* Rose pastel */
-  --decoration-blue: #BACCE9;          /* Bleu pastel */
+  --decoration-pink: #F5DCE3;          /* Rose pastel */
+  --decoration-blue: #E8EEF6;          /* Bleu pastel */
   --decoration-green: #D6EDCF;         /* Vert clair */
 
   /* ─── Tickets Art nouveau (billets) ─── */
   --blush: #FDF0F1;
-  --bleu-pale: #E3F2FB;
+  --bleu-pale: #E8EEF6;
   --jaune-pale: #FDF6E3;
   --rose-moyen: #F9C9D4;
-  --bleu-moyen: #AFC6E3;
-  --or-moyen: #C9A76B;
+  --bleu-moyen: #3A4F70;
+  --or-moyen: #D9A956;
   --mauve: #D9D6E3;
-  --ardoise: #3F5B76;
-  --or-fonce: #A8863F;
-  --vert-pale: #CFE3CC;
-  --vert-moyen: #7FB878;
+  --ardoise: #2C3E5C;
+  --or-fonce: #C8963F;
+  --vert-pale: #D6EDCF;
+  --vert-moyen: #9DBE8B;
   --ivoire: #FFFDF8;
 
   /* ─── Boutons cartouche (refonte) ─── */
@@ -230,12 +230,12 @@
   --marine-clair: #3A4F70;  /* haut du dégradé */
   --marine-fonce: #22314A;  /* bas du dégradé */
 
-  --sauge: #CFE3CC;         /* fond secondaire */
-  --sauge-clair: #DCEDD9;
-  --sauge-texte: #3A5A72;
+  --sauge: #D6EDCF;         /* fond secondaire */
+  --sauge-clair: #F0F7EC;
+  --sauge-texte: #2C3E5C;
 
   /* Or de relief (liseré + fleurons) */
-  --or-clair: #E8CFA0;
+  --or-clair: #F3DAA2;
 
   /* Rose poudré — accents floraux (refonte La Soirée) */
   --rose-poudre: #F5DCE3;
@@ -327,7 +327,7 @@
 
   /* Focus visible global : outline épais avec la couleur primary-light */
   *:focus-visible {
-    outline: 3px solid #BACCE9;
+    outline: 3px solid #3A4F70;
     outline-offset: 2px;
   }
 

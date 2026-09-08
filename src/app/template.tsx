@@ -88,7 +88,7 @@ export default function Template({ children }: { children: React.ReactNode }) {
           }}
           style={{
             background:
-              "linear-gradient(160deg, #3D4F6A 0%, #5E708E 45%, #50617C 100%)",
+              "linear-gradient(160deg, #22314A 0%, #2C3E5C 45%, #3A4F70 100%)",
           }}
         >
           {/* Halo doré central — signature visuelle Gala */}

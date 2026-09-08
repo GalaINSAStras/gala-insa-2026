@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useMemo, useRef, useState } from "react";
 import {
   Bean,
   ChevronDown,
@@ -15,6 +15,7 @@ import {
 import { Reveal } from "./Reveal";
 import { SectionHeading } from "./SectionHeading";
 import { ButtonFleuron } from "@/components/ui/ButtonFleuron";
+import { Grain } from "@/components/ornaments/Grain";
 import type { Comptoir, Plat } from "@/lib/sanity/types";
 
 const ALLERGEN_META: Record<
@@ -22,11 +23,11 @@ const ALLERGEN_META: Record<
   { label: string; Icon: LucideIcon; bg: string; text: string; border: string }
 > = {
   gluten: { label: "Gluten", Icon: Wheat, bg: "#F5DCE3", text: "#8A4A5C", border: "#E9C1CF" },
-  lactose: { label: "Lactose", Icon: Milk, bg: "#EAF1F8", text: "#3A5A72", border: "#C6D7E8" },
+  lactose: { label: "Lactose", Icon: Milk, bg: "#E8EEF6", text: "#2C3E5C", border: "#C6D7E8" },
   oeufs: { label: "Œufs", Icon: Egg, bg: "#FDF6E3", text: "#8A6A1F", border: "#F0D9A6" },
   fruits_coque: { label: "Fruits à coque", Icon: Nut, bg: "#F5DCE3", text: "#8A4A5C", border: "#E9C1CF" },
-  soja: { label: "Soja", Icon: Bean, bg: "#CFE3CC", text: "#3A5A72", border: "#B6D2AE" },
-  poisson: { label: "Poisson", Icon: Fish, bg: "#EAF1F8", text: "#3A5A72", border: "#C6D7E8" },
+  soja: { label: "Soja", Icon: Bean, bg: "#D6EDCF", text: "#2C3E5C", border: "#B6D2AE" },
+  poisson: { label: "Poisson", Icon: Fish, bg: "#E8EEF6", text: "#2C3E5C", border: "#C6D7E8" },
   crustaces: { label: "Crustacés", Icon: Shrimp, bg: "#FDF6E3", text: "#8A6A1F", border: "#F0D9A6" },
 };
 
@@ -109,6 +110,16 @@ export function Buffet({
 
   return (
     <section className="relative overflow-hidden bg-bleuPale py-[clamp(3rem,7vw,6rem)]">
+      {/* Dégradé doré partagé pour les frontons métalliques */}
+      <svg width="0" height="0" aria-hidden className="absolute">
+        <defs>
+          <linearGradient id="gala-gold-grad" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stopColor="#F3DAA2" />
+            <stop offset="0.5" stopColor="#D9A956" />
+            <stop offset="1" stopColor="#B8893C" />
+          </linearGradient>
+        </defs>
+      </svg>
       <div className="mx-auto max-w-[1180px] px-4 sm:px-6 lg:px-8">
         <SectionHeading
           kicker="Le dîner"
@@ -118,7 +129,7 @@ export function Buffet({
 
         {prixBuffet != null && (
           <div className="mx-auto mt-8 max-w-md rounded-2xl border border-[var(--or-moyen)]/50 bg-[linear-gradient(135deg,var(--jaune-pale),#FBF0D6)] px-8 py-4 text-center shadow-[0_6px_24px_rgba(168,134,63,.14)]">
-            <p className="font-garamond text-sm font-medium uppercase tracking-[.16em] text-[var(--or-fonce)]">
+            <p className="font-garamond text-sm font-semibold italic text-[var(--or-fonce)]">
               Place buffet + soirée
             </p>
             <p className="font-garamond text-3xl font-semibold text-[var(--or-fonce)] tabular-nums">
@@ -165,7 +176,7 @@ export function Buffet({
         {/* Légende des allergènes */}
         {legendAllergens.length > 0 && (
           <div className="mt-12 flex flex-col items-center gap-3">
-            <p className="font-garamond text-xs font-medium uppercase tracking-[.16em] text-ardoise/60">
+            <p className="font-garamond text-xs font-semibold italic text-ardoise/60">
               Légende des allergènes
             </p>
             <ul className="flex flex-wrap justify-center gap-x-6 gap-y-2">
@@ -212,24 +223,24 @@ function ComptoirCard({
   const visiblePlats = plats.filter((p) => !isHidden(p));
   const hasHidden = visiblePlats.length < plats.length;
 
-  // Défilement interne : détecte si la liste déborde pour afficher le fondu bas
+  // Défilement interne : référencé pour la zone scrollable
   const scrollRef = useRef<HTMLDivElement>(null);
-  const [canScroll, setCanScroll] = useState(false);
-  useEffect(() => {
-    const el = scrollRef.current;
-    if (!el) return;
-    const check = () => setCanScroll(el.scrollHeight > el.clientHeight + 2);
-    check();
-    window.addEventListener("resize", check);
-    return () => window.removeEventListener("resize", check);
-  }, [visiblePlats.length, open]);
 
   return (
-    <article className="relative flex flex-col overflow-hidden rounded-t-[120px] rounded-b-2xl border border-[var(--or-moyen)]/60 bg-ivoire pt-12 shadow-[0_10px_36px_rgba(63,91,118,.1)] sm:h-[520px]">
+    <article
+      className="relative flex flex-col overflow-hidden rounded-t-[120px] rounded-b-2xl pt-12 shadow-[0_10px_36px_rgba(63,91,118,.12)] sm:h-[520px]"
+      style={{
+        border: "2px solid transparent",
+        background:
+          "#FFFDF8 padding-box, linear-gradient(120deg,#F6E3B8,#D9A956 30%,#FDF0D0 48%,#B8893C 62%,#E8CFA0 80%,#D9A956) border-box",
+      }}
+    >
+      {/* grain de papier */}
+      <Grain opacity={0.22} />
       {/* double liseré doré */}
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-2 rounded-t-[112px] rounded-b-xl border border-[var(--or-clair)]/50"
+        className="pointer-events-none absolute inset-2 rounded-t-[112px] rounded-b-xl border border-[var(--or-clair)]/40"
       />
 
       {/* fronton ornemental */}
@@ -238,17 +249,17 @@ function ComptoirCard({
         viewBox="0 0 200 44"
         className="pointer-events-none absolute left-1/2 top-0 h-11 w-44 -translate-x-1/2"
       >
-        <path d="M14 40 C 50 10, 150 10, 186 40" fill="none" stroke="var(--or-moyen)" strokeWidth="1.6" />
-        <path d="M26 40 C 58 16, 142 16, 174 40" fill="none" stroke="var(--or-clair)" strokeWidth="0.8" />
-        <path d="M100 6 l5 9 -5 9 -5 -9 Z" fill="var(--or-fonce)" />
+        <path d="M14 40 C 50 10, 150 10, 186 40" fill="none" stroke="#B8893C" strokeWidth="1.8" />
+        <path d="M26 40 C 58 16, 142 16, 174 40" fill="none" stroke="#E8CFA0" strokeWidth="0.8" />
+        <path d="M100 6 l5 9 -5 9 -5 -9 Z" fill="url(#gala-gold-grad)" />
       </svg>
 
       <header className="relative px-6 text-center">
-        <h3 className="text-2xl text-marine" style={{ fontFamily: "var(--font-title)" }}>
+        <h3 className="font-heading text-2xl text-marine">
           {comptoir.nom}
         </h3>
         {comptoir.sousTitre && (
-          <p className="mt-1 font-garamond text-sm font-medium uppercase tracking-[.08em] text-ardoise/70">
+          <p className="mt-1 font-garamond text-sm font-semibold italic text-ardoise/70">
             {comptoir.sousTitre}
           </p>
         )}
@@ -282,7 +293,7 @@ function ComptoirCard({
             {visiblePlats.map((plat, j) => (
               <li key={plat._key ?? j} className="py-3 first:pt-0 last:pb-0">
                 <div className="flex items-start justify-between gap-3">
-                  <span className="font-medium text-marine">{plat.nom}</span>
+                  <span className="font-garamond font-semibold italic text-marine">{plat.nom}</span>
                   {plat.regime && (
                     <span className="shrink-0 rounded-full bg-[var(--rose-poudre)] px-2 py-0.5 text-[11px] font-medium text-[#8A4A5C]">
                       {REGIME_LABELS[plat.regime]}
@@ -309,14 +320,6 @@ function ComptoirCard({
           <p className="mt-3 text-xs italic text-ardoise/60">
             Certains plats sont masqués selon vos filtres.
           </p>
-        )}
-
-        {/* Fondu bas — signale que la liste se poursuit */}
-        {canScroll && (
-          <div
-            aria-hidden
-            className="pointer-events-none sticky bottom-0 h-10 bg-gradient-to-t from-ivoire to-transparent"
-          />
         )}
       </div>
 

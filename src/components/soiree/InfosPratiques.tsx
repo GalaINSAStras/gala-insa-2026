@@ -31,13 +31,15 @@ export function InfosPratiques({
           {/* Place soirée seule */}
           <Reveal>
             <article className="flex h-full flex-col rounded-2xl border border-[var(--or-moyen)]/50 bg-ivoire p-7 shadow-[0_8px_28px_rgba(63,91,118,.08)]">
-              <ButtonFleuron className="h-8 w-8" />
-              <h3
-                className="mt-4 text-xl text-marine"
-                style={{ fontFamily: "var(--font-title)" }}
-              >
-                Place soirée seule
-              </h3>
+              <div className="flex items-center gap-3 sm:flex-col sm:items-start sm:gap-4">
+                <ButtonFleuron className="h-8 w-8 shrink-0" />
+                <h3
+                  className="text-xl text-marine"
+                  style={{ fontFamily: "var(--font-display)" }}
+                >
+                  Place soirée seule
+                </h3>
+              </div>
               {soiree?.soireeSeulePrice != null && (
                 <p className="mt-3 font-garamond text-3xl font-semibold text-[var(--or-fonce)] tabular-nums">
                   {soiree.soireeSeulePrice} €
@@ -59,13 +61,15 @@ export function InfosPratiques({
           {/* Code vestimentaire */}
           <Reveal delay={0.08}>
             <article className="flex h-full flex-col rounded-2xl border border-[var(--or-moyen)]/50 bg-ivoire p-7 shadow-[0_8px_28px_rgba(63,91,118,.08)]">
-              <ButtonFleuron className="h-8 w-8" />
-              <h3
-                className="mt-4 text-xl text-marine"
-                style={{ fontFamily: "var(--font-title)" }}
-              >
-                Code vestimentaire
-              </h3>
+              <div className="flex items-center gap-3 sm:flex-col sm:items-start sm:gap-4">
+                <ButtonFleuron className="h-8 w-8 shrink-0" />
+                <h3
+                  className="text-xl text-marine"
+                  style={{ fontFamily: "var(--font-display)" }}
+                >
+                  Code vestimentaire
+                </h3>
+              </div>
               {dressCodeUrl ? (
                 <div className="relative mt-4 h-44 overflow-hidden rounded-xl">
                   <Image
@@ -92,13 +96,15 @@ export function InfosPratiques({
           {/* Documents */}
           <Reveal delay={0.16}>
             <article className="flex h-full flex-col rounded-2xl border border-[var(--or-moyen)]/50 bg-ivoire p-7 shadow-[0_8px_28px_rgba(63,91,118,.08)]">
-              <ButtonFleuron className="h-8 w-8" />
-              <h3
-                className="mt-4 text-xl text-marine"
-                style={{ fontFamily: "var(--font-title)" }}
-              >
-                Documents
-              </h3>
+              <div className="flex items-center gap-3 sm:flex-col sm:items-start sm:gap-4">
+                <ButtonFleuron className="h-8 w-8 shrink-0" />
+                <h3
+                  className="text-xl text-marine"
+                  style={{ fontFamily: "var(--font-display)" }}
+                >
+                  Documents
+                </h3>
+              </div>
               {hasDocs ? (
                 <ul className="mt-4 flex flex-col gap-3">
                   {contratMineurHref && (

@@ -65,7 +65,7 @@ export function Footer() {
         <div className="grid grid-cols-1 gap-8 md:grid-cols-[1fr_auto_1fr] md:gap-20 lg:gap-32">
           {/* Colonne 1 : Logo & description */}
           <div className="space-y-3 text-center md:text-right">
-            <h3 className="font-heading text-lg font-bold">
+            <h3 className="font-garamond text-lg font-bold italic">
               Gala INSA Strasbourg
             </h3>
             <p className="text-sm text-white/70">
@@ -78,7 +78,7 @@ export function Footer() {
 
           {/* Colonne 2 : Liens rapides */}
           <div className="space-y-3 text-center md:text-center">
-            <h4 className="font-heading text-sm md:text-lg font-semibold uppercase tracking-wider text-gala-gold">
+            <h4 className="font-titre text-sm md:text-lg font-semibold uppercase tracking-wider text-gala-gold">
               Accès rapide
             </h4>
             <nav className="grid grid-cols-2 gap-2 md:flex md:flex-col">
@@ -117,7 +117,7 @@ export function Footer() {
 
           {/* Colonne 3 : Réseaux sociaux & mentions légales */}
           <div className="space-y-3 text-center md:text-left">
-            <h4 className="font-heading text-sm md:text-lg font-semibold uppercase tracking-wider text-gala-gold">
+            <h4 className="font-titre text-sm md:text-lg font-semibold uppercase tracking-wider text-gala-gold">
               Suivez-nous
             </h4>
             <div className="flex gap-6 justify-center md:justify-start">

@@ -2,7 +2,7 @@ import { defineType, defineField } from "sanity";
 
 /**
  * Schéma : Partenaire
- * Partenaires du Gala classés par catégorie (Or/Argent/Bronze)
+ * Partenaires du Gala
  */
 export default defineType({
   name: "partner",
@@ -23,29 +23,11 @@ export default defineType({
       validation: (rule) => rule.required(),
     }),
     defineField({
-      name: "websiteUrl",
-      title: "Site web",
-      type: "url",
-    }),
-    defineField({
       name: "description",
       title: "Description courte",
       type: "text",
       rows: 3,
-      description: "Texte descriptif du partenaire (affiché au survol sur la page Partenaires).",
-    }),
-    defineField({
-      name: "category",
-      title: "Catégorie",
-      type: "string",
-      options: {
-        list: [
-          { title: "Premium", value: "premium" },
-          { title: "Or", value: "gold" },
-          { title: "Argent", value: "silver" },
-        ],
-      },
-      validation: (rule) => rule.required(),
+      description: "Texte descriptif du partenaire.",
     }),
     defineField({
       name: "displayOrder",

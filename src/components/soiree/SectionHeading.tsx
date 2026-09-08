@@ -27,7 +27,7 @@ export function SectionHeading({
             aria-hidden
             className="h-px w-8 bg-gradient-to-r from-transparent to-[var(--or-moyen)]"
           />
-          <span className="font-garamond text-[clamp(.7rem,1.4vw,.85rem)] font-medium uppercase tracking-[.28em] text-[var(--or-fonce)]">
+          <span className="font-titre text-[clamp(.7rem,1.4vw,.85rem)] font-semibold uppercase tracking-[.28em] text-[var(--or-fonce)]">
             {kicker}
           </span>
           <span
@@ -37,10 +37,7 @@ export function SectionHeading({
         </div>
       )}
 
-      <h2
-        className="mt-3 text-[clamp(2rem,5vw,3.25rem)] leading-[1.05] text-marine"
-        style={{ fontFamily: "var(--font-title)" }}
-      >
+      <h2 className="mt-3 font-titre text-[clamp(2rem,5vw,3.25rem)] leading-[1.05] text-marine">
         {title}
       </h2>
 

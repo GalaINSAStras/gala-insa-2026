@@ -8,8 +8,8 @@ import { useState } from "react";
  * Style JSON Google Maps personnalisé aux couleurs du Design System V2
  * Mapping des tokens :
  *   - Terres → Surface 1 (crème #FFFBF2)
- *   - Eau   → Surface 2 (bleu clair #E9F5FF)
- *   - Routes → Primary Light (#BACCE9) + labels Primary (#5E708E)
+ *   - Eau   → Surface 2 (bleu clair #E8EEF6)
+ *   - Routes → Primary Light (#3A4F70) + labels Primary (#2C3E5C)
  *   - Végétation → Secondary Light (#D6EDCF)
  *   - POI non pertinents → masqués
  */
@@ -171,7 +171,7 @@ const GALA_MAP_STYLES: google.maps.MapTypeStyle[] = [
 
 /**
  * Marqueur SVG personnalisé — Pin ocre doré (#D9A956)
- * avec cercle intérieur bleu ardoise (#5E708E)
+ * avec cercle intérieur bleu ardoise (#2C3E5C)
  */
 const MARKER_SVG = `<svg xmlns="http://www.w3.org/2000/svg" width="36" height="48" viewBox="0 0 36 48">
   <path d="M18 0C8.06 0 0 8.06 0 18c0 13.5 18 30 18 30s18-16.5 18-30C36 8.06 27.94 0 18 0z" fill="${TOKENS.accent}" stroke="${TOKENS.text.primary}" stroke-width="1.5"/>

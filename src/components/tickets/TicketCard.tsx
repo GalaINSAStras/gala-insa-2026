@@ -91,7 +91,7 @@ export function TicketCard({
 
       {/* Contenu */}
       <div className="relative flex h-full flex-col items-center px-[13%] pb-[9%] pt-[11%] text-center text-ardoise">
-        <h3 className="font-titre text-[clamp(1.15rem,2.1vw,1.6rem)] uppercase leading-tight tracking-[0.1em]">
+        <h3 className="font-heading text-[clamp(1.15rem,2.1vw,1.6rem)] uppercase leading-tight tracking-[0.1em]">
           {title}
         </h3>
 
@@ -99,12 +99,12 @@ export function TicketCard({
           <Divider color={theme.divider} />
         </div>
 
-        <p className="mt-[8%] font-titre text-[clamp(2.4rem,5.4vw,3.5rem)] leading-none">
+        <p className="mt-[8%] font-garamond text-[clamp(2.4rem,5.4vw,3.5rem)] leading-none">
           <span className="tabular-nums">{price}</span>
           <span className="ml-2 text-[0.62em] align-baseline">{currency}</span>
         </p>
 
-        <div className="mt-[8%] space-y-1 font-titre text-[clamp(0.82rem,1.3vw,1rem)] leading-relaxed">
+        <div className="mt-[8%] space-y-1 font-garamond text-[clamp(0.82rem,1.3vw,1rem)] leading-relaxed">
           <p className="line-clamp-2">{description}</p>
           <p className="line-clamp-1 opacity-80">{quantityLabel}</p>
         </div>

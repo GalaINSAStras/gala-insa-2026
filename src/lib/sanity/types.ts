@@ -12,9 +12,7 @@ export interface Partner {
   _updatedAt: string;
   name: string;
   logo: SanityImageSource;
-  websiteUrl?: string;
   description?: string;
-  category: "premium" | "gold" | "silver";
   displayOrder: number;
 }
 

@@ -225,7 +225,7 @@ export function GalleryCarousel() {
     <section className="relative overflow-hidden py-12 sm:py-24 md:pb-32 md:pt-24">
       <div className="container mx-auto mb-8 sm:mb-16 px-5 md:px-6">
         <motion.h2
-          className="font-display text-center text-3xl font-bold text-gala-primary md:text-4xl"
+          className="font-titre text-center text-3xl font-bold text-gala-primary md:text-4xl"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}

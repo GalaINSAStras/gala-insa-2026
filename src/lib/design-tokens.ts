@@ -10,12 +10,12 @@
  * ─── Couleurs sémantiques principales ───
  */
 export const TOKENS = {
-  /** Bleu ardoise — Primaire */
-  primary: "#5E708E" as const,
-  /** Bleu ardoise clair — Hover, Light variant */
-  primaryLight: "#BACCE9" as const,
-  /** Bleu ardoise foncé — Hover state */
-  primaryHover: "#50617C" as const,
+  /** Bleu marine (encre) — Primaire */
+  primary: "#2C3E5C" as const,
+  /** Bleu marine clair — Light variant */
+  primaryLight: "#3A4F70" as const,
+  /** Bleu marine foncé — Hover state */
+  primaryHover: "#22314A" as const,
 
   /** Vert sauge — Secondaire */
   secondary: "#9DBE8B" as const,
@@ -36,7 +36,7 @@ export const TOKENS = {
     /** Crème — fond principal */
     1: "#FFFBF2" as const,
     /** Bleu très clair — fond secondaire */
-    2: "#E9F5FF" as const,
+    2: "#E8EEF6" as const,
     /** Rose très clair — fond tertiaire */
     3: "#FFF2F6" as const,
   },
@@ -46,9 +46,9 @@ export const TOKENS = {
     /** Jaune pastel — Highlight */
     highlight: "#F3DAA2" as const,
     /** Rose pastel */
-    pink: "#FCD8E4" as const,
+    pink: "#F5DCE3" as const,
     /** Bleu pastel */
-    blue: "#BACCE9" as const,
+    blue: "#E8EEF6" as const,
     /** Vert clair */
     green: "#D6EDCF" as const,
   },
@@ -85,7 +85,7 @@ export const TOKENS = {
  */
 export const PARTNER_TIERS = {
   gold: "#D9A956" as const,     // → Accent
-  silver: "#BACCE9" as const,   // → Primary Light
+  silver: "#3A4F70" as const,   // → Primary (medium)
   bronze: "#D6EDCF" as const,   // → Secondary Light
 } as const;
 

@@ -52,7 +52,7 @@ const partnerNames = [
   { _id: "partner-sew-usocome", name: "SEW Usocome", displayOrder: 2 },
   { _id: "partner-maf-assurances", name: "MAF assurances", displayOrder: 3 },
   { _id: "partner-arts-industries", name: "Arts et Industries", displayOrder: 4 },
-  { _id: "partner-eiffage-energies", name: "Eiffage Energies Systèmes", displayOrder: 5 },
+  { _id: "partner-eiffage-energies", name: "Eiffage Construction", displayOrder: 5 },
   { _id: "partner-electricite-strasbourg", name: "Electricité Strasbourg", displayOrder: 6 },
 ];
 
@@ -79,7 +79,6 @@ async function main() {
         _id: p._id,
         _type: "partner",
         name: p.name,
-        category: "gold",
         displayOrder: p.displayOrder,
         logo: { _type: "image", asset: { _type: "reference", _ref: assetId } },
       };
@@ -131,7 +130,7 @@ async function main() {
   for (const m of finalTeam) console.log(`  - ${m.role} : ${m.name}`);
 
   console.log("\n=== PARTENAIRES ===");
-  for (const p of finalPartners) console.log(`  - ${p.name} (${p.category})`);
+  for (const p of finalPartners) console.log(`  - ${p.name}`);
 
   console.log("\n=== BILLETTERIE ===");
   for (const t of finalTickets) console.log(`  - ${t.type} : ${t.price}€`);

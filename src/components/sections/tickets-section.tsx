@@ -27,7 +27,7 @@ export function TicketsSection() {
         <div key={t._id} className={`relative flex flex-col rounded-xl border bg-card p-6 shadow-sm transition-all hover:shadow-md ${t.soldOut ? "opacity-60" : ""}`}>
           {t.soldOut && <span className="absolute -top-2 -right-2 rounded-full bg-destructive px-3 py-1 text-xs font-bold text-destructive-foreground">Épuisé</span>}
           <h3 className="font-heading text-lg font-bold text-foreground">{t.type}</h3>
-          <p className="mt-2 text-3xl font-bold text-gala-primary">{t.price.toLocaleString("fr-FR", { style: "currency", currency: "EUR" })}</p>
+          <p className="mt-2 font-garamond text-3xl font-semibold text-gala-primary">{t.price.toLocaleString("fr-FR", { style: "currency", currency: "EUR" })}</p>
           {t.description && <p className="mt-3 text-sm text-muted-foreground flex-1">{t.description}</p>}
           {t.quantityAvailable !== undefined && t.quantityAvailable > 0 && (
             <p className="mt-2 text-xs text-muted-foreground">{t.quantityAvailable > 10 ? "Places disponibles" : `Plus que ${t.quantityAvailable} place${t.quantityAvailable > 1 ? "s" : ""}`}</p>

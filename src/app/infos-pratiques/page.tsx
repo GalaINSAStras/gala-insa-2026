@@ -60,10 +60,7 @@ export default async function InfosPratiquesPage() {
               />
               <div className="relative flex items-center gap-3">
                 <ButtonFleuron className="h-5 w-5" />
-                <h2
-                  className="text-xl text-marine"
-                  style={{ fontFamily: "var(--font-title)" }}
-                >
+                <h2 className="font-heading text-xl text-marine">
                   Horaires
                 </h2>
               </div>
@@ -72,7 +69,7 @@ export default async function InfosPratiquesPage() {
                   <>
                     {infos?.openingTime && (
                       <div className="flex items-baseline justify-between gap-4 border-b border-dotted border-[var(--or-moyen)]/40 pb-3">
-                        <p className="font-garamond text-xs font-medium uppercase tracking-[.16em] text-[var(--or-fonce)]">
+                        <p className="font-garamond text-xs font-semibold italic text-[var(--or-fonce)]">
                           Ouverture
                         </p>
                         <p className="font-garamond text-2xl font-semibold text-ardoise tabular-nums">
@@ -82,7 +79,7 @@ export default async function InfosPratiquesPage() {
                     )}
                     {infos?.closingTime && (
                       <div className="flex items-baseline justify-between gap-4">
-                        <p className="font-garamond text-xs font-medium uppercase tracking-[.16em] text-[var(--or-fonce)]">
+                        <p className="font-garamond text-xs font-semibold italic text-[var(--or-fonce)]">
                           Fermeture
                         </p>
                         <p className="font-garamond text-2xl font-semibold text-ardoise tabular-nums">
@@ -108,10 +105,7 @@ export default async function InfosPratiquesPage() {
                 />
                 <div className="relative flex items-center gap-3">
                   <ButtonFleuron className="h-5 w-5" />
-                  <h2
-                    className="text-xl text-marine"
-                    style={{ fontFamily: "var(--font-title)" }}
-                  >
+                  <h2 className="font-heading text-xl text-marine">
                     Accessibilité
                   </h2>
                 </div>

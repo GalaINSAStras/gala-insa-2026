@@ -49,7 +49,7 @@ export function PageHero({ kicker, title, subtitle, children }: PageHeroProps) {
                 aria-hidden
                 className="h-px w-12 bg-gradient-to-r from-transparent to-[var(--or-moyen)] md:w-20"
               />
-              <span className="font-garamond text-[clamp(.72rem,1.6vw,.9rem)] font-medium uppercase tracking-[.32em] text-[var(--or-fonce)]">
+              <span className="font-titre text-[clamp(.72rem,1.6vw,.9rem)] font-semibold uppercase tracking-[.32em] text-[var(--or-fonce)]">
                 {kicker}
               </span>
               <span
@@ -61,8 +61,8 @@ export function PageHero({ kicker, title, subtitle, children }: PageHeroProps) {
 
           {/* Titre */}
           <h1
-            className="mt-6 font-titre italic text-marine [text-wrap:balance] [text-shadow:0_2px_18px_rgba(44,62,92,.12)]"
-            style={{ fontSize: "clamp(2.5rem, 6.5vw, 4.75rem)", lineHeight: 1.05 }}
+            className="mt-6 text-marine [text-wrap:balance] [text-shadow:0_2px_18px_rgba(44,62,92,.12)]"
+            style={{ fontFamily: "var(--font-title)", fontSize: "clamp(2.5rem, 6.5vw, 4.75rem)", lineHeight: 1.05 }}
           >
             {title}
           </h1>

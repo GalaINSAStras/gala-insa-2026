@@ -97,10 +97,7 @@ function TimelineItem({ entry, index }: { entry: TimelineEntry; index: number })
           </p>
         )}
         {entry.titre && (
-          <h3
-            className="mt-1 text-xl text-marine md:text-2xl"
-            style={{ fontFamily: "var(--font-title)" }}
-          >
+          <h3 className="mt-1 font-heading text-xl text-marine md:text-2xl">
             {entry.titre}
           </h3>
         )}
@@ -140,10 +137,7 @@ export function Programmation({
     return (
       <div className="mx-auto max-w-2xl text-center">
         <FloralEdge className="mx-auto h-28 w-28 opacity-70" />
-        <p
-          className="mt-4 text-2xl text-marine"
-          style={{ fontFamily: "var(--font-title)" }}
-        >
+        <p className="mt-4 font-heading text-2xl text-marine">
           Programmation dévoilée prochainement
         </p>
         <p className="mt-2 text-ardoise/80">

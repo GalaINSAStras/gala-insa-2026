@@ -13,10 +13,7 @@ export function TransportInfo() {
         aria-hidden
         className="pointer-events-none absolute inset-2 rounded-xl border border-[var(--or-clair)]/40"
       />
-      <h3
-        className="relative text-xl text-marine"
-        style={{ fontFamily: "var(--font-title)" }}
-      >
+      <h3 className="relative font-heading text-xl text-marine">
         Transports
       </h3>
       <div className="relative mt-4 space-y-4 text-sm text-ardoise/80 leading-relaxed">
@@ -25,7 +22,7 @@ export function TransportInfo() {
             <Bus className="h-4 w-4 text-[var(--marine)]" strokeWidth={2} />
           </span>
           <div>
-            <p className="font-medium text-marine">En bus</p>
+            <p className="font-garamond font-semibold italic text-marine">En bus</p>
             <p>Ligne 67, direction Plobsheim Est, arrêt Cours de l&rsquo;Illiade</p>
           </div>
         </div>
@@ -34,7 +31,7 @@ export function TransportInfo() {
             <TrainFront className="h-4 w-4 text-[var(--marine)]" strokeWidth={2} />
           </span>
           <div>
-            <p className="font-medium text-marine">En tram</p>
+            <p className="font-garamond font-semibold italic text-marine">En tram</p>
             <p>Ligne A, direction Illkirch Graffenstaden, arrêt Cours de l&rsquo;Illiade</p>
           </div>
         </div>
@@ -43,7 +40,7 @@ export function TransportInfo() {
             <Car className="h-4 w-4 text-[var(--marine)]" strokeWidth={2} />
           </span>
           <div>
-            <p className="font-medium text-marine">En voiture</p>
+            <p className="font-garamond font-semibold italic text-marine">En voiture</p>
             <p>Depuis l&rsquo;autoroute A35, sorties Illkirch Nord ou Vigie, Ostwald</p>
           </div>
         </div>

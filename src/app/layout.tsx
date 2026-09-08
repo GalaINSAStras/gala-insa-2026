@@ -108,6 +108,15 @@ export default function RootLayout({
       className={`${inter.variable} ${cormorantGaramond.variable} ${titre.variable} ${ebGaramond.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col" suppressHydrationWarning>
+      {/* Filtre global de grain (feTurbulence) — utilisé par le composant Grain */}
+      <svg width="0" height="0" className="absolute" aria-hidden focusable="false">
+        <defs>
+          <filter id="gala-grain" x="0" y="0" width="100%" height="100%">
+            <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="3" stitchTiles="stitch" />
+            <feColorMatrix type="saturate" values="0" />
+          </filter>
+        </defs>
+      </svg>
         {/* Script anti-extension (bis_skin_checked) — s'exécute avant l'hydration */}
         <Script id="sanitize-bis" strategy="beforeInteractive">
           {`
