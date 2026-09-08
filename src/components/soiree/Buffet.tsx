@@ -1,23 +1,44 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { ChevronDown } from "lucide-react";
+import {
+  Bean,
+  ChevronDown,
+  Egg,
+  Fish,
+  Milk,
+  Nut,
+  Shrimp,
+  Wheat,
+  type LucideIcon,
+} from "lucide-react";
 import { Reveal } from "./Reveal";
 import { SectionHeading } from "./SectionHeading";
 import type { Comptoir, Plat } from "@/lib/sanity/types";
 
 const ALLERGEN_META: Record<
   string,
-  { label: string; abbr: string; bg: string; text: string; border: string }
+  { label: string; Icon: LucideIcon; bg: string; text: string; border: string }
 > = {
-  gluten: { label: "Gluten", abbr: "Glu", bg: "#F5DCE3", text: "#8A4A5C", border: "#E9C1CF" },
-  lactose: { label: "Lactose", abbr: "Lac", bg: "#EAF1F8", text: "#3A5A72", border: "#C6D7E8" },
-  oeufs: { label: "Œufs", abbr: "Oeu", bg: "#FDF6E3", text: "#8A6A1F", border: "#F0D9A6" },
-  fruits_coque: { label: "Fruits à coque", abbr: "Frc", bg: "#F5DCE3", text: "#8A4A5C", border: "#E9C1CF" },
-  soja: { label: "Soja", abbr: "Soj", bg: "#CFE3CC", text: "#3A5A72", border: "#B6D2AE" },
-  poisson: { label: "Poisson", abbr: "Poi", bg: "#EAF1F8", text: "#3A5A72", border: "#C6D7E8" },
-  crustaces: { label: "Crustacés", abbr: "Cru", bg: "#FDF6E3", text: "#8A6A1F", border: "#F0D9A6" },
+  gluten: { label: "Gluten", Icon: Wheat, bg: "#F5DCE3", text: "#8A4A5C", border: "#E9C1CF" },
+  lactose: { label: "Lactose", Icon: Milk, bg: "#EAF1F8", text: "#3A5A72", border: "#C6D7E8" },
+  oeufs: { label: "Œufs", Icon: Egg, bg: "#FDF6E3", text: "#8A6A1F", border: "#F0D9A6" },
+  fruits_coque: { label: "Fruits à coque", Icon: Nut, bg: "#F5DCE3", text: "#8A4A5C", border: "#E9C1CF" },
+  soja: { label: "Soja", Icon: Bean, bg: "#CFE3CC", text: "#3A5A72", border: "#B6D2AE" },
+  poisson: { label: "Poisson", Icon: Fish, bg: "#EAF1F8", text: "#3A5A72", border: "#C6D7E8" },
+  crustaces: { label: "Crustacés", Icon: Shrimp, bg: "#FDF6E3", text: "#8A6A1F", border: "#F0D9A6" },
 };
+
+/** Ordre d'affichage canonique (légende) */
+const ALLERGEN_ORDER = [
+  "gluten",
+  "lactose",
+  "oeufs",
+  "fruits_coque",
+  "soja",
+  "poisson",
+  "crustaces",
+] as const;
 
 const REGIME_LABELS: Record<string, string> = {
   vegetarien: "Végétarien",
@@ -28,14 +49,15 @@ const REGIME_LABELS: Record<string, string> = {
 function AllergenPill({ code }: { code: string }) {
   const meta = ALLERGEN_META[code];
   if (!meta) return null;
+  const Icon = meta.Icon;
   return (
     <span
       title={meta.label}
       aria-label={`Allergène : ${meta.label}`}
-      className="group relative inline-flex h-6 min-w-6 items-center justify-center rounded-full border px-1.5 text-[11px] font-semibold leading-none"
+      className="group relative inline-flex h-6 w-6 items-center justify-center rounded-full border"
       style={{ background: meta.bg, color: meta.text, borderColor: meta.border }}
     >
-      {meta.abbr}
+      <Icon className="h-3.5 w-3.5" strokeWidth={2} aria-hidden />
       <span
         role="tooltip"
         className="pointer-events-none absolute bottom-full left-1/2 z-10 mb-1.5 -translate-x-1/2 whitespace-nowrap rounded-md bg-marine px-2 py-1 text-[11px] font-normal text-white opacity-0 transition-opacity group-hover:opacity-100"
@@ -54,7 +76,6 @@ export function Buffet({
   prixBuffet?: number;
 }) {
   const [active, setActive] = useState<Set<string>>(new Set());
-  const [filterOn, setFilterOn] = useState(true);
 
   const allAllergens = useMemo(() => {
     const set = new Set<string>();
@@ -66,6 +87,10 @@ export function Buffet({
     return Array.from(set);
   }, [comptoirs]);
 
+  const legendAllergens = ALLERGEN_ORDER.filter((a) =>
+    allAllergens.includes(a)
+  );
+
   const toggle = (a: string) =>
     setActive((prev) => {
       const next = new Set(prev);
@@ -75,7 +100,7 @@ export function Buffet({
     });
 
   const isHidden = (plat: Plat) => {
-    if (!filterOn || active.size === 0) return false;
+    if (active.size === 0) return false;
     return (plat.allergenes ?? []).some((a) => active.has(a));
   };
 
@@ -125,26 +150,6 @@ export function Buffet({
                 );
               })}
             </div>
-            <button
-              type="button"
-              role="switch"
-              aria-checked={filterOn}
-              onClick={() => setFilterOn((v) => !v)}
-              className="inline-flex items-center gap-2 text-sm text-ardoise/80"
-            >
-              <span
-                className={`relative inline-flex h-5 w-9 items-center rounded-full transition-colors ${
-                  filterOn ? "bg-[var(--or-moyen)]" : "bg-[var(--or-moyen)]/30"
-                }`}
-              >
-                <span
-                  className={`inline-block h-4 w-4 transform rounded-full bg-white shadow transition-transform ${
-                    filterOn ? "translate-x-4" : "translate-x-0.5"
-                  }`}
-                />
-              </span>
-              Masquer les plats contenant les allergènes sélectionnés
-            </button>
           </div>
         )}
 
@@ -155,6 +160,40 @@ export function Buffet({
             </Reveal>
           ))}
         </div>
+
+        {/* Légende des allergènes */}
+        {legendAllergens.length > 0 && (
+          <div className="mt-12 flex flex-col items-center gap-3">
+            <p className="font-garamond text-xs font-medium uppercase tracking-[.16em] text-ardoise/60">
+              Légende des allergènes
+            </p>
+            <ul className="flex flex-wrap justify-center gap-x-6 gap-y-2">
+              {legendAllergens.map((code) => {
+                const meta = ALLERGEN_META[code];
+                if (!meta) return null;
+                const Icon = meta.Icon;
+                return (
+                  <li
+                    key={code}
+                    className="inline-flex items-center gap-1.5 text-sm text-ardoise/80"
+                  >
+                    <span
+                      className="inline-flex h-6 w-6 items-center justify-center rounded-full border"
+                      style={{
+                        background: meta.bg,
+                        color: meta.text,
+                        borderColor: meta.border,
+                      }}
+                    >
+                      <Icon className="h-3.5 w-3.5" strokeWidth={2} aria-hidden />
+                    </span>
+                    {meta.label}
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
+        )}
       </div>
     </section>
   );
