@@ -96,6 +96,7 @@ export function TeaserCarousel({ slides }: { slides: TeaserSlide[] }) {
               src={s.src}
               poster={s.poster}
               muted
+              autoPlay
               loop
               playsInline
               preload={i === 0 ? "auto" : "metadata"}
