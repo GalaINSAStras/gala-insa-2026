@@ -23,7 +23,7 @@ function FaqItem({ faq, index }: { faq: FAQ; index: number }) {
 
   return (
     <motion.div
-      className="border-b border-border last:border-0"
+      className="border-b border-[var(--or-moyen)]/25 last:border-0"
       initial={{ opacity: 0, y: 16 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-50px" }}
@@ -45,7 +45,7 @@ function FaqItem({ faq, index }: { faq: FAQ; index: number }) {
         <motion.span
           animate={{ rotate: isOpen ? 180 : 0 }}
           transition={{ duration: 0.3, ease: [0.76, 0, 0.24, 1] }}
-          className="flex-shrink-0 text-muted-foreground"
+          className="flex h-7 w-7 flex-shrink-0 items-center justify-center rounded-full border border-[var(--or-moyen)]/40 text-[var(--or-fonce)]"
         >
           <ChevronDown className="h-4 w-4" />
         </motion.span>

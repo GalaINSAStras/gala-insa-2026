@@ -4,6 +4,9 @@ import { TicketGrid } from "@/components/tickets/TicketGrid";
 import type { TicketCardProps } from "@/components/tickets/TicketCard";
 import type { TicketVariant } from "@/components/tickets/lib/variants";
 import type { Ticket } from "@/lib/sanity/types";
+import { PageHero } from "@/components/ornaments/PageHero";
+import { FloralSeparator } from "@/components/ornaments/FloralSeparator";
+import { SectionHeading } from "@/components/soiree/SectionHeading";
 
 export const metadata: Metadata = {
   title: "Billetterie",
@@ -58,43 +61,39 @@ export default async function BilletteriePage() {
 
   return (
     <div className="flex flex-col">
-      {/* === Hero === */}
-      <section className="flex min-h-[40vh] items-center justify-center bg-gradient-to-br from-gala-primary via-gala-primary-dark to-gala-primary px-4 text-white">
-        <div className="text-center max-w-3xl">
-          <p className="mb-2 text-sm font-medium uppercase tracking-widest text-gala-gold">
-            72<sup>e</sup> Édition
-          </p>
-          <h1 className="font-heading text-4xl font-bold tracking-tight md:text-5xl lg:text-6xl">
-            Billetterie
-          </h1>
-          <p className="mt-4 text-lg text-white/80">
-            Réservez votre place et rejoignez-nous pour une soirée qui promet d&rsquo;être mémorable.
-          </p>
-        </div>
-      </section>
+      {/* === Hero orné === */}
+      <PageHero
+        kicker="Édition 2026"
+        title="Billetterie"
+        subtitle="Réservez votre place et rejoignez-nous pour une soirée qui promet d&rsquo;être mémorable."
+      />
+
+      {/* Séparateur floral — chevauche la jointure hero / contenu */}
+      <FloralSeparator />
 
       {/* === Nos billets === */}
-      <section className="py-[clamp(3rem,7vw,6rem)]">
-        <div className="container mx-auto px-4 md:px-6">
-          <h2 className="mb-[clamp(2rem,4vw,3.5rem)] text-center text-[clamp(1.8rem,4vw,2.6rem)] italic text-ardoise">
-            Nos billets
-          </h2>
+      <section className="bg-ivoire py-[clamp(3rem,7vw,6rem)]">
+        <div className="mx-auto max-w-[1180px] px-4 sm:px-6 lg:px-8">
+          <SectionHeading kicker="Réservez" title="Nos billets" />
 
-          {tickets && tickets.length > 0 ? (
-            <TicketGrid tickets={tickets.map(toTicketCardProps)} />
-          ) : (
-            <div className="text-center py-20">
-              <p className="text-muted-foreground italic">
-                La billetterie n&rsquo;a pas encore ouvert ses portes... patience !
-              </p>
-            </div>
-          )}
+          <div className="mt-12">
+            {tickets && tickets.length > 0 ? (
+              <TicketGrid tickets={tickets.map(toTicketCardProps)} />
+            ) : (
+              <div className="py-20 text-center">
+                <p className="font-garamond text-xl italic text-ardoise/70">
+                  La billetterie n&rsquo;a pas encore ouvert ses portes...
+                  patience !
+                </p>
+              </div>
+            )}
+          </div>
 
           {/* Info HelloAsso */}
-          <div className="mt-12 text-center">
-            <p className="text-sm text-muted-foreground">
-              La billetterie passe par Helloasso
-            </p>
+          <div className="mt-14 flex items-center justify-center gap-3">
+            <span aria-hidden className="h-px w-10 bg-gradient-to-r from-transparent to-[var(--or-moyen)]" />
+            <p className="text-sm text-ardoise/70">La billetterie passe par Helloasso</p>
+            <span aria-hidden className="h-px w-10 bg-gradient-to-l from-transparent to-[var(--or-moyen)]" />
           </div>
         </div>
       </section>

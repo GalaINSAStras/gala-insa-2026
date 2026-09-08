@@ -96,6 +96,7 @@
   --font-display: "Cormorant Garamond", serif;
   --font-body: "Inter", sans-serif;
   --font-mono: "Geist Mono", ui-monospace, monospace;
+  --font-heading: var(--font-display); /* titre générique (CardTitle, SheetTitle…) → Cormorant */
   --font-titre: var(--font-titre); /* Playfair Display — injectée via next/font */
   --font-garamond: var(--font-garamond); /* EB Garamond — injectée via next/font */
 
@@ -348,4 +349,20 @@
   p, li, td, th, label, input, textarea, button, span, small, blockquote {
     font-family: var(--font-body);
   }
+}
+
+/* ─── Défilement élégant (cartes du buffet) ─── */
+.gala-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: var(--or-moyen) transparent;
+}
+.gala-scroll::-webkit-scrollbar {
+  width: 6px;
+}
+.gala-scroll::-webkit-scrollbar-thumb {
+  background: var(--or-moyen);
+  border-radius: 999px;
+}
+.gala-scroll::-webkit-scrollbar-track {
+  background: transparent;
 }

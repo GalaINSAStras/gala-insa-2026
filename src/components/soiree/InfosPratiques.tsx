@@ -3,6 +3,7 @@ import { Reveal } from "./Reveal";
 import { SectionHeading } from "./SectionHeading";
 import { CartoucheButton } from "@/components/ui/CartoucheButton";
 import { ButtonFleuron } from "@/components/ui/ButtonFleuron";
+import { DressCodeIllustration } from "@/components/ornaments/DressCodeIllustration";
 import { PdfLink } from "@/components/ui/pdf-link";
 import type { Soiree } from "@/lib/sanity/types";
 
@@ -24,7 +25,7 @@ export function InfosPratiques({
   return (
     <section className="relative bg-bleuPale py-[clamp(3rem,7vw,6rem)]">
       <div className="mx-auto max-w-[1180px] px-4 sm:px-6 lg:px-8">
-        <SectionHeading kicker="Avant de venir" title="Infos pratiques" />
+        <SectionHeading kicker="Avant de venir" title="À savoir" />
 
         <div className="mt-12 grid grid-cols-1 gap-6 md:grid-cols-3">
           {/* Place soirée seule */}
@@ -65,7 +66,7 @@ export function InfosPratiques({
               >
                 Code vestimentaire
               </h3>
-              {dressCodeUrl && (
+              {dressCodeUrl ? (
                 <div className="relative mt-4 h-44 overflow-hidden rounded-xl">
                   <Image
                     src={dressCodeUrl}
@@ -74,6 +75,10 @@ export function InfosPratiques({
                     className="object-cover"
                     sizes="(min-width:768px) 320px, 100vw"
                   />
+                </div>
+              ) : (
+                <div className="mt-4 flex h-44 items-center justify-center rounded-xl border border-[var(--or-moyen)]/30 bg-[var(--rose-poudre)]/20">
+                  <DressCodeIllustration className="h-full max-h-40 w-auto" />
                 </div>
               )}
               {soiree?.dressCode && (

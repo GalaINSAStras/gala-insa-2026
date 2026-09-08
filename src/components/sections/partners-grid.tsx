@@ -33,8 +33,9 @@ export function PartnersGrid() {
         const c = categoryStyles[p.category] ?? categoryStyles.silver;
         return (
           <Link key={p._id} href={p.websiteUrl ?? "#"} target={p.websiteUrl ? "_blank" : undefined} rel={p.websiteUrl ? "noopener noreferrer" : undefined}
-            className={`group relative flex flex-col items-center justify-center rounded-xl border-2 p-6 transition-all hover:shadow-lg hover:-translate-y-1 ${c.className}`}>
-            <span className={`absolute top-3 right-3 rounded-full px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-wider ${c.badge}`}>{c.label}</span>
+            className={`group relative flex flex-col items-center justify-center rounded-2xl border-2 p-6 transition-all hover:shadow-lg hover:-translate-y-1 ${c.className}`}>
+            <span aria-hidden className="pointer-events-none absolute inset-[3px] rounded-[14px] border border-[var(--or-clair)]/40" />
+            <span className={`absolute top-3 right-3 z-10 rounded-full px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-wider ${c.badge}`}>{c.label}</span>
             {p.logo ? (
               <div className="relative h-20 w-40 overflow-hidden">
                 <Image src={urlFor(p.logo).width(160).height(80).fit("max").url()} alt={`Logo ${p.name}`} fill className="object-contain transition-transform group-hover:scale-105" sizes="160px" />

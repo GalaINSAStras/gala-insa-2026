@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import {
   Bean,
   ChevronDown,
@@ -14,6 +14,7 @@ import {
 } from "lucide-react";
 import { Reveal } from "./Reveal";
 import { SectionHeading } from "./SectionHeading";
+import { ButtonFleuron } from "@/components/ui/ButtonFleuron";
 import type { Comptoir, Plat } from "@/lib/sanity/types";
 
 const ALLERGEN_META: Record<
@@ -211,8 +212,20 @@ function ComptoirCard({
   const visiblePlats = plats.filter((p) => !isHidden(p));
   const hasHidden = visiblePlats.length < plats.length;
 
+  // Défilement interne : détecte si la liste déborde pour afficher le fondu bas
+  const scrollRef = useRef<HTMLDivElement>(null);
+  const [canScroll, setCanScroll] = useState(false);
+  useEffect(() => {
+    const el = scrollRef.current;
+    if (!el) return;
+    const check = () => setCanScroll(el.scrollHeight > el.clientHeight + 2);
+    check();
+    window.addEventListener("resize", check);
+    return () => window.removeEventListener("resize", check);
+  }, [visiblePlats.length, open]);
+
   return (
-    <article className="relative flex h-full flex-col overflow-hidden rounded-t-[120px] rounded-b-2xl border border-[var(--or-moyen)]/60 bg-ivoire pt-12 shadow-[0_10px_36px_rgba(63,91,118,.1)]">
+    <article className="relative flex flex-col overflow-hidden rounded-t-[120px] rounded-b-2xl border border-[var(--or-moyen)]/60 bg-ivoire pt-12 shadow-[0_10px_36px_rgba(63,91,118,.1)] sm:h-[520px]">
       {/* double liseré doré */}
       <div
         aria-hidden
@@ -255,8 +268,10 @@ function ComptoirCard({
         />
       </button>
 
+      {/* Liste — défilement interne sur écrans ≥ sm */}
       <div
-        className={`relative mt-4 px-6 pb-7 ${open ? "block" : "hidden"} sm:block`}
+        ref={scrollRef}
+        className={`relative mt-4 min-h-0 flex-1 px-6 pb-4 gala-scroll sm:overflow-y-auto ${open ? "block" : "hidden"} sm:block`}
       >
         {visiblePlats.length === 0 ? (
           <p className="text-sm italic text-ardoise/60">
@@ -295,6 +310,21 @@ function ComptoirCard({
             Certains plats sont masqués selon vos filtres.
           </p>
         )}
+
+        {/* Fondu bas — signale que la liste se poursuit */}
+        {canScroll && (
+          <div
+            aria-hidden
+            className="pointer-events-none sticky bottom-0 h-10 bg-gradient-to-t from-ivoire to-transparent"
+          />
+        )}
+      </div>
+
+      {/* Signature fleuron en pied de carte */}
+      <div className="relative hidden items-center justify-center gap-3 px-6 pb-5 pt-2 sm:flex">
+        <span aria-hidden className="h-px w-12 bg-gradient-to-r from-transparent to-[var(--or-moyen)]" />
+        <ButtonFleuron className="h-4 w-4" />
+        <span aria-hidden className="h-px w-12 bg-gradient-to-l from-transparent to-[var(--or-moyen)]" />
       </div>
     </article>
   );

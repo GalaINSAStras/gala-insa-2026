@@ -8,8 +8,6 @@ import { SectionHeading } from "@/components/soiree/SectionHeading";
 import { Buffet } from "@/components/soiree/Buffet";
 import { Carte } from "@/components/soiree/Carte";
 import { InfosPratiques } from "@/components/soiree/InfosPratiques";
-import { FaqSection } from "@/components/sections/faq-section";
-import { ContactSection } from "@/components/sections/contact-section";
 
 export const metadata: Metadata = {
   title: "La Soirée",
@@ -77,29 +75,6 @@ export default async function LaSoireePage() {
         contratMineurHref={contratMineurHref}
         reglementInterieurHref={reglementInterieurHref}
       />
-
-      {/* FAQ & Contact */}
-      <section id="faq" className="bg-ivoire py-[clamp(3rem,7vw,6rem)]">
-        <div className="mx-auto max-w-[1180px] px-4 sm:px-6 lg:px-8">
-          <SectionHeading kicker="On vous répond" title="Questions fréquentes" />
-          <div className="mt-8">
-            <FaqSection />
-          </div>
-        </div>
-      </section>
-
-      <section id="contact" className="bg-bleuPale py-[clamp(3rem,7vw,6rem)]">
-        <div className="mx-auto max-w-[1180px] px-4 sm:px-6 lg:px-8">
-          <SectionHeading
-            kicker="Une question"
-            title="Nous contacter"
-            subtitle="Une question sur la soirée, le menu ou l'organisation ? Écrivez-nous."
-          />
-          <div className="mt-8">
-            <ContactSection />
-          </div>
-        </div>
-      </section>
     </div>
   );
 }

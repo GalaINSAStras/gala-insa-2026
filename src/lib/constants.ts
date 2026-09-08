@@ -48,7 +48,7 @@ export const NAVIGATION = [
   { label: "La Soirée", href: "/la-soiree" },
   { label: "Infos Pratiques", href: "/infos-pratiques" },
   { label: "Billetterie", href: "/billetterie" },
-  { label: "Partenaires", href: "/partenaires" },
+  { label: "Partenaires", href: "/#partners" },
   { label: "FAQ", href: "/#faq" },
   { label: "Contact", href: "/#contact" },
 ] as const;

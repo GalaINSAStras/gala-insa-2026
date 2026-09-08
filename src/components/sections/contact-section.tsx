@@ -172,7 +172,7 @@ export function ContactSection() {
               <Button
                 type="submit"
                 disabled={pending}
-                className="group relative w-full overflow-hidden rounded-xl bg-gala-primary text-white shadow-md transition-all duration-300 hover:bg-gala-primary-hover hover:shadow-lg disabled:opacity-60"
+                className="group relative h-auto w-full overflow-hidden rounded-xl border border-[var(--or-moyen)]/50 bg-[linear-gradient(180deg,var(--marine-clair)_0%,var(--marine)_55%,var(--marine-fonce)_100%)] py-3 font-titre tracking-[0.06em] text-[#F5F0E4] shadow-md transition-all duration-300 hover:shadow-lg hover:brightness-105 disabled:opacity-60"
               >
                 <AnimatePresence mode="wait">
                   {pending ? (

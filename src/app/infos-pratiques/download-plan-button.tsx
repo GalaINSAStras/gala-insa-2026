@@ -11,14 +11,13 @@ type DownloadPlanButtonProps = {
 /**
  * Lien « Télécharger le plan » — déclenche le téléchargement du PDF du plan
  * servi par /documents/<nom-du-fichier>, enregistré sous son nom d'origine.
- *
- * Style identique au bouton "Voir l'itinéraire" de map-section.tsx.
+ * Style « cartouche secondaire » (liseré doré) cohérent avec la charte.
  */
 export function DownloadPlanButton({ href, ...props }: DownloadPlanButtonProps) {
   return (
     <a
       href={href}
-      className="inline-flex items-center gap-2 rounded-lg border border-border bg-card px-4 py-2 md:px-6 md:py-3 text-sm md:text-base font-medium text-foreground hover:bg-muted transition-colors"
+      className="inline-flex items-center gap-2 rounded-full border border-[var(--or-moyen)]/60 bg-white/70 px-5 py-2.5 text-sm md:text-base font-medium text-ardoise transition-colors hover:border-[var(--or-fonce)] hover:text-[var(--or-fonce)]"
       download
       {...props}
     >
