@@ -67,10 +67,6 @@ export const metadata: Metadata = {
     description: "Le Gala revient — Édition 2026 à L'Illiade.",
     images: ["/og-image.png"],
   },
-  icons: {
-    icon: "/favicon.ico",
-    apple: "/apple-touch-icon.png",
-  },
 };
 
 const organizationSchema = {
