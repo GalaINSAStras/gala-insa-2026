@@ -59,6 +59,9 @@ function BurgerButton({
   );
 }
 
+/** Navigation du menu mobile — « Accueil » en tête, puis les pages principales */
+const MOBILE_NAVIGATION = [{ label: "Accueil", href: "/" }, ...NAVIGATION];
+
 export function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
@@ -128,7 +131,7 @@ export function Header() {
                 <BurgerButton open={true} onClick={closeMenu} renderWhenOpen />
                 <nav className="flex h-full w-full flex-col items-center justify-center px-6 pt-[calc(env(safe-area-inset-top,0px)+5rem)] pb-[calc(env(safe-area-inset-bottom,0px)+2rem)] text-center">
                   <div className="flex flex-col items-center gap-8">
-                    {NAVIGATION.map((item, i) => (
+                    {MOBILE_NAVIGATION.map((item, i) => (
                       <motion.span
                         key={item.href}
                         initial={{ opacity: 0, y: 20 }}
