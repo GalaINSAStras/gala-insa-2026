@@ -46,6 +46,7 @@ next-env.d.ts
 
 # debug screenshots
 studio-check*.png
+.mobile-screenshots/
 
 # design artifacts / mockups & screenshots (refonte)
 .mockups/
