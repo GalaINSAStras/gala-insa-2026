@@ -59,7 +59,7 @@ export function TicketCard({
 
   return (
     <motion.article
-      className={`group relative isolate ${className}`}
+      className={`group relative isolate drop-shadow-[0_10px_22px_rgba(63,91,118,.08)] ${className}`}
       style={{ aspectRatio: `${geo.width} / ${geo.height}` }}
       initial={reduceMotion ? false : { opacity: 0, y: 22 }}
       whileInView={{ opacity: 1, y: 0 }}
@@ -70,7 +70,7 @@ export function TicketCard({
       {/* Halo au survol */}
       <div
         aria-hidden
-        className="pointer-events-none absolute -inset-3 -z-10 rounded-[2rem] opacity-0 blur-2xl transition-opacity duration-500 group-hover:opacity-100"
+        className="pointer-events-none absolute -inset-4 -z-10 rounded-[2rem] opacity-0 blur-2xl transition-opacity duration-500 group-hover:opacity-100"
         style={{
           background: `radial-gradient(60% 60% at 50% 55%, rgba(${theme.glowRgb},0.30), transparent 70%)`,
         }}
@@ -91,7 +91,7 @@ export function TicketCard({
 
       {/* Contenu */}
       <div className="relative flex h-full flex-col items-center px-[13%] pb-[9%] pt-[11%] text-center text-ardoise">
-        <h3 className="font-heading text-[clamp(1.15rem,2.1vw,1.6rem)] uppercase leading-tight tracking-[0.1em]">
+        <h3 className="font-heading text-[clamp(1.15rem,2.1vw,1.6rem)] uppercase leading-tight tracking-[0.08em]">
           {title}
         </h3>
 

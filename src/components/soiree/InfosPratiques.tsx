@@ -81,7 +81,7 @@ export function InfosPratiques({
                   />
                 </div>
               ) : (
-                <div className="mt-4 flex h-44 items-center justify-center rounded-xl border border-[var(--or-moyen)]/30 bg-[var(--rose-poudre)]/20">
+                <div className="mt-4 flex h-44 items-center justify-center rounded-xl bg-ivoire/70">
                   <DressCodeIllustration className="h-full max-h-40 w-auto" />
                 </div>
               )}

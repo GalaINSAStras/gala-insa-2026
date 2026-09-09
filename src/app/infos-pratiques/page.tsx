@@ -52,9 +52,9 @@ export default async function InfosPratiquesPage() {
         <div className="mx-auto max-w-[1180px] px-4 sm:px-6 lg:px-8">
           <SectionHeading kicker="Le jour J" title="Horaires & accès" />
 
-          <div className="mt-12 grid gap-6 md:grid-cols-2">
+          <div className="mt-10 grid gap-5 sm:gap-6 md:mt-12 md:grid-cols-2">
             {/* Horaires */}
-            <article className="relative flex h-full flex-col rounded-2xl border border-[var(--or-moyen)]/50 bg-white/60 p-7 shadow-[0_8px_28px_rgba(63,91,118,.08)]">
+            <article className="group relative flex h-full flex-col rounded-2xl border border-[var(--or-moyen)]/50 bg-white/65 p-6 shadow-[0_8px_28px_rgba(63,91,118,.08)] transition-transform duration-300 hover:-translate-y-1 hover:shadow-[0_14px_34px_rgba(63,91,118,.13)] sm:p-7">
               <div
                 aria-hidden
                 className="pointer-events-none absolute inset-2 rounded-xl border border-[var(--or-clair)]/40"
@@ -70,7 +70,7 @@ export default async function InfosPratiquesPage() {
                   <>
                     {infos?.openingTime && (
                       <div className="flex items-baseline justify-between gap-4 border-b border-dotted border-[var(--or-moyen)]/40 pb-3">
-                        <p className="font-garamond text-xs font-semibold italic text-[var(--or-fonce)]">
+                        <p className="font-garamond text-xs font-semibold italic text-[var(--or-fonce)] max-sm:text-lg">
                           Ouverture
                         </p>
                         <p className="font-garamond text-2xl font-semibold text-ardoise tabular-nums">
@@ -80,7 +80,7 @@ export default async function InfosPratiquesPage() {
                     )}
                     {infos?.closingTime && (
                       <div className="flex items-baseline justify-between gap-4">
-                        <p className="font-garamond text-xs font-semibold italic text-[var(--or-fonce)]">
+                        <p className="font-garamond text-xs font-semibold italic text-[var(--or-fonce)] max-sm:text-lg">
                           Fermeture
                         </p>
                         <p className="font-garamond text-2xl font-semibold text-ardoise tabular-nums">
@@ -99,7 +99,7 @@ export default async function InfosPratiquesPage() {
 
             {/* Accessibilité */}
             {infos?.accessibilite && (
-              <article className="relative flex h-full flex-col rounded-2xl border border-[var(--or-moyen)]/50 bg-white/60 p-7 shadow-[0_8px_28px_rgba(63,91,118,.08)]">
+              <article className="group relative flex h-full flex-col rounded-2xl border border-[var(--or-moyen)]/50 bg-white/65 p-6 shadow-[0_8px_28px_rgba(63,91,118,.08)] transition-transform duration-300 hover:-translate-y-1 hover:shadow-[0_14px_34px_rgba(63,91,118,.13)] sm:p-7">
                 <div
                   aria-hidden
                   className="pointer-events-none absolute inset-2 rounded-xl border border-[var(--or-clair)]/40"

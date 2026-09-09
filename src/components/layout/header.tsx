@@ -70,6 +70,17 @@ export function Header() {
   useLayoutEffect(() => {
     if (!isMobileMenuOpen) return;
 
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") closeMenu();
+    };
+
+    document.addEventListener("keydown", handleKeyDown);
+    return () => document.removeEventListener("keydown", handleKeyDown);
+  }, [closeMenu, isMobileMenuOpen]);
+
+  useLayoutEffect(() => {
+    if (!isMobileMenuOpen) return;
+
     const { body, documentElement } = document;
     const previousBodyOverflow = body.style.overflow;
     const previousBodyPosition = body.style.position;
@@ -112,7 +123,7 @@ export function Header() {
           <AnimatePresence>
             {isMobileMenuOpen && (
               <motion.div
-                className="fixed inset-0 z-50 flex items-stretch justify-stretch"
+                role="dialog" aria-modal="true" aria-label="Menu de navigation" className="fixed inset-0 z-50 flex items-stretch justify-stretch"
                 style={{ backgroundColor: "var(--background)" }}
                 initial={{
                   clipPath: `circle(0% at ${mobileMenuOriginX} ${mobileMenuOriginY})`,

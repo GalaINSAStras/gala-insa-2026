@@ -8,7 +8,7 @@ import { LogoReveal } from "./LogoReveal";
 const EASE = [0.76, 0, 0.24, 1] as const;
 
 /** Durée totale de l'animation avant de commencer la sortie */
-const HOLD_MS = 2600;
+const HOLD_MS = 1800;
 
 /** Durée de la sortie (fondu vers le site) */
 const EXIT_DURATION = 0.7;
@@ -24,12 +24,17 @@ export function Preloader({ onComplete }: { onComplete: () => void }) {
   const [exiting, setExiting] = useState(false);
 
   useEffect(() => {
-    const timer = setTimeout(() => setExiting(true), HOLD_MS);
-    return () => clearTimeout(timer);
-  }, []);
+    const exitTimer = setTimeout(() => setExiting(true), HOLD_MS);
+    const completeTimer = setTimeout(() => onComplete(), HOLD_MS + EXIT_DURATION * 1000);
+
+    return () => {
+      clearTimeout(exitTimer);
+      clearTimeout(completeTimer);
+    };
+  }, [onComplete]);
 
   return (
-    <AnimatePresence onExitComplete={onComplete}>
+    <AnimatePresence>
       {!exiting && (
         <motion.div
           className="fixed inset-0 z-[10000] flex flex-col items-center justify-center overflow-hidden"

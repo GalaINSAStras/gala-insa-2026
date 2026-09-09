@@ -35,6 +35,8 @@ export function ContactSection() {
             exit={{ opacity: 0, scale: 0.95 }}
             transition={{ duration: 0.4, ease: [0.76, 0, 0.24, 1] }}
             className="rounded-2xl border p-8 text-center shadow-sm"
+            role="status"
+            aria-live="polite"
             style={{
               borderColor: "#9DBE8B",
               background:
@@ -172,6 +174,7 @@ export function ContactSection() {
               <Button
                 type="submit"
                 disabled={pending}
+                aria-busy={pending}
                 className="group relative h-auto w-full overflow-hidden rounded-xl border border-[var(--or-moyen)]/50 bg-[linear-gradient(180deg,var(--marine-clair)_0%,var(--marine)_55%,var(--marine-fonce)_100%)] py-3 font-titre tracking-[0.06em] text-[#F5F0E4] shadow-md transition-all duration-300 hover:shadow-lg hover:brightness-105 disabled:opacity-60"
               >
                 <AnimatePresence mode="wait">

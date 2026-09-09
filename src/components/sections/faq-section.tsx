@@ -17,6 +17,7 @@ import type { FAQ } from "@/lib/sanity/types";
  */
 function FaqItem({ faq, index }: { faq: FAQ; index: number }) {
   const [isOpen, setIsOpen] = useState(false);
+  const panelId = `faq-reponse-${faq._id}`;
 
   // Découpage de la réponse en mots pour l'animation stagger
   const words = faq.reponse?.split(" ") ?? [];
@@ -34,6 +35,7 @@ function FaqItem({ faq, index }: { faq: FAQ; index: number }) {
         onClick={() => setIsOpen((prev) => !prev)}
         className="flex w-full cursor-pointer items-center justify-between gap-4 py-5 text-left transition-colors hover:text-gala-primary"
         aria-expanded={isOpen}
+        aria-controls={panelId}
       >
         {/*
          * Texte question : text-foreground → hover text-gala-primary
@@ -55,6 +57,9 @@ function FaqItem({ faq, index }: { faq: FAQ; index: number }) {
         {isOpen && (
           <motion.div
             key="answer"
+            id={panelId}
+            role="region"
+            aria-label={`Réponse à : ${faq.question}`}
             initial={{ height: 0, opacity: 0 }}
             animate={{ height: "auto", opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}

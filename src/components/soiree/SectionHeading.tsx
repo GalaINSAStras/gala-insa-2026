@@ -37,13 +37,13 @@ export function SectionHeading({
         </div>
       )}
 
-      <h2 className="mt-3 font-titre text-[clamp(2rem,5vw,3.25rem)] leading-[1.05] text-marine">
+      <h2 className="mt-3 font-titre text-[clamp(2rem,5vw,3.25rem)] leading-[1.05] tracking-[-0.02em] text-marine">
         {title}
       </h2>
 
       {subtitle && (
         <p
-          className={`mt-4 max-w-2xl text-ardoise/80 leading-relaxed ${
+          className={`mt-4 max-w-2xl text-sm text-ardoise/80 leading-relaxed sm:text-base ${
             align === "center" ? "mx-auto" : ""
           }`}
         >

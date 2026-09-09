@@ -27,6 +27,8 @@ export function NotifyForm() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0 }}
             className="flex items-center justify-center gap-2 text-sm text-[var(--sauge-texte)]"
+            role="status"
+            aria-live="polite"
           >
             <CheckCircle className="h-4 w-4" aria-hidden />
             Merci ! Nous vous préviendrons dès l&rsquo;ouverture.
@@ -63,6 +65,7 @@ export function NotifyForm() {
             <button
               type="submit"
               disabled={pending}
+              aria-busy={pending}
               className="inline-flex h-11 items-center justify-center gap-2 rounded-full bg-marine px-5 text-sm font-semibold text-[#F5F0E4] transition-colors hover:bg-[var(--marine-fonce)] disabled:opacity-60"
             >
               <BellRing className="h-4 w-4" aria-hidden />
@@ -73,7 +76,7 @@ export function NotifyForm() {
       </AnimatePresence>
 
       {state.error && (
-        <p role="alert" className="mt-2 text-center text-sm text-destructive">
+        <p role="alert" aria-live="assertive" className="mt-2 text-center text-sm text-destructive">
           {state.error}
         </p>
       )}

@@ -2,7 +2,7 @@ import { TicketCard, type TicketCardProps } from "./TicketCard";
 
 export function TicketGrid({ tickets }: { tickets: TicketCardProps[] }) {
   return (
-    <ul className="mx-auto grid w-full max-w-[1180px] list-none grid-cols-1 gap-x-8 gap-y-14 px-5 sm:grid-cols-2 lg:grid-cols-3 lg:gap-x-10">
+    <ul className="mx-auto grid w-full max-w-[1180px] list-none grid-cols-1 gap-x-8 gap-y-16 px-1 sm:grid-cols-2 sm:gap-y-20 lg:grid-cols-3 lg:gap-x-10">
       {tickets.map((t, i) => (
         <li key={t.id ?? `${t.variant}-${i}`} className="flex justify-center">
           <TicketCard

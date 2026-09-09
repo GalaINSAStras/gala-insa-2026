@@ -21,8 +21,10 @@ type PageHeroProps = {
  */
 export function PageHero({ kicker, title, subtitle, children }: PageHeroProps) {
   return (
-    <section className="relative isolate overflow-hidden">
+    <section className="relative isolate overflow-hidden border-b border-[var(--or-moyen)]/25">
       <PageBackdrop />
+
+      <div aria-hidden className="pointer-events-none absolute left-1/2 top-1/2 h-[min(34rem,80vw)] w-[min(48rem,92vw)] -translate-x-1/2 -translate-y-1/2 rounded-full bg-white/35 blur-3xl" />
 
       {/* Colonnes ioniques (masquées < 768px) */}
       <div aria-hidden className="pointer-events-none absolute inset-0 hidden md:block">
@@ -40,7 +42,7 @@ export function PageHero({ kicker, title, subtitle, children }: PageHeroProps) {
         />
       </div>
 
-      <div className="relative mx-auto max-w-[1180px] px-4 py-16 sm:px-6 sm:py-20 md:py-28 lg:px-8">
+      <div className="relative mx-auto max-w-[1180px] px-4 py-[clamp(4.5rem,10vw,8rem)] sm:px-6 lg:px-8">
         <div className="mx-auto max-w-3xl text-center">
           {/* Sur-titre */}
           {kicker && (
@@ -87,7 +89,7 @@ export function PageHero({ kicker, title, subtitle, children }: PageHeroProps) {
             </p>
           )}
 
-          {children && <div className="mt-10">{children}</div>}
+          {children && <div className="mt-8 sm:mt-10">{children}</div>}
         </div>
       </div>
     </section>
