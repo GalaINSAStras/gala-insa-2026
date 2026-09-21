@@ -55,7 +55,7 @@ export function DocumentsSection({ contratMineurHref }: DocumentsSectionProps) {
               </div>
             </div>
 
-            <div className="relative flex flex-wrap items-center gap-3 md:justify-end">
+            <div className="relative flex flex-wrap items-center justify-center gap-3 md:justify-end">
               <CartoucheButton
                 href={APP_URLS.cgv}
                 external
@@ -101,7 +101,7 @@ export function DocumentsSection({ contratMineurHref }: DocumentsSectionProps) {
                 </div>
               </div>
 
-              <div className="relative flex flex-wrap items-center gap-3 md:justify-end">
+              <div className="relative flex flex-wrap items-center justify-center gap-3 md:justify-end">
                 <CartoucheButton
                   href={contratMineurHref}
                   external

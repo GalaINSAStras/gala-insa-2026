@@ -8,7 +8,7 @@ export function TicketGrid({ tickets }: { tickets: TicketCardProps[] }) {
           <TicketCard
             {...t}
             className="w-full max-w-[360px]"
-            delay={i * 0.09}
+            delay={i * 0.04}
           />
         </li>
       ))}

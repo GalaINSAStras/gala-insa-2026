@@ -63,8 +63,8 @@ export function TicketCard({
       style={{ aspectRatio: `${geo.width} / ${geo.height}` }}
       initial={reduceMotion ? false : { opacity: 0, y: 22 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.35 }}
-      transition={{ duration: 0.65, ease: EASE, delay }}
+      viewport={{ once: true, amount: 0.15 }}
+      transition={{ duration: 0.5, ease: EASE, delay }}
       whileHover={reduceMotion || isLocked ? undefined : { y: -6 }}
     >
       {/* Halo au survol */}

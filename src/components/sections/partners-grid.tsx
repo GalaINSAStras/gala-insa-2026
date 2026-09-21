@@ -34,9 +34,9 @@ export function PartnersGrid() {
 
   if (loading) {
     return (
-      <div className="grid grid-cols-1 gap-7 sm:grid-cols-2 lg:grid-cols-3">
+      <div className="grid grid-cols-2 gap-3 sm:gap-7 lg:grid-cols-3">
         {Array.from({ length: 6 }).map((_, i) => (
-          <div key={i} className="h-44 animate-pulse rounded-md border bg-muted" />
+          <div key={i} className="h-32 animate-pulse rounded-md border bg-muted sm:h-44" />
         ))}
       </div>
     );
@@ -47,11 +47,11 @@ export function PartnersGrid() {
   }
 
   return (
-    <div className="grid grid-cols-1 gap-7 sm:grid-cols-2 lg:grid-cols-3">
+    <div className="grid grid-cols-2 gap-3 sm:gap-7 lg:grid-cols-3">
       {partners.map((p) => (
         <div
           key={p._id}
-          className="relative flex flex-col items-center rounded-md border-[1.5px] border-[var(--or-moyen)]/55 bg-white px-7 pb-6 pt-8 shadow-[0_6px_20px_rgba(63,91,118,.07)]"
+          className="relative flex flex-col items-center rounded-md border-[1.5px] border-[var(--or-moyen)]/55 bg-white px-3 pb-4 pt-5 shadow-[0_6px_20px_rgba(63,91,118,.07)] sm:px-7 sm:pb-6 sm:pt-8"
         >
           {/* Liseré intérieur doré */}
           <span
@@ -78,17 +78,17 @@ export function PartnersGrid() {
           />
 
           {/* Fleuron sommet */}
-          <ButtonFleuron className="h-5 w-5 drop-shadow-[0_1px_2px_rgba(168,134,63,.3)]" />
+          <ButtonFleuron className="h-4 w-4 drop-shadow-[0_1px_2px_rgba(168,134,63,.3)] sm:h-5 sm:w-5" />
 
           {/* Logo — haute résolution, sans crop */}
-          <div className="relative mt-4 flex h-20 w-full items-center justify-center">
+          <div className="relative mt-2 flex h-14 w-full items-center justify-center sm:mt-4 sm:h-20">
             {p.logo ? (
               <Image
                 src={urlFor(p.logo).width(480).url()}
                 alt={`Logo ${p.name}`}
                 fill
                 className="object-contain"
-                sizes="(min-width:1024px) 220px, (min-width:640px) 300px, 90vw"
+                sizes="(min-width:1024px) 220px, (min-width:640px) 300px, 45vw"
               />
             ) : (
               <span className="font-garamond text-sm font-semibold italic text-muted-foreground/60">
@@ -98,7 +98,7 @@ export function PartnersGrid() {
           </div>
 
           {/* Nom */}
-          <p className="mt-3 text-center font-garamond text-[15px] font-semibold italic text-marine">
+          <p className="mt-2 text-center font-garamond text-xs font-semibold italic text-marine sm:mt-3 sm:text-[15px]">
             {p.name}
           </p>
         </div>
