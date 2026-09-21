@@ -136,17 +136,17 @@ export default async function InfosPratiquesPage() {
               address={venueAddress}
             />
 
-            {/* Colonne droite : boutons + transports */}
-            <div className="flex flex-col justify-center gap-6">
-              <div className="flex flex-wrap items-center gap-3">
-                <CartoucheButton href={directionsUrl} external variant="marine" size="sm">
-                  Voir l&rsquo;itinéraire
-                </CartoucheButton>
-                {planPdfHref && <DownloadPlanButton href={planPdfHref} />}
-              </div>
-
+            {/* Colonne droite : transports */}
+            <div className="flex flex-col justify-center">
               <TransportInfo />
             </div>
+          </div>
+
+          <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
+            <CartoucheButton href={directionsUrl} external variant="marine" size="sm">
+              Voir l&rsquo;itinéraire
+            </CartoucheButton>
+            {planPdfHref && <DownloadPlanButton href={planPdfHref} />}
           </div>
         </div>
       </section>
