@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
-import { getInfosPratiques, getEvent } from "@/lib/sanity/queries";
+import { getInfosPratiques, getEvent, getSoiree } from "@/lib/sanity/queries";
 import { pdfDownloadUrl } from "@/lib/sanity/pdf";
+import { pdfViewerUrl } from "@/lib/sanity/pdf";
 import { MapSection } from "./map-section";
 import { DownloadPlanButton } from "./download-plan-button";
 import { DocumentsSection } from "./documents-section";
@@ -20,13 +21,17 @@ export const metadata: Metadata = {
 export const revalidate = 60;
 
 export default async function InfosPratiquesPage() {
-  const [infos, event] = await Promise.all([
+  const [infos, event, soiree] = await Promise.all([
     getInfosPratiques().catch(() => null),
     getEvent().catch(() => null),
+    getSoiree().catch(() => null),
   ]);
   // Plan PDF servi sous son nom d'origine via /documents/<nom-du-fichier>?download=1
   // (masqué tant que le plan n'est pas uploadé dans Sanity)
   const planPdfHref = infos?.planPDF ? pdfDownloadUrl(infos.planPDF) : null;
+  const contratMineurHref = soiree?.contratMineurPDF
+    ? pdfViewerUrl(soiree.contratMineurPDF)
+    : null;
   const venueAddress = (event?.address ?? "11 Allée François Mitterrand, 67400 Illkirch-Graffenstaden").replace(
     /^L['']Illiade[\s,-]*/i,
     ""
@@ -187,7 +192,7 @@ export default async function InfosPratiquesPage() {
       )}
 
       {/* === Documents officiels (CGV) === */}
-      <DocumentsSection />
+      <DocumentsSection contratMineurHref={contratMineurHref} />
     </div>
   );
 }

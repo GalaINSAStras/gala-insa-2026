@@ -10,20 +10,18 @@ import type { Soiree } from "@/lib/sanity/types";
 type InfosPratiquesProps = {
   soiree: Soiree | null;
   dressCodeUrl?: string | null;
-  contratMineurHref?: string | null;
   reglementInterieurHref?: string | null;
 };
 
 export function InfosPratiques({
   soiree,
   dressCodeUrl,
-  contratMineurHref,
   reglementInterieurHref,
 }: InfosPratiquesProps) {
-  const hasDocs = Boolean(contratMineurHref || reglementInterieurHref);
+  const hasDocs = Boolean(reglementInterieurHref);
 
   return (
-    <section className="relative bg-bleuPale py-[clamp(3rem,7vw,6rem)]">
+    <section className="hidden relative bg-bleuPale py-[clamp(3rem,7vw,6rem)]">
       <div className="mx-auto max-w-[1180px] px-4 sm:px-6 lg:px-8">
         <SectionHeading kicker="Avant de venir" title="À savoir" />
 
@@ -107,14 +105,6 @@ export function InfosPratiques({
               </div>
               {hasDocs ? (
                 <ul className="mt-4 flex flex-col gap-3">
-                  {contratMineurHref && (
-                    <li className="flex">
-                      <PdfLink
-                        href={contratMineurHref}
-                        label="Contrat pour mineurs"
-                      />
-                    </li>
-                  )}
                   {reglementInterieurHref && (
                     <li className="flex">
                       <PdfLink

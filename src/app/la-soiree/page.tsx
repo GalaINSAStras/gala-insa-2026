@@ -29,9 +29,6 @@ export default async function LaSoireePage() {
   const dressCodeUrl = soiree?.dressCodeIllustration
     ? urlFor(soiree.dressCodeIllustration).width(640).height(640).fit("crop").url()
     : null;
-  const contratMineurHref = soiree?.contratMineurPDF
-    ? pdfViewerUrl(soiree.contratMineurPDF)
-    : null;
   const reglementInterieurHref = soiree?.reglementInterieurPDF
     ? pdfViewerUrl(soiree.reglementInterieurPDF)
     : null;
@@ -72,7 +69,6 @@ export default async function LaSoireePage() {
       <InfosPratiques
         soiree={soiree}
         dressCodeUrl={dressCodeUrl}
-        contratMineurHref={contratMineurHref}
         reglementInterieurHref={reglementInterieurHref}
       />
     </div>
