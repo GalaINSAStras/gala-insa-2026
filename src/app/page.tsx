@@ -96,10 +96,10 @@ export default async function HomePage() {
       </section>
 
       {/* Section Équipe */}
-      <section id="team" className="bg-muted/50 py-10 sm:py-20 md:py-28">
+      <section id="team" className="hidden bg-muted/50 py-10 sm:py-20 md:py-28">
         <div className="container mx-auto px-5 md:px-6">
           <h2 className="font-titre text-3xl font-bold text-gala-primary md:text-4xl text-center">
-            L'équipe organisatrice
+            L&apos;équipe organisatrice
           </h2>
           <p className="mt-2 text-muted-foreground text-center">
             Découvrez les étudiants qui façonnent cette soirée de A à Z —

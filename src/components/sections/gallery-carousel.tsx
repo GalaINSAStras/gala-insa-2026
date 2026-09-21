@@ -13,7 +13,7 @@ interface GalleryImage {
 
 const GALLERY_IMAGES: GalleryImage[] = [
   {
-    gradient: "from-gala-primary to-gala-gold",
+    src: "/affiches/aff_2026.webp",
     alt: "Affiche Gala 2026 — 72e édition",
     label: "Gala 2026 — 72e édition",
   },
@@ -257,7 +257,7 @@ export function GalleryCarousel() {
 
         <motion.div
           ref={trackRef}
-          className="flex cursor-grab items-start gap-4 active:cursor-grabbing md:gap-8"
+          className="flex cursor-grab select-none items-start gap-4 active:cursor-grabbing md:gap-8"
           style={{ x, touchAction: "pan-y" }}
           drag="x"
           dragMomentum={false}
@@ -290,7 +290,9 @@ export function GalleryCarousel() {
                     <img
                       src={image.src}
                       alt={image.alt}
-                      className={`block h-64 max-w-none w-auto rounded-t-lg md:h-[400px] ${
+                      draggable={false}
+                      onDragStart={(event) => event.preventDefault()}
+                      className={`block h-64 max-w-none w-auto rounded-t-lg select-none md:h-[400px] ${
                         image.cancelled ? "grayscale opacity-60" : ""
                       }`}
                     />
