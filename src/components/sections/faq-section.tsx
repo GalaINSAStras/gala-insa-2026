@@ -18,8 +18,6 @@ import type { FAQ } from "@/lib/sanity/types";
 function FaqItem({ faq, index }: { faq: FAQ; index: number }) {
   const [isOpen, setIsOpen] = useState(false);
   const panelId = `faq-reponse-${faq._id}`;
-
-  // Découpage de la réponse en mots pour l'animation stagger
   const words = faq.reponse?.split(" ") ?? [];
 
   return (
