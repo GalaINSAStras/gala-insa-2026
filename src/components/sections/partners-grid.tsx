@@ -87,7 +87,7 @@ export function PartnersGrid() {
                 src={urlFor(p.logo).width(480).url()}
                 alt={`Logo ${p.name}`}
                 fill
-                className="object-contain"
+                className={p._id === "partner-eiffage-energies" ? "scale-[1.16] object-contain" : "object-contain"}
                 sizes="(min-width:1024px) 220px, (min-width:640px) 300px, 45vw"
               />
             ) : (
