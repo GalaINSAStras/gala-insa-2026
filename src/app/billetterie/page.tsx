@@ -76,6 +76,11 @@ export default async function BilletteriePage() {
         <div className="mx-auto max-w-[1180px] px-4 sm:px-6 lg:px-8">
           <SectionHeading kicker="Réservez" title="Nos billets" />
 
+          <p className="mx-auto mt-6 max-w-2xl text-center font-garamond text-lg text-ardoise/85">
+            Des places en bus sont disponibles lors de l&rsquo;achat de votre billet
+            sur la boutique, pour les retours de 2h et 3h.
+          </p>
+
           <div className="mt-12">
             {tickets && tickets.length > 0 ? (
               <TicketGrid tickets={tickets.map(toTicketCardProps)} />
