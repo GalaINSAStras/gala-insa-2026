@@ -71,8 +71,7 @@ export async function generateMetadata(): Promise<Metadata> {
   const location = event?.location ?? "L'Illiade, Illkirch-Graffenstaden";
   const title = event?.title ?? "Gala INSA Strasbourg";
   const description =
-    event?.description ??
-    `Site officiel du ${edition}e Gala de l'INSA Strasbourg. Rejoignez-nous le ${date} à ${location} pour une soirée exceptionnelle.`;
+    "Le Gala de l'INSA Strasbourg est une soirée exceptionnelle organisée par les étudiants de l'école. Au programme : Cocktail dînatoire et animations, musique et groupes de l'école à partir de 21h.";
 
   return {
     title: {

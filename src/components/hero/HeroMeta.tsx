@@ -20,7 +20,10 @@ export function HeroMeta() {
         className="inline-flex items-center gap-2.5 whitespace-nowrap rounded text-[clamp(.8rem,1.9vw,1.05rem)] transition-colors hover:text-[var(--or-fonce)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--or-fonce)] focus-visible:ring-offset-2"
       >
         <MapPin className="h-[1.15em] w-[1.15em] shrink-0 text-[var(--or-fonce)]" strokeWidth={1.7} />
-        <span className="font-titre tracking-[.06em]">{GALA.venue.toUpperCase()}</span>
+        <span className="font-titre tracking-[.06em] max-[380px]:flex max-[380px]:flex-col max-[380px]:items-center">
+          <span>L&apos;ILLIADE,</span>
+          <span>ILLKIRCH-GRAFFENSTADEN</span>
+        </span>
       </a>
     </div>
   );
