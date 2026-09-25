@@ -33,7 +33,7 @@ function BurgerButton({
     <button
       type="button"
       onClick={onClick}
-      className="fixed top-[calc(env(safe-area-inset-top,0px)+1rem)] right-4 z-[70] flex h-11 w-11 items-center justify-center bg-transparent md:hidden"
+      className="fixed top-[calc(env(safe-area-inset-top,0px)+1.75rem)] right-4 z-[70] flex h-11 w-11 items-center justify-center bg-transparent md:hidden"
       aria-label={open ? "Fermer le menu" : "Menu de navigation"}
       aria-expanded={open}
     >
@@ -174,6 +174,10 @@ export function Header() {
 
   return (
     <header className="sticky top-0 z-50 w-full border-b-2 border-gala-gold bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/80">
+      <div className="flex h-6 items-center justify-center bg-red-600 px-4 text-xs font-bold tracking-[0.2em] text-white">
+        VERSION DEV
+      </div>
+
       {/* Motif floral — coin gauche, chevauche la ligne de démarcation dorée */}
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
