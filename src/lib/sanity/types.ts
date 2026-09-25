@@ -93,7 +93,7 @@ export interface Hero {
   ctaLink: string;
 }
 
-/** Soirée — Thème, programme, buffet, carte, infos pratiques */
+/** Soirée — Thème, programme, cocktail dînatoire, carte, infos pratiques */
 export interface Soiree {
   _id: string;
   _type: "soiree";
@@ -115,7 +115,7 @@ export interface Soiree {
   reglementInterieurPDF?: SanityFileAsset;
 }
 
-/** Plat du buffet (comptoir) */
+/** Plat du cocktail dînatoire (comptoir) */
 export interface Plat {
   _key: string;
   nom?: string;
@@ -124,7 +124,7 @@ export interface Plat {
   regime?: "vegetarien" | "vegan" | "sans_gluten";
 }
 
-/** Comptoir du buffet (carte en arche) */
+/** Comptoir du cocktail dînatoire (carte en arche) */
 export interface Comptoir {
   _key: string;
   nom?: string;
