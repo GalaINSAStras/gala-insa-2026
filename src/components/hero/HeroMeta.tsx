@@ -21,8 +21,8 @@ export function HeroMeta() {
       >
         <MapPin className="h-[1.15em] w-[1.15em] shrink-0 text-[var(--or-fonce)]" strokeWidth={1.7} />
         <span className="font-titre font-semibold tracking-[.06em] max-[380px]:flex max-[380px]:flex-col max-[380px]:items-center max-[380px]:text-[0.72rem] max-[380px]:tracking-[.03em]">
-          <span>L&apos;ILLIADE,</span>
-          <span>ILLKIRCH-GRAFFENSTADEN</span>
+          <span className="font-titre">L&apos;ILLIADE,</span>
+          <span className="font-titre">ILLKIRCH-GRAFFENSTADEN</span>
         </span>
       </a>
     </div>
