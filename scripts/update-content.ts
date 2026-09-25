@@ -57,12 +57,12 @@ const partnerNames = [
 ];
 
 const tickets = [
-  { _id: "ticket-soiree-etudiant", type: "Soirée seule — Étudiant & Diplômé", price: 25, description: "Réservation soirée seule (tarif étudiant & diplômé)", displayOrder: 1, externalLink: "https://www.helloasso.com/associations/gala-insa-strasbourg/evenements/billetterie-gala-2026" },
+  { _id: "ticket-soiree-etudiant", type: "Soirée seule — Étudiant & Diplômé 2026", price: 25, description: "Réservation soirée seule (tarif étudiant & diplômé 2026)", displayOrder: 1, externalLink: "https://www.helloasso.com/associations/gala-insa-strasbourg/evenements/billetterie-gala-2026" },
   { _id: "ticket-soiree-exterieur", type: "Soirée - ALUMNI & Personnel INSA & Extérieur", price: 30, description: "Réservation soirée seule", displayOrder: 2, externalLink: "https://www.helloasso.com/associations/gala-insa-strasbourg/evenements/billetterie-gala-2026" },
   { _id: "ticket-soiree-jourj", type: "Soirée seule — Jour J", price: 35, description: "Réservation soirée seule (tarif le jour J)", displayOrder: 3, externalLink: "https://www.helloasso.com/associations/gala-insa-strasbourg/evenements/billetterie-gala-2026" },
-  { _id: "ticket-repas-etudiant", type: "Repas + Soirée — Étudiant & Diplômé", price: 50, description: "Réservation repas + soirée (tarif étudiant & diplômé)", displayOrder: 4, externalLink: "https://www.helloasso.com/associations/gala-insa-strasbourg/evenements/billetterie-gala-2026" },
-  { _id: "ticket-repas-exterieur", type: "Buffet & Soirée - ALUMNI & Personnel INSA & Extérieur", price: 58, description: "Réservation repas + soirée", displayOrder: 5, externalLink: "https://www.helloasso.com/associations/gala-insa-strasbourg/evenements/billetterie-gala-2026" },
-  { _id: "ticket-repas-jourj", type: "Repas + Soirée — Jour J", price: 65, description: "Réservation repas + soirée (tarif le jour J)", displayOrder: 6, externalLink: "https://www.helloasso.com/associations/gala-insa-strasbourg/evenements/billetterie-gala-2026" },
+  { _id: "ticket-repas-etudiant", type: "Buffet & Soirée — Étudiant & Diplômé 2026", price: 50, description: "Réservation buffet & soirée (tarif étudiant & diplômé 2026)", displayOrder: 4, externalLink: "https://www.helloasso.com/associations/gala-insa-strasbourg/evenements/billetterie-gala-2026" },
+  { _id: "ticket-repas-exterieur", type: "Buffet & Soirée - ALUMNI & Personnel INSA & Extérieur", price: 58, description: "Réservation buffet & soirée", displayOrder: 5, externalLink: "https://www.helloasso.com/associations/gala-insa-strasbourg/evenements/billetterie-gala-2026" },
+  { _id: "ticket-repas-jourj", type: "Buffet & Soirée — Jour J", price: 65, description: "Réservation buffet & soirée (tarif le jour J)", displayOrder: 6, externalLink: "https://www.helloasso.com/associations/gala-insa-strasbourg/evenements/billetterie-gala-2026" },
 ];
 
 

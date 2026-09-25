@@ -21,8 +21,8 @@ const VARIANT_CYCLE: TicketVariant[] = ["etudiant", "prevente", "normal"];
 
 function toVariant(type: string, index: number): TicketVariant {
   const t = type.toLowerCase();
-  // « Repas + Soirée — Étudiant & Diplômé » en jaune, comme le dernier billet
-  if (t.includes("repas") && (t.includes("étudiant") || t.includes("etudiant"))) return "normal";
+  // « Buffet & Soirée — Étudiant & Diplômé 2026 » en jaune
+  if (t.includes("buffet") && (t.includes("étudiant") || t.includes("etudiant"))) return "normal";
   if (t.includes("étudiant") || t.includes("etudiant")) return "etudiant";
   if (t.includes("vip") || t.includes("premium")) return "normal";
   return VARIANT_CYCLE[index % VARIANT_CYCLE.length];
