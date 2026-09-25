@@ -3,9 +3,13 @@
 import { useMemo, useRef, useState } from "react";
 import {
   Bean,
+  Carrot,
   ChevronDown,
   Egg,
   Fish,
+  Flower2,
+  Grape,
+  Leaf,
   Milk,
   Nut,
   Shrimp,
@@ -23,12 +27,18 @@ const ALLERGEN_META: Record<
   { label: string; Icon: LucideIcon; bg: string; text: string; border: string }
 > = {
   gluten: { label: "Gluten", Icon: Wheat, bg: "#F5DCE3", text: "#8A4A5C", border: "#E9C1CF" },
-  lactose: { label: "Lactose", Icon: Milk, bg: "#E8EEF6", text: "#2C3E5C", border: "#C6D7E8" },
+  lactose: { label: "Lait", Icon: Milk, bg: "#E8EEF6", text: "#2C3E5C", border: "#C6D7E8" },
   oeufs: { label: "Œufs", Icon: Egg, bg: "#FDF6E3", text: "#8A6A1F", border: "#F0D9A6" },
   fruits_coque: { label: "Fruits à coque", Icon: Nut, bg: "#F5DCE3", text: "#8A4A5C", border: "#E9C1CF" },
   soja: { label: "Soja", Icon: Bean, bg: "#D6EDCF", text: "#2C3E5C", border: "#B6D2AE" },
   poisson: { label: "Poisson", Icon: Fish, bg: "#E8EEF6", text: "#2C3E5C", border: "#C6D7E8" },
   crustaces: { label: "Crustacés", Icon: Shrimp, bg: "#FDF6E3", text: "#8A6A1F", border: "#F0D9A6" },
+  arachides: { label: "Arachides", Icon: Nut, bg: "#F5DCE3", text: "#8A4A5C", border: "#E9C1CF" },
+  celeri: { label: "Céleri", Icon: Leaf, bg: "#D6EDCF", text: "#2C3E5C", border: "#B6D2AE" },
+  moutarde: { label: "Moutarde", Icon: Carrot, bg: "#FDF6E3", text: "#8A6A1F", border: "#F0D9A6" },
+  sesame: { label: "Sésame", Icon: Flower2, bg: "#F9C9D4", text: "#8A4A5C", border: "#E9C1CF" },
+  sulfites: { label: "Sulfites", Icon: Grape, bg: "#D9D6E3", text: "#3F5B76", border: "#B9B4C9" },
+  lupin: { label: "Lupin", Icon: Flower2, bg: "#AFC6E3", text: "#2C3E5C", border: "#8FAECC" },
 };
 
 /** Ordre d'affichage canonique (légende) */
@@ -40,6 +50,12 @@ const ALLERGEN_ORDER = [
   "soja",
   "poisson",
   "crustaces",
+  "arachides",
+  "celeri",
+  "moutarde",
+  "sesame",
+  "sulfites",
+  "lupin",
 ] as const;
 
 const REGIME_LABELS: Record<string, string> = {

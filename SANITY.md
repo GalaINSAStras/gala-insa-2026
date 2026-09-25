@@ -213,7 +213,7 @@ export const schemaTypes = [
 
 ### Particularités notables
 
-- **Menu Buffer (`soiree.ts`)** : Utilise un champ `array` d'objets imbriqués avec un champ `allergenes` de type `array` avec une `list` prédéfinie des 14 allergènes réglementaires.
+- **Menu Buffet (`soiree.ts`)** : Utilise un champ `array` d'objets imbriqués avec un champ `allergenes` de type `array` avec une `list` prédéfinie des 13 allergènes réglementaires. Le repas 2026 en utilise 12 ; le code historique `lactose` est conservé pour les données existantes, mais affiché comme « Lait ».
 - **Hotpot** : Les images utilisent `options: { hotspot: true }` pour permettre le recadrage interactif dans le Studio.
 - **Ordre d'affichage** : Les schémas `partner`, `ticket`, `faq`, `teamMember`, `lineup` incluent un champ `displayOrder` avec un `ordering` associé pour le tri.
 - **Singletons** : Les schémas `hero`, `soiree`, `infosPratiques` sont conçus comme des singletons (un seul document) — le contrôle se fait par la logique applicative (requête `[0]`), pas encore par une structure personnalisée.
