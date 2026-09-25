@@ -56,7 +56,16 @@ const partnerNames = [
   { _id: "partner-electricite-strasbourg", name: "Electricité Strasbourg", displayOrder: 6 },
 ];
 
-const tickets = [
+type TicketSeed = {
+  _id: string;
+  type: string;
+  price: number;
+  description?: string;
+  displayOrder: number;
+  externalLink: string;
+};
+
+const tickets: TicketSeed[] = [
   { _id: "ticket-soiree-etudiant", type: "Soirée seule — Étudiant & Diplômé 2026", price: 25, description: "Réservation soirée seule (tarif étudiant & diplômé 2026)", displayOrder: 1, externalLink: "https://www.helloasso.com/associations/gala-insa-strasbourg/evenements/billetterie-gala-2026" },
   { _id: "ticket-soiree-exterieur", type: "Soirée - ALUMNI & Personnel INSA & Extérieur", price: 30, displayOrder: 2, externalLink: "https://www.helloasso.com/associations/gala-insa-strasbourg/evenements/billetterie-gala-2026" },
   { _id: "ticket-soiree-jourj", type: "Soirée seule — Jour J", price: 35, description: "Réservation soirée seule (tarif le jour J)", displayOrder: 3, externalLink: "https://www.helloasso.com/associations/gala-insa-strasbourg/evenements/billetterie-gala-2026" },
