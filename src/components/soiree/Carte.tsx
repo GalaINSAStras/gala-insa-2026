@@ -58,15 +58,7 @@ export function Carte({ carte }: { carte: CarteCategory[] }) {
                           aria-hidden
                           className="mx-1 flex-1 border-b border-dotted border-[var(--or-moyen)]/50"
                         />
-                        <span className="whitespace-nowrap font-garamond text-lg font-semibold text-[var(--or-fonce)] tabular-nums">
-                          {item.price} €
-                        </span>
                       </div>
-                      {item.glassPrice != null && (
-                        <p className="mt-0.5 text-sm text-ardoise/60">
-                          Au verre (12 cl) — {item.glassPrice} €
-                        </p>
-                      )}
                     </li>
                   ))}
                 </ul>

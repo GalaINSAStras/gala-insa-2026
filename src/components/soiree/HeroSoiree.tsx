@@ -128,7 +128,7 @@ export function HeroSoiree({ theme, accroche, themeImageUrl }: HeroSoireeProps) 
                 </span>
               </div>
               <p className="mt-2 font-titre text-lg text-marine">
-                Buffet &amp; animations
+                Cocktail dînatoire &amp; animations
               </p>
             </div>
             <div className="rounded-2xl border border-[var(--or-moyen)]/40 bg-white/40 px-6 py-5 shadow-[0_4px_20px_rgba(63,91,118,.06)] backdrop-blur-md">

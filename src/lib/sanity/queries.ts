@@ -38,7 +38,7 @@ export async function getPartners(): Promise<Partner[]> {
 /** Récupère les billets disponibles triés par ordre d'affichage */
 export async function getTickets(): Promise<Ticket[]> {
   return sanityFetch<Ticket[]>(
-    `*[_type == "ticket"] | order(displayOrder asc)`
+    `*[_type == "ticket"] | order(price asc)`
   );
 }
 

@@ -12,7 +12,7 @@ import { InfosPratiques } from "@/components/soiree/InfosPratiques";
 export const metadata: Metadata = {
   title: "La Soirée",
   description:
-    "Découvrez le thème Renaissance, la programmation, le buffet et le dress code du Gala INSA Strasbourg 2026.",
+    "Découvrez le thème Renaissance, la programmation, le cocktail dînatoire et le dress code du Gala INSA Strasbourg 2026.",
 };
 
 export const revalidate = 60;

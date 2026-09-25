@@ -139,14 +139,14 @@ export function Buffet({
       <div className="mx-auto max-w-[1180px] px-4 sm:px-6 lg:px-8">
         <SectionHeading
           kicker="Le dîner"
-          title="Buffet"
+          title="Cocktail dînatoire"
           subtitle="Un cocktail dînatoire raffiné, préparé avec soin par notre traiteur."
         />
 
         {prixBuffet != null && (
           <div className="mx-auto mt-8 max-w-md rounded-2xl border border-[var(--or-moyen)]/50 bg-[linear-gradient(135deg,var(--jaune-pale),#FBF0D6)] px-8 py-4 text-center shadow-[0_6px_24px_rgba(168,134,63,.14)]">
             <p className="font-garamond text-sm font-semibold italic text-[var(--or-fonce)]">
-              Place buffet + soirée
+              Place cocktail dînatoire + soirée
             </p>
             <p className="font-garamond text-3xl font-semibold text-[var(--or-fonce)] tabular-nums">
               À partir de {prixBuffet} €

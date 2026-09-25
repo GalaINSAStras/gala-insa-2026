@@ -38,8 +38,6 @@ export default async function InfosPratiquesPage() {
   );
   const directionsUrl = `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(venueAddress)}`;
 
-  const hasHoraires = Boolean(infos?.openingTime || infos?.closingTime);
-
   return (
     <div className="flex flex-col">
       {/* === Hero orné === */}
@@ -71,34 +69,22 @@ export default async function InfosPratiquesPage() {
                 </h2>
               </div>
               <div className="relative mt-5 space-y-4">
-                {hasHoraires ? (
-                  <>
-                    {infos?.openingTime && (
-                      <div className="flex items-baseline justify-between gap-4 border-b border-dotted border-[var(--or-moyen)]/40 pb-3">
-                        <p className="font-garamond text-xs font-semibold italic text-[var(--or-fonce)] max-sm:text-lg">
-                          Ouverture
-                        </p>
-                        <p className="font-garamond text-2xl font-semibold text-ardoise tabular-nums">
-                          {infos.openingTime}
-                        </p>
-                      </div>
-                    )}
-                    {infos?.closingTime && (
-                      <div className="flex items-baseline justify-between gap-4">
-                        <p className="font-garamond text-xs font-semibold italic text-[var(--or-fonce)] max-sm:text-lg">
-                          Fermeture
-                        </p>
-                        <p className="font-garamond text-2xl font-semibold text-ardoise tabular-nums">
-                          {infos.closingTime}
-                        </p>
-                      </div>
-                    )}
-                  </>
-                ) : (
-                  <p className="italic text-ardoise/60">
-                    Les horaires seront annoncés prochainement.
+                <div className="flex items-baseline justify-between gap-4 border-b border-dotted border-[var(--or-moyen)]/40 pb-3">
+                  <p className="font-garamond text-lg font-semibold italic text-[var(--or-fonce)]">
+                    Cocktail dînatoire
                   </p>
-                )}
+                  <p className="font-garamond text-2xl font-semibold text-ardoise tabular-nums">
+                    19h — 21h
+                  </p>
+                </div>
+                <div className="flex items-baseline justify-between gap-4">
+                  <p className="font-garamond text-lg font-semibold italic text-[var(--or-fonce)]">
+                    Soirée
+                  </p>
+                  <p className="font-garamond text-2xl font-semibold text-ardoise tabular-nums">
+                    21h — 4h
+                  </p>
+                </div>
               </div>
             </article>
 
