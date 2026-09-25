@@ -25,7 +25,7 @@ const cormorantGaramond = Cormorant_Garamond({
 
 /* ─── Titre / boutons : Playfair Display (serif, accents marqués) ─── */
 const titre = Playfair_Display({
-  variable: "--font-titre",
+  variable: "--font-titre-family",
   subsets: ["latin"],
   weight: ["600", "700"],
   display: "swap",
@@ -33,7 +33,7 @@ const titre = Playfair_Display({
 
 /* ─── Sous-titres & prix : EB Garamond (papeterie haut de gamme) ─── */
 const ebGaramond = EB_Garamond({
-  variable: "--font-garamond",
+  variable: "--font-garamond-family",
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
   style: ["normal", "italic"],
