@@ -1,5 +1,9 @@
 import Image from "next/image";
-import { Mail } from "lucide-react";
+import { PartnersGrid } from "@/components/sections/partners-grid";
+import { FaqSection } from "@/components/sections/faq-section";
+import { TeamSection } from "@/components/sections/team-section";
+import { ContactSection } from "@/components/sections/contact-section";
+import { getEvent } from "@/lib/sanity/queries";
 
 function InstagramIcon({ className }: { className?: string }) {
   return (
@@ -37,7 +41,14 @@ function FacebookIcon({ className }: { className?: string }) {
   );
 }
 
-export default function ComingSoon() {
+export const revalidate = 60;
+
+export default async function ComingSoon() {
+  const event = await getEvent().catch(() => null);
+  const description =
+    event?.description ??
+    "Le Gala INSA Strasbourg revient pour une nouvelle edition exceptionnelle.";
+
   return (
     <div className="flex min-h-screen flex-col items-center justify-center gap-10 bg-marine px-6 py-16 text-center text-white">
       <Image
