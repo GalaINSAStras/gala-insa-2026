@@ -56,6 +56,8 @@ export function TicketCard({
   const isAnchor = Boolean(href) && !isLocked;
   const isExternal = href ? /^https?:\/\//.test(href) : false;
   const ariaLabel = `${soldOut ? "COMPLET" : ctaLabel} — ${title}, ${price} ${currency}`;
+  const isLongExternalTitle =
+    title === "Cocktail dînatoire & Soirée - ALUMNI & Personnel INSA & Extérieur";
 
   return (
     <motion.article
@@ -91,7 +93,13 @@ export function TicketCard({
 
       {/* Contenu */}
       <div className="relative flex h-full flex-col items-center px-[13%] pb-[9%] pt-[11%] text-center text-ardoise">
-        <h3 className="font-heading text-[clamp(1.15rem,2.1vw,1.6rem)] uppercase leading-tight tracking-[0.08em]">
+        <h3
+          className={`font-heading uppercase leading-tight tracking-[0.08em] ${
+            isLongExternalTitle
+              ? "text-[clamp(1.05rem,1.8vw,1.4rem)]"
+              : "text-[clamp(1.15rem,2.1vw,1.6rem)]"
+          }`}
+        >
           {title}
         </h3>
 
@@ -105,7 +113,7 @@ export function TicketCard({
         </p>
 
         <div className="mt-[8%] space-y-1 font-garamond text-[clamp(0.82rem,1.3vw,1rem)] leading-relaxed">
-          <p className="line-clamp-2">{description}</p>
+          {description && <p className="line-clamp-2">{description}</p>}
           <p className="line-clamp-1 opacity-80">{quantityLabel}</p>
         </div>
 
