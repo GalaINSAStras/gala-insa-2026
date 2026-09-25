@@ -33,7 +33,7 @@ function BurgerButton({
     <button
       type="button"
       onClick={onClick}
-      className="fixed top-[calc(env(safe-area-inset-top,0px)+1rem)] right-4 z-[70] flex h-11 w-11 items-center justify-center bg-transparent md:hidden"
+      className="fixed top-[calc(env(safe-area-inset-top,0px)+1.75rem)] right-4 z-[70] flex h-11 w-11 items-center justify-center bg-transparent md:hidden"
       aria-label={open ? "Fermer le menu" : "Menu de navigation"}
       aria-expanded={open}
     >

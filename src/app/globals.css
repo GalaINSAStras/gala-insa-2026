@@ -97,8 +97,8 @@
   --font-body: "Inter", sans-serif;
   --font-mono: "Geist Mono", ui-monospace, monospace;
   --font-heading: var(--font-display); /* titre générique (CardTitle, SheetTitle…) → Cormorant */
-  --font-titre: var(--font-titre); /* Playfair Display — injectée via next/font */
-  --font-garamond: var(--font-garamond); /* EB Garamond — injectée via next/font */
+  --font-titre: var(--font-titre-family); /* Playfair Display — injectée via next/font */
+  --font-garamond: var(--font-garamond-family); /* EB Garamond — injectée via next/font */
 
   /* ─── Tickets Art nouveau (billets) ─── */
   --color-blush: var(--blush);
@@ -351,7 +351,7 @@
   }
 }
 
-/* ─── Défilement élégant (cartes du buffet) ─── */
+/* ─── Défilement élégant (cartes du cocktail dînatoire) ─── */
 .gala-scroll {
   scrollbar-width: thin;
   scrollbar-color: var(--or-moyen) transparent;

@@ -2,7 +2,7 @@ import { defineType, defineField } from "sanity";
 
 /**
  * Schéma : Soirée (Singleton)
- * Thème, programme (timeline), buffet (comptoirs), carte, dress code & documents.
+ * Thème, programme (timeline), cocktail dînatoire (comptoirs), carte, dress code & documents.
  * Refonte « La Soirée » — style Art nouveau / papeterie de mariage.
  */
 export default defineType({
@@ -49,7 +49,7 @@ export default defineType({
             {
               name: "titre",
               type: "string",
-              title: "Titre (ex : Buffet & animations)",
+              title: "Titre (ex : Cocktail dînatoire & animations)",
             },
             {
               name: "description",
@@ -84,15 +84,15 @@ export default defineType({
       ],
     }),
 
-    // ── Buffet (comptoirs) ────────────────────────────────
+    // ── Cocktail dînatoire (comptoirs) ────────────────────
     defineField({
       name: "prixBuffet",
-      title: "Prix — Place Buffet + Soirée (€)",
+      title: "Prix — Place Cocktail dînatoire + Soirée (€)",
       type: "number",
     }),
     defineField({
       name: "comptoirs",
-      title: "Comptoirs du buffet",
+      title: "Comptoirs du cocktail dînatoire",
       type: "array",
       of: [
         {

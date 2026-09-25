@@ -25,7 +25,7 @@ const cormorantGaramond = Cormorant_Garamond({
 
 /* ─── Titre / boutons : Playfair Display (serif, accents marqués) ─── */
 const titre = Playfair_Display({
-  variable: "--font-titre",
+  variable: "--font-titre-family",
   subsets: ["latin"],
   weight: ["600", "700"],
   display: "swap",
@@ -33,7 +33,7 @@ const titre = Playfair_Display({
 
 /* ─── Sous-titres & prix : EB Garamond (papeterie haut de gamme) ─── */
 const ebGaramond = EB_Garamond({
-  variable: "--font-garamond",
+  variable: "--font-garamond-family",
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
   style: ["normal", "italic"],
@@ -71,8 +71,7 @@ export async function generateMetadata(): Promise<Metadata> {
   const location = event?.location ?? "L'Illiade, Illkirch-Graffenstaden";
   const title = event?.title ?? "Gala INSA Strasbourg";
   const description =
-    event?.description ??
-    `Site officiel du ${edition}e Gala de l'INSA Strasbourg. Rejoignez-nous le ${date} à ${location} pour une soirée exceptionnelle.`;
+    "Le Gala de l'INSA Strasbourg est une soirée exceptionnelle organisée par les étudiants de l'école. Au programme : Cocktail dînatoire et animations, musique et groupes de l'école à partir de 21h.";
 
   return {
     title: {
