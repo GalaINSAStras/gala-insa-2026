@@ -1,10 +1,6 @@
 import type { Metadata } from "next";
 import { Inter, Cormorant_Garamond, Playfair_Display, EB_Garamond } from "next/font/google";
 import Script from "next/script";
-import { LEGAL } from "@/lib/constants";
-import { sanityFetch } from "@/lib/sanity/client";
-import { SiteShellClient } from "./site-shell-client";
-import { PreloaderGate } from "@/components/preloader/PreloaderGate";
 import "./globals.css";
 
 /* ─── Body Font : Inter (lisibilité maximale) ─── */
@@ -40,59 +36,51 @@ const ebGaramond = EB_Garamond({
   display: "swap",
 });
 
-async function getEventMetadata() {
-  try {
-    const event = await sanityFetch<{
-      title: string;
-      edition: number;
-      date: string;
-      location: string;
-      description?: string;
-    } | null>(
-      `*[_type == "event" && status == "upcoming"] | order(edition desc) [0]{ title, edition, date, location, description }`
-    );
-    return event;
-  } catch {
-    return null;
-  }
-}
+export const metadata: Metadata = {
+  metadataBase: new URL("https://www.gala-insa.com"),
+  title: "Gala INSA 2026",
+  description:
+    "Le Gala revient — Édition 2026 à L'Illiade. Réservez votre place.",
+  robots: {
+    index: true,
+    follow: true,
+  },
+  openGraph: {
+    title: "Gala INSA 2026",
+    description: "Le Gala revient — Édition 2026 à L'Illiade.",
+    url: "https://www.gala-insa.com",
+    siteName: "Gala INSA",
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "Gala INSA 2026",
+      },
+    ],
+    locale: "fr_FR",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Gala INSA 2026",
+    description: "Le Gala revient — Édition 2026 à L'Illiade.",
+    images: ["/og-image.png"],
+  },
+};
 
-export async function generateMetadata(): Promise<Metadata> {
-  const event = await getEventMetadata();
-
-  const edition = event?.edition ?? 72;
-  const date = event?.date
-    ? new Date(event.date).toLocaleDateString("fr-FR", {
-        day: "numeric",
-        month: "long",
-        year: "numeric",
-      })
-    : "21 novembre 2026";
-  const location = event?.location ?? "L'Illiade, Illkirch-Graffenstaden";
-  const title = event?.title ?? "Gala INSA Strasbourg";
-  const description =
-    event?.description ??
-    `Site officiel du ${edition}e Gala de l'INSA Strasbourg. Rejoignez-nous le ${date} à ${location} pour une soirée exceptionnelle.`;
-
-  return {
-    title: {
-      default: `Gala INSA Strasbourg 2026`,
-      template: `%s | Gala INSA Strasbourg 2026`,
-    },
-    description,
-    openGraph: {
-      title: `Gala INSA Strasbourg 2026`,
-      description,
-      type: "website",
-      locale: "fr_FR",
-      siteName: `Gala INSA Strasbourg 2026`,
-    },
-    robots: {
-      index: true,
-      follow: true,
-    },
-  };
-}
+const organizationSchema = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: "Gala INSA",
+  url: "https://www.gala-insa.com",
+  logo: "https://www.gala-insa.com/logo/signature-logo.png",
+  sameAs: [
+    "https://www.facebook.com/GalaINSA2026",
+    "https://www.instagram.com/gala_insa_strasbourg/",
+    "https://www.linkedin.com/company/gala-insa-strasbourg-2024/home/",
+  ],
+};
 
 export default function RootLayout({
   children,
@@ -150,9 +138,7 @@ export default function RootLayout({
           `}
         </Script>
 
-        <PreloaderGate>
-          <SiteShellClient>{children}</SiteShellClient>
-        </PreloaderGate>
+        {children}
 
         {umamiWebsiteId && umamiUrl && (
           <Script

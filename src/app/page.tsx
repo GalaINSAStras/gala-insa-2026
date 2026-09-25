@@ -1,49 +1,60 @@
-import { TopSection } from "@/components/hero/TopSection";
-import { PartnersGrid } from "@/components/sections/partners-grid";
-import { FaqSection } from "@/components/sections/faq-section";
-import { TeamSection } from "@/components/sections/team-section";
-import { ContactSection } from "@/components/sections/contact-section";
-import { StatsCountdown } from "@/components/sections/stats-countdown";
-import { GalleryCarousel } from "@/components/sections/gallery-carousel";
-import { InstagramFeed } from "@/components/sections/instagram-feed";
-import { getEvent } from "@/lib/sanity/queries";
+import Image from "next/image";
+import { Mail } from "lucide-react";
 
-export const revalidate = 60;
-
-export default async function HomePage() {
-  const event = await getEvent().catch(() => null);
-
-  const description =
-    event?.description ??
-    "Chaque année, les étudiants de l'INSA Strasbourg donnent vie à une soirée d'exception. Un gala pensé, organisé et vécu par ceux qui font battre le cœur de l'école.";
-
+function InstagramIcon({ className }: { className?: string }) {
   return (
-    <div className="flex flex-col">
-      {/* Bloc supérieur — Teaser + Hero à colonnes */}
-      <TopSection />
+    <svg
+      className={className}
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth={2}
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+    >
+      <rect width="20" height="20" x="2" y="2" rx="5" ry="5" />
+      <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+      <line x1="17.5" x2="17.51" y1="6.5" y2="6.5" />
+    </svg>
+  );
+}
 
-      {/* Galerie immersive */}
-      <GalleryCarousel />
+function FacebookIcon({ className }: { className?: string }) {
+  return (
+    <svg
+      className={className}
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth={2}
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+    >
+      <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
+    </svg>
+  );
+}
 
-      {/* Séparateur floral — centré exactement sur la démarcation */}
-      <div className="relative z-10 h-0 overflow-visible my-0">
-        <img
-          src="/separateur2.svg"
-          alt=""
-          aria-hidden="true"
-          className="absolute left-1/2 -translate-x-1/2 -translate-y-1/2 w-4/5 max-md:max-w-xl md:max-w-3xl h-16 md:h-24"
-        />
-      </div>
-
-      {/* Compteurs animés + Countdown */}
-      <StatsCountdown
-        edition={event?.edition}
-        participants={event?.participants}
+export default function ComingSoon() {
+  return (
+    <div className="flex min-h-screen flex-col items-center justify-center gap-10 bg-marine px-6 py-16 text-center text-white">
+      <Image
+        src="/logo/signature-logo.png"
+        alt="Logo Gala 2026"
+        width={220}
+        height={220}
+        priority
       />
 
-      {/* Section Instagram — Dernière publication — temporairement masquée */}
-      <div className="hidden">
-        <InstagramFeed />
+      <div className="space-y-4">
+        <h1 className="text-4xl font-bold tracking-tight sm:text-5xl">
+          Le Gala revient
+        </h1>
+        <p className="max-w-md text-lg text-neutral-400">
+          Édition 2026 — informations et billetterie très bientôt.
+        </p>
       </div>
 
       {/* Séparateur floral — remonté pour annuler le mb de StatsCountdown */}
