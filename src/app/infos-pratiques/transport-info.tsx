@@ -45,7 +45,7 @@ export function TransportInfo() {
           </div>
         </div>
       </div>
-      <div className="relative mt-5 -mx-6 rounded-xl border border-[var(--or-fonce)]/45 bg-[var(--jaune-pale)]/70 py-4 pl-9 pr-4 shadow-[0_4px_14px_rgba(168,134,63,.12)]">
+      <div className="relative mt-5 -mx-4 rounded-xl border border-[var(--or-fonce)]/45 bg-[var(--jaune-pale)]/70 py-4 pl-4 pr-4 shadow-[0_4px_14px_rgba(168,134,63,.12)]">
         <div className="flex items-start gap-3">
           <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-[var(--or-fonce)]/40 bg-[linear-gradient(180deg,var(--or-clair),var(--or-moyen))]">
             <Bus className="h-4 w-4 text-[var(--marine)]" strokeWidth={2} />
