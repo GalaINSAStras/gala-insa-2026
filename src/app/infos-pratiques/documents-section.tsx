@@ -50,7 +50,7 @@ export function DocumentsSection({
                 </svg>
               </span>
               <div>
-                <h3 className="font-heading text-xl text-marine">
+                <h3 className="font-titre text-xl text-marine">
                   Conditions Générales de Vente
                 </h3>
                 <p className="mt-1 text-sm text-ardoise/70">
@@ -96,7 +96,7 @@ export function DocumentsSection({
                   </svg>
                 </span>
                 <div>
-                  <h3 className="font-heading text-xl text-marine">
+                  <h3 className="font-titre text-xl text-marine">
                     Contrat pour mineurs
                   </h3>
                   <p className="mt-1 text-sm text-ardoise/70">
@@ -143,7 +143,7 @@ export function DocumentsSection({
                   </svg>
                 </span>
                 <div>
-                  <h3 className="font-heading text-xl text-marine">
+                  <h3 className="font-titre text-xl text-marine">
                     Règlement intérieur de la soirée
                   </h3>
                   <p className="mt-1 text-sm text-ardoise/70">
