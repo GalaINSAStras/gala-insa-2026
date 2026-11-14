@@ -256,7 +256,7 @@ export default defineType({
       type: "file",
       options: { accept: "application/pdf" },
       description:
-        "Règlement intérieur de la soirée, téléchargeable depuis la page La Soirée.",
+        "Règlement intérieur de la soirée, téléchargeable depuis la page Infos Pratiques.",
     }),
 
     // ── Réglage ───────────────────────────────────────────
@@ -270,4 +270,3 @@ export default defineType({
     }),
   ],
 });
-

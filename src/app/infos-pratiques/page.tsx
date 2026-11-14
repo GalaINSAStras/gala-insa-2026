@@ -32,6 +32,9 @@ export default async function InfosPratiquesPage() {
   const contratMineurHref = soiree?.contratMineurPDF
     ? pdfViewerUrl(soiree.contratMineurPDF)
     : null;
+  const reglementInterieurHref = soiree?.reglementInterieurPDF
+    ? pdfViewerUrl(soiree.reglementInterieurPDF)
+    : null;
   const venueAddress = (event?.address ?? "11 Allée François Mitterrand, 67400 Illkirch-Graffenstaden").replace(
     /^L['']Illiade[\s,-]*/i,
     ""
@@ -177,8 +180,11 @@ export default async function InfosPratiquesPage() {
         </section>
       )}
 
-      {/* === Documents officiels (CGV) === */}
-      <DocumentsSection contratMineurHref={contratMineurHref} />
+      {/* === Documents officiels === */}
+      <DocumentsSection
+        contratMineurHref={contratMineurHref}
+        reglementInterieurHref={reglementInterieurHref}
+      />
     </div>
   );
 }
