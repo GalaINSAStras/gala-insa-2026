@@ -93,12 +93,12 @@
   --color-chart-5: var(--chart-5);
 
   /* ─── Fonts ─── */
-  --font-display: "Renaissance", "Cormorant Garamond", Georgia, serif;
-  --font-body: Inter, Arial, sans-serif;
+  --font-display: "Cormorant Garamond", serif;
+  --font-body: "Inter", sans-serif;
   --font-mono: "Geist Mono", ui-monospace, monospace;
   --font-heading: var(--font-display); /* titre générique (CardTitle, SheetTitle…) → Cormorant */
-  --font-titre: "Playfair Display", Georgia, serif;
-  --font-garamond: "EB Garamond", Georgia, serif;
+  --font-titre: var(--font-titre-family); /* Playfair Display — injectée via next/font */
+  --font-garamond: var(--font-garamond-family); /* EB Garamond — injectée via next/font */
 
   /* ─── Tickets Art nouveau (billets) ─── */
   --color-blush: var(--blush);

@@ -1,10 +1,44 @@
 import type { Metadata } from "next";
+import { Inter, Cormorant_Garamond, Playfair_Display, EB_Garamond } from "next/font/google";
 import Script from "next/script";
 import { LEGAL } from "@/lib/constants";
 import { sanityFetch } from "@/lib/sanity/client";
 import { SiteShellClient } from "./site-shell-client";
 import { PreloaderGate } from "@/components/preloader/PreloaderGate";
 import "./globals.css";
+
+/* ─── Body Font : Inter (lisibilité maximale) ─── */
+const inter = Inter({
+  variable: "--font-body",
+  subsets: ["latin"],
+  display: "swap",
+});
+
+/* ─── Display Font : Cormorant Garamond (alternative libre à Renaissance) ─── */
+const cormorantGaramond = Cormorant_Garamond({
+  variable: "--font-display",
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  style: ["normal", "italic"],
+  display: "swap",
+});
+
+/* ─── Titre / boutons : Playfair Display (serif, accents marqués) ─── */
+const titre = Playfair_Display({
+  variable: "--font-titre-family",
+  subsets: ["latin"],
+  weight: ["600", "700"],
+  display: "swap",
+});
+
+/* ─── Sous-titres & prix : EB Garamond (papeterie haut de gamme) ─── */
+const ebGaramond = EB_Garamond({
+  variable: "--font-garamond-family",
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  style: ["normal", "italic"],
+  display: "swap",
+});
 
 async function getEventMetadata() {
   try {
@@ -70,7 +104,7 @@ export default function RootLayout({
   return (
     <html
       lang="fr"
-      className="h-full antialiased"
+      className={`${inter.variable} ${cormorantGaramond.variable} ${titre.variable} ${ebGaramond.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col" suppressHydrationWarning>
       {/* Filtre global de grain (feTurbulence) — utilisé par le composant Grain */}

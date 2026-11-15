@@ -1,8 +1,52 @@
 import { Reveal } from "./Reveal";
 import { SectionHeading } from "./SectionHeading";
 import { Fleuron } from "@/components/hero/Fleuron";
-import type { CarteCategory } from "@/lib/sanity/types";
+import type { CarteCategory, CarteItem } from "@/lib/sanity/types";
 import { Grain } from "@/components/ornaments/Grain";
+
+type DrinkGroup = "cocktails" | "mocktails" | "shots" | "other";
+
+const DRINK_GROUPS: ReadonlyArray<{ key: DrinkGroup; label: string }> = [
+  { key: "cocktails", label: "Cocktails" },
+  { key: "mocktails", label: "Mocktails" },
+  { key: "shots", label: "Shots" },
+  { key: "other", label: "Autres boissons" },
+];
+
+function normalizeDrinkText(value: string) {
+  return value
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLowerCase();
+}
+
+function getDrinkGroup(item: CarteItem): DrinkGroup {
+  const text = normalizeDrinkText(`${item.name} ${item.format ?? ""}`);
+
+  if (/\bshots?\b/.test(text)) return "shots";
+  if (
+    /\bmocktails?\b/.test(text) ||
+    /\bvirgin\b/.test(text) ||
+    /\bsans alcool\b/.test(text)
+  ) {
+    return "mocktails";
+  }
+  if (
+    /\bcocktails?\b/.test(text) ||
+    /\bmarquisette\b/.test(text) ||
+    /\bapple ginger fizz\b/.test(text) ||
+    /\bkir\b/.test(text) ||
+    /\bmojitos?\b/.test(text) ||
+    /\bspritz\b/.test(text) ||
+    /\bsangria\b/.test(text) ||
+    /\bmargarita\b/.test(text) ||
+    /\bdaiquiri\b/.test(text) ||
+    /\bpina colada\b/.test(text)
+  ) {
+    return "cocktails";
+  }
+  return "other";
+}
 
 /**
  * « La Carte » — deux panneaux « ardoise de bar » (Alcools / Softs),
@@ -44,24 +88,50 @@ export function Carte({ carte }: { carte: CarteCategory[] }) {
                   )}
                   <Fleuron className="mx-auto mt-2 h-3 w-16" />
                 </header>
-                <ul className="relative mt-6 space-y-3">
-                  {(cat.items ?? []).map((item) => (
-                    <li key={item._key}>
-                      <div className="flex items-baseline gap-2">
-                        <span className="font-garamond font-semibold italic text-marine">{item.name}</span>
-                        {item.format && (
-                          <span className="text-sm text-ardoise/60">
-                            ({item.format})
-                          </span>
-                        )}
-                        <span
-                          aria-hidden
-                          className="mx-1 flex-1 border-b border-dotted border-[var(--or-moyen)]/50"
-                        />
+                <div className="relative mt-6 space-y-6">
+                  {DRINK_GROUPS.map(({ key, label }) => {
+                    const items = (cat.items ?? []).filter(
+                      (item) => getDrinkGroup(item) === key
+                    );
+                    if (items.length === 0) return null;
+
+                    return (
+                      <div key={key}>
+                        <h4 className="mb-3 flex items-center gap-3 font-titre text-sm font-semibold uppercase tracking-[0.18em] text-[var(--or-fonce)]">
+                          <span
+                            aria-hidden
+                            className="h-px flex-1 bg-[var(--or-moyen)]/35"
+                          />
+                          <span>{label}</span>
+                          <span
+                            aria-hidden
+                            className="h-px flex-1 bg-[var(--or-moyen)]/35"
+                          />
+                        </h4>
+                        <ul className="space-y-3">
+                          {items.map((item) => (
+                            <li key={item._key}>
+                              <div className="flex items-baseline gap-2">
+                                <span className="font-garamond font-semibold italic text-marine">
+                                  {item.name}
+                                </span>
+                                {item.format && (
+                                  <span className="text-sm text-ardoise/60">
+                                    ({item.format})
+                                  </span>
+                                )}
+                                <span
+                                  aria-hidden
+                                  className="mx-1 flex-1 border-b border-dotted border-[var(--or-moyen)]/50"
+                                />
+                              </div>
+                            </li>
+                          ))}
+                        </ul>
                       </div>
-                    </li>
-                  ))}
-                </ul>
+                    );
+                  })}
+                </div>
               </div>
             </Reveal>
           ))}
