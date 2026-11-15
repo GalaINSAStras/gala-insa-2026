@@ -16,8 +16,8 @@ const DRINK_GROUPS: ReadonlyArray<{ key: DrinkGroup; label: string }> = [
   { key: "cocktails", label: "Cocktails" },
   { key: "mocktails", label: "Mocktails" },
   { key: "shots", label: "Shots" },
-  { key: "wine", label: "Vin" },
-  { key: "beer", label: "Bière" },
+  { key: "wine", label: "Vins" },
+  { key: "beer", label: "Bières" },
   { key: "other", label: "Autres boissons" },
 ];
 
