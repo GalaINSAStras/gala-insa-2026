@@ -48,7 +48,7 @@ async function main() {
       _type: "carteItem",
       name: "Shot écarlate",
       format: "Liqueur de framboise & Porto rouge",
-      price: 4,
+      price: 2,
     };
 
     return {
